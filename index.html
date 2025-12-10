@@ -4,179 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LarkSpur Industries</title>
-    <style>
-        :root {
-            --bg: #0a0a0a;
-            --card-bg: #111111;
-            --text-main: #e0e0e0;
-            --text-muted: #666666;
-            --accent: #9f7aea; /* Subtle Larkspur Purple */
-            --border: #333333;
-            --gold: #d69e2e;
-        }
-
-        body {
-            font-family: "Courier New", Courier, monospace; /* Monospace for that terminal feel */
-            background-color: var(--bg);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-            text-align: left; /* Aligned left like a document */
-        }
-
-        .header {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: normal;
-            letter-spacing: -0.5px;
-        }
-
-        .flower {
-            color: var(--accent);
-            font-size: 1.2rem;
-            margin-right: 0.5rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .project-title {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .product-name {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            color: #fff;
-        }
-
-        .grid-specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-            border-top: 1px solid var(--border);
-            padding-top: 1rem;
-        }
-
-        .spec-row {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .spec-key { color: var(--text-muted); }
-        .spec-val { color: var(--text-main); }
-
-        .status-dot {
-            height: 8px;
-            width: 8px;
-            background-color: var(--gold);
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 6px;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 1rem 0;
-            background: transparent;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            text-align: center;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.1s, color 0.1s;
-        }
-
-        .btn:hover {
-            background: var(--text-main);
-            color: var(--bg);
-        }
-
-        .footer {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2rem;
-            border-top: 1px solid var(--border);
-            padding-top: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        a.link { color: var(--text-muted); text-decoration: none; }
-        a.link:hover { text-decoration: underline; }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
         <div class="header">
             <div>
-                <span class="flower">❀</span> LARKSPUR INDUSTRIES.
+                <span class="flower">❀</span> LARKSPUR INDUSTRIES
             </div>
             <div style="font-size: 0.8rem; color: #444;">EST. 2025</div>
         </div>
 
         <div class="card">
-            <div class="project-title">CURRENT PROJECT</div>
+            <div class="project-title">FLAGSHIP PRODUCT</div>
             <div class="product-name">MARIGOLD-5</div>
             
             <div style="font-size: 0.9rem; line-height: 1.4; margin-bottom: 1.5rem; color: #ccc;">
-                Reliable USB-C power distribution for FRC robotics. Designed to eliminate connection failures in competitive environments at team friendly prices.
+                Reliable USB-C power distribution for FRC robotics. 12V in, 4x 3A USB-C out. Built to eliminate connection failures in competition.
             </div>
 
             <div class="grid-specs">
                 <div class="spec-row">
                     <span class="spec-key">Input</span>
-                    <span class="spec-val">6-17V DC</span>
+                    <span class="spec-val">7-18V DC</span>
                 </div>
                 <div class="spec-row">
                     <span class="spec-key">Output</span>
-                    <span class="spec-val">3A per Port @ 10A Total</span>
+                    <span class="spec-val">5V @ 10A Total</span>
                 </div>
                 <div class="spec-row">
-                    <span class="spec-key">Mounting</span>
-                    <span class="spec-val">#10-32 / Zip</span>
+                    <span class="spec-key">Ports</span>
+                    <span class="spec-val">4x USB-C</span>
                 </div>
                 <div class="spec-row">
                     <span class="spec-key">Status</span>
-                    <span class="spec-val"><span class="status-dot"></span>Beta</span>
+                    <span class="spec-val"><span class="status-dot"></span>In Production</span>
                 </div>
-                
             </div>
 
-            <a href="https://shop.larkspurindustries.com" class="btn">VIEW IN STORE -></a>
+            <!-- Links to the internal product page -->
+            <a href="marigold-5.html" class="btn">VIEW DATASHEET & ORDER -></a>
         </div>
 
         <div class="footer">

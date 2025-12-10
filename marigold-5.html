@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marigold-5 | LarkSpur Industries</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google's Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .gallery-img {
+            width: 100%;
+            border: 1px solid var(--border);
+            background: #1a1a1a;
+            padding: 10px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .gallery-img:hover { border-color: var(--accent); }
+        
+        model-viewer {
+            width: 100%;
+            height: 350px; /* Made slightly taller */
+            background-color: #1a1a1a; /* Dark gray background */
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            --poster-color: #1a1a1a;
+        }
+
+        /* Lightbox Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95); /* Black background with opacity */
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .close-btn {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            align-self: center;
+        }
+        .close-btn:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <!-- Lightbox Modal (Hidden) -->
+    <div id="imgModal" class="modal" onclick="closeModal()">
+        <div class="close-btn">&times; CLOSE</div>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <div class="container">
+        <div style="margin-bottom: 1rem; font-size: 0.8rem;">
+            <a href="index.html" class="link"><- BACK TO HOME</a>
+        </div>
+
+        <div class="card">
+            <div class="project-title">PRODUCT DATASHEET</div>
+            <div class="product-name">MARIGOLD-5</div>
+
+            <!-- 3D Model Viewer -->
+            <div style="position: relative;">
+                <model-viewer 
+                    src="docs/marigold-5/3d/Marigold-5_V1.0A.gltf" 
+                    alt="Marigold-5 3D Model"
+                    
+                    /* Lighting & Contrast Settings */
+                    environment-image="neutral" 
+                    exposure="0.25"
+                    tone-mapping="aces"
+                    shadow-intensity="1.5"
+                    shadow-softness="0.5"
+
+                    /* Rotation & Camera */
+                    auto-rotate
+                    camera-controls
+                    orientation="90deg -90deg 180deg"  /* Tweak these if model faces wrong way (Roll Pitch Yaw) */
+                    camera-orbit="45deg 75deg 105%" 
+                    min-camera-orbit="auto auto auto" 
+                    max-camera-orbit="auto auto auto">
+                </model-viewer>
+                <div style="position:absolute; bottom:10px; right:10px; font-size:0.7rem; color:#888; pointer-events:none;">
+                    INTERACTIVE 3D PREVIEW
+                </div>
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="gallery-grid">
+                <!-- Added onclick handlers to open modal -->
+                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Corner.png" class="gallery-img" onclick="openModal(this.src)">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Top.png" class="gallery-img" onclick="openModal(this.src)">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Side.png" class="gallery-img" onclick="openModal(this.src)">
+            </div>
+
+            <div style="font-size: 0.9rem; line-height: 1.5; color: #ccc; margin-bottom: 1.5rem;">
+                The Marigold-5 is a compact DC-DC power module engineered for the FIRST Robotics Competition. It provides four high-current USB-C ports to power coprocessors, cameras, and other peripherals directly from the robot's 12V supply.
+            </div>
+
+            <a href="https://square.link/u/PsINvPEL" class="btn btn-primary" target="_blank">BUY NOW - $39.99</a>
+            
+            <div class="section-title">TECHNICAL SPECIFICATIONS</div>
+            <div class="grid-specs">
+                <div class="spec-row"><span class="spec-key">Input Voltage</span><span class="spec-val">7.0V - 18.0V</span></div>
+                <div class="spec-row"><span class="spec-key">Output Voltage</span><span class="spec-val">5.1V Regulated</span></div>
+                <div class="spec-row"><span class="spec-key">Max Current</span><span class="spec-val">10A Total (3A/Port)</span></div>
+                <div class="spec-row"><span class="spec-key">Mounting</span><span class="spec-val">4x #10-32 Holes</span></div>
+            </div>
+
+            <div class="section-title">DOCUMENTATION</div>
+            <div style="display: flex; gap: 1rem;">
+                <a href="docs/marigold-5/index.html" class="btn" style="flex:1">FULL TECH MANUAL</a>
+                <a href="docs/marigold-5/3d/Marigold-5_V1.0A.step" class="btn" style="flex:1">DOWNLOAD STEP</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>© 2025 LARKSPUR INDUSTRIES</span>
+            <span style="margin-left: auto;">VA, USA</span>
+        </div>
+    </div>
+
+    <!-- Script to handle the modal logic -->
+    <script>
+        var modal = document.getElementById("imgModal");
+        var modalImg = document.getElementById("modalImg");
+
+        function openModal(src) {
+            modal.style.display = "flex";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
