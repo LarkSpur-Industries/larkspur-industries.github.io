@@ -3,7 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marigold-5 | LarkSpur Industries</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>Marigold-5 USB-C Power Module | LarkSpur Industries</title>
+    <meta name="title" content="Marigold-5 USB-C Power Module | LarkSpur Industries">
+    <meta name="description" content="Marigold-5: Rugged 4-port USB-C power module for FRC robots. 12V input, 10A total output (3A per port). No more brownouts or fragile cables. $39.99">
+    <meta name="keywords" content="Marigold-5, FRC power module, USB-C robot power, FIRST Robotics power, 12V to 5V converter, robot USB-C, competition robotics, coprocessor power">
+    <meta name="author" content="LarkSpur Industries">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://larkspur.industries/marigold-5.html">
+    <meta property="og:title" content="Marigold-5 USB-C Power Module for FRC Robots">
+    <meta property="og:description" content="Compact DC-DC power module with 4x high-current USB-C ports. Powers Raspberry Pi, cameras & peripherals from your robot's 12V supply. 10A total, $39.99">
+    <meta property="og:image" content="https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="LarkSpur Industries">
+    <meta property="product:price:amount" content="39.99">
+    <meta property="product:price:currency" content="USD">
+    <meta property="product:availability" content="out of stock">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://larkspur.industries/marigold-5.html">
+    <meta property="twitter:title" content="Marigold-5 USB-C Power Module for FRC Robots">
+    <meta property="twitter:description" content="Compact DC-DC power module with 4x high-current USB-C ports. Powers Raspberry Pi, cameras & peripherals from your robot's 12V supply. 10A total, $39.99">
+    <meta property="twitter:image" content="https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://larkspur.industries/marigold-5.html">
+    
+    <!-- Structured Data / Schema.org for Product -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Marigold-5 USB-C Power Module",
+      "image": [
+        "https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png",
+        "https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Top.png",
+        "https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Side.png"
+      ],
+      "description": "Compact DC-DC power module engineered for FIRST Robotics Competition. Provides four high-current USB-C ports to power coprocessors, cameras, and peripherals from robot's 12V supply.",
+      "sku": "MARIGOLD-5-V1.0A",
+      "mpn": "MARIGOLD-5",
+      "brand": {
+        "@type": "Brand",
+        "name": "LarkSpur Industries"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://larkspur.industries/marigold-5.html",
+        "priceCurrency": "USD",
+        "price": "39.99",
+        "availability": "https://schema.org/OutOfStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "LarkSpur Industries"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "1"
+      }
+    }
+    </script>
+    
     <link rel="stylesheet" href="style.css">
     <!-- Google's Model Viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
@@ -25,13 +93,48 @@
         }
         .gallery-img:hover { border-color: var(--accent); }
         
-        model-viewer {
+        .model-container {
+            position: relative;
             width: 100%;
             height: 350px;
             background-color: #1a1a1a;
             border: 1px solid var(--border);
             margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
             --poster-color: #1a1a1a;
+        }
+
+        .load-model-btn {
+            padding: 1rem 2rem;
+            background: var(--text-main);
+            color: var(--bg);
+            border: 1px solid var(--text-main);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            font-family: "Courier New", Courier, monospace;
+            transition: all 0.2s;
+        }
+
+        .load-model-btn:hover {
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .model-label {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.7rem;
+            color: #888;
+            pointer-events: none;
         }
 
         .modal {
@@ -74,15 +177,63 @@
             border-bottom: 1px solid #222;
             display: flex;
             justify-content: space-between;
+            gap: 1rem;
         }
         .box-list li:last-child { border-bottom: none; }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .model-container {
+                height: 280px;
+            }
+
+            .grid-specs {
+                grid-template-columns: 1fr !important;
+            }
+
+            .box-list li {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .box-list li span:last-child {
+                font-size: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 0.9rem;
+            }
+
+            .product-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .model-container {
+                height: 250px;
+            }
+
+            .load-model-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div id="imgModal" class="modal" onclick="closeModal()">
         <div class="close-btn">&times; CLOSE</div>
-        <img class="modal-content" id="modalImg">
+        <img class="modal-content" id="modalImg" alt="Marigold-5 Detail View">
     </div>
 
     <div class="container">
@@ -94,31 +245,19 @@
             <div class="project-title">PRODUCT DATASHEET</div>
             <div class="product-name">MARIGOLD-5</div>
 
-            <div style="position: relative;">
-                <model-viewer 
-                    src="docs/marigold-5/3d/Marigold-5_V1.0A.gltf" 
-                    alt="Marigold-5 3D Model"
-                    environment-image="neutral" 
-                    exposure="0.25"
-                    tone-mapping="aces"
-                    shadow-intensity="1.5"
-                    shadow-softness="0.5"
-                    auto-rotate
-                    camera-controls
-                    orientation="90deg -90deg 180deg"
-                    camera-orbit="45deg 75deg 105%" 
-                    min-camera-orbit="auto auto auto" 
-                    max-camera-orbit="auto auto auto">
-                </model-viewer>
-                <div style="position:absolute; bottom:10px; right:10px; font-size:0.7rem; color:#888; pointer-events:none;">
+            <div class="model-container" id="modelContainer">
+                <button class="load-model-btn" id="loadModelBtn" onclick="loadModel()">
+                    LOAD 3D MODEL
+                </button>
+                <div class="model-label" id="modelLabel" style="display: none;">
                     INTERACTIVE 3D PREVIEW
                 </div>
             </div>
 
             <div class="gallery-grid">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Corner.png" class="gallery-img" onclick="openModal(this.src)">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Top.png" class="gallery-img" onclick="openModal(this.src)">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Side.png" class="gallery-img" onclick="openModal(this.src)">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Corner.png" class="gallery-img" onclick="openModal(this.src)" alt="Marigold-5 Corner View">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Top.png" class="gallery-img" onclick="openModal(this.src)" alt="Marigold-5 Top View">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Side.png" class="gallery-img" onclick="openModal(this.src)" alt="Marigold-5 Side View">
             </div>
 
             <div style="font-size: 0.9rem; line-height: 1.5; color: #ccc; margin-bottom: 1.5rem;">
@@ -135,7 +274,6 @@
                 <div class="spec-row"><span class="spec-key">Mounting</span><span class="spec-val">4x #10-32 Holes</span></div>
             </div>
 
-            <!-- NEW SECTION: WHAT'S IN THE BOX -->
             <div class="section-title">WHAT'S IN THE BOX</div>
             <ul class="box-list">
                 <li><span>1x Marigold-5 Module</span> <span style="color:#666">Fully Assembled</span></li>
@@ -146,9 +284,9 @@
             </ul>
 
             <div class="section-title">DOCUMENTATION</div>
-            <div style="display: flex; gap: 1rem;">
-                <a href="docs/marigold-5/index.html" class="btn" style="flex:1">FULL TECH MANUAL</a>
-                <a href="docs/marigold-5/3d/Marigold-5_V1.0A.step" class="btn" style="flex:1">DOWNLOAD STEP</a>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="docs/marigold-5/index.html" class="btn" style="flex:1; min-width: 200px;">FULL TECH MANUAL</a>
+                <a href="docs/marigold-5/3d/Marigold-5_V1.0A.step" class="btn" style="flex:1; min-width: 200px;">DOWNLOAD STEP</a>
             </div>
         </div>
 
@@ -161,6 +299,51 @@
     <script>
         var modal = document.getElementById("imgModal");
         var modalImg = document.getElementById("modalImg");
+        var modelLoaded = false;
+
+        // Check if device is mobile
+        function isMobile() {
+            return window.innerWidth <= 768 || 
+                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Auto-load model on desktop
+        window.addEventListener('DOMContentLoaded', function() {
+            if (!isMobile()) {
+                loadModel();
+            }
+        });
+
+        function loadModel() {
+            if (modelLoaded) return;
+            
+            var container = document.getElementById('modelContainer');
+            var btn = document.getElementById('loadModelBtn');
+            var label = document.getElementById('modelLabel');
+            
+            // Create model viewer
+            var modelViewer = document.createElement('model-viewer');
+            modelViewer.setAttribute('src', 'docs/marigold-5/3d/Marigold-5_V1.0A.gltf');
+            modelViewer.setAttribute('alt', 'Marigold-5 3D Model');
+            modelViewer.setAttribute('environment-image', 'neutral');
+            modelViewer.setAttribute('exposure', '0.25');
+            modelViewer.setAttribute('tone-mapping', 'aces');
+            modelViewer.setAttribute('shadow-intensity', '1.5');
+            modelViewer.setAttribute('shadow-softness', '0.5');
+            modelViewer.setAttribute('auto-rotate', '');
+            modelViewer.setAttribute('camera-controls', '');
+            modelViewer.setAttribute('orientation', '90deg -90deg 180deg');
+            modelViewer.setAttribute('camera-orbit', '45deg 75deg 105%');
+            modelViewer.setAttribute('min-camera-orbit', 'auto auto auto');
+            modelViewer.setAttribute('max-camera-orbit', 'auto auto auto');
+            
+            // Remove button and add model
+            btn.style.display = 'none';
+            container.appendChild(modelViewer);
+            label.style.display = 'block';
+            
+            modelLoaded = true;
+        }
 
         function openModal(src) {
             modal.style.display = "flex";
