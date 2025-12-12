@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | LarkSpur Industries</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            align-items: flex-start;
+            padding-top: 40px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        /* Center container when showing product listing */
+        body.listing-mode {
+            align-items: center;
+            justify-content: center;
+        }
+        body.listing-mode .container {
+            max-width: 600px;
+        }
+        .doc-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Product listing styles */
+        .product-listing {
+            padding: 0;
+        }
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.2s;
+        }
+        .product-card:hover {
+            border-color: var(--accent);
+        }
+        .product-card h3 {
+            color: var(--highlight);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        .product-card p {
+            color: #ccc;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .listing-intro {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar {
+            border-right: 1px solid var(--border);
+            padding-right: 1rem;
+            position: sticky;
+            top: 40px;
+            align-self: start;
+        }
+        .sidebar a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .sidebar a:hover { color: var(--text-main); }
+        .sidebar .active { color: var(--accent); font-weight: bold; }
+        
+        .content {
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        /* Markdown content styling */
+        .content h1 {
+            color: var(--highlight);
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        .content h2 {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-size: 1.4rem;
+        }
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #eee;
+            font-size: 1.1rem;
+        }
+        .content h4 {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .content p {
+            margin-bottom: 1rem;
+        }
+        
+        .content ul, .content ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .content code {
+            background: #222;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: var(--gold);
+            font-size: 0.9em;
+        }
+        
+        .content pre {
+            background: #1a1a1a;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            border-radius: 3px;
+        }
+        
+        .content pre code {
+            background: none;
+            padding: 0;
+            color: #ccc;
+        }
+        
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .content th, .content td {
+            border: 1px solid var(--border);
+            padding: 8px;
+            text-align: left;
+        }
+        .content th {
+            background: #222;
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .content img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid var(--border);
+            margin: 1.5rem 0;
+        }
+        
+        .content blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .content a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+        
+        .download-box {
+            background: #1a1a1a;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .download-box .btn {
+            width: auto;
+            padding: 0.5rem 1rem;
+            margin: 0;
+        }
+        
+        /* Custom button styling from markdown */
+        .content .md-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.1s, color 0.1s;
+            cursor: pointer;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        
+        .content .md-button:hover {
+            background: var(--text-main);
+            color: var(--bg);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 20px;
+            }
+            body.listing-mode .container {
+                max-width: 100%;
+            }
+            .doc-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+                position: static;
+            }
+            .content table {
+                font-size: 0.8rem;
+            }
+            .content th, .content td {
+                padding: 6px;
+            }
+            .product-card {
+                padding: 1rem;
+            }
+            .product-card h3 {
+                font-size: 1.1rem;
+            }
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+        
+        .error-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+        
+        .error-state h2 {
+            color: var(--highlight);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="margin-bottom: 1rem; font-size: 0.8rem; display:flex; justify-content:space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <a href="index.html" class="link"><- HOME</a>
+        </div>
+
+        <div class="header">
+            <div>
+                <span class="flower">❀</span> <span id="product-name">DOCUMENTATION</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #666;" id="product-subtitle">TECHNICAL REFERENCE</div>
+        </div>
+
+        <div class="doc-layout">
+            <div class="sidebar" id="sidebar">
+                <!-- Sidebar will be populated dynamically -->
+            </div>
+
+            <div class="content" id="markdown-content">
+                <div class="loading">Loading documentation...</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>© 2025 LARKSPUR INDUSTRIES</span>
+        </div>
+    </div>
+
+    <script>
+        // Get product from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const product = urlParams.get('product');
+        
+        // Product configuration - sidebar is auto-generated from markdown headings
+        const PRODUCTS = {
+            'marigold-5': {
+                name: 'MARIGOLD-5',
+                subtitle: 'TECHNICAL REFERENCE MANUAL',
+                folder: 'docs/marigold-5'
+            }
+        };
+        
+        // Custom button renderer: BUTTON("text", url)
+        function processButtons(markdown, productFolder) {
+            const buttonRegex = /BUTTON\("([^"]+)",\s*"([^"]+)"(?:,\s*"([^"]+)")?\)/g;
+            return markdown.replace(buttonRegex, (match, text, url, target) => {
+                // Make relative URLs absolute from the product folder
+                let fullUrl = url;
+                if (!url.startsWith('http') && !url.startsWith('/')) {
+                    fullUrl = `${productFolder}/${url}`;
+                }
+                const targetAttr = target ? ` target="${target}"` : '';
+                return `<a href="${fullUrl}" class="md-button"${targetAttr}>${text}</a>`;
+            });
+        }
+        
+        // Remove {#id} syntax and convert to proper HTML id attributes
+        function processHeadingIds(html) {
+            const headingRegex = /(<h[1-6][^>]*>)(.*?)\s*\{#([a-z0-9-]+)\}\s*(<\/h[1-6]>)/gi;
+            return html.replace(headingRegex, (match, openTag, text, id, closeTag) => {
+                const tagWithId = openTag.replace('>', ` id="${id}">`);
+                return `${tagWithId}${text}${closeTag}`;
+            });
+        }
+        
+        // Fix relative image paths
+        function fixImagePaths(html, productFolder) {
+            return html.replace(/src="(?!http|\/)/g, `src="${productFolder}/`);
+        }
+        
+        // Extract headings from markdown for auto-generating sidebar
+        function extractHeadings(markdown) {
+            const headings = [];
+            // Match ## Heading {#anchor} or ## Heading (H2 only for sidebar)
+            const h2Regex = /^##\s+([^{#\n]+)(?:\s*\{#([a-z0-9-]+)\})?/gm;
+            let match;
+            
+            while ((match = h2Regex.exec(markdown)) !== null) {
+                const title = match[1].trim();
+                const anchor = match[2] || title.toLowerCase().replace(/[^\w]+/g, '-');
+                
+                headings.push({
+                    label: title,
+                    anchor: anchor,
+                    // Mark "downloads" or "resources" sections as special
+                    special: /download|resource/i.test(title)
+                });
+            }
+            
+            return headings;
+        }
+        
+        // Build sidebar navigation
+        function buildSidebar(headings) {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.innerHTML = '';
+            
+            headings.forEach((item, index) => {
+                const link = document.createElement('a');
+                link.href = `#${item.anchor}`;
+                link.textContent = item.label;
+                if (item.special) {
+                    link.style.marginTop = '1rem';
+                    link.style.color = 'var(--gold)';
+                }
+                sidebar.appendChild(link);
+            });
+        }
+        
+        // Show product listing if no product specified
+        function showProductListing() {
+            document.body.classList.add('listing-mode');
+            document.getElementById('product-name').textContent = 'DOCUMENTATION';
+            document.getElementById('product-subtitle').textContent = 'TECHNICAL REFERENCES & GUIDES';
+            
+            // Hide sidebar and change layout
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.display = 'none';
+            const docLayout = document.querySelector('.doc-layout');
+            docLayout.style.display = 'block';
+            
+            let html = '<div class="product-listing">';
+            html += '<div class="listing-intro">';
+            html += '<p>Complete technical documentation for all LarkSpur Industries products. Includes specifications, integration guides, and downloadable CAD files.</p>';
+            html += '</div>';
+            
+            for (const [key, config] of Object.entries(PRODUCTS)) {
+                html += `
+                    <div class="product-card">
+                        <h3>${config.name}</h3>
+                        <p>${config.subtitle}</p>
+                        <a href="docs.html?product=${key}" class="md-button">View Documentation</a>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            document.getElementById('markdown-content').innerHTML = html;
+        }
+        
+        // Show error state
+        function showError(message) {
+            document.getElementById('markdown-content').innerHTML = `
+                <div class="error-state">
+                    <h2>Unable to Load Documentation</h2>
+                    <p>${message}</p>
+                    <p style="margin-top: 2rem;">
+                        <a href="docs.html" class="md-button">View All Documentation</a>
+                        <a href="index.html" class="md-button">Back to Home</a>
+                    </p>
+                </div>
+            `;
+        }
+        
+        // Fetch and render markdown
+        async function loadMarkdown() {
+            // If no product specified, show product listing
+            if (!product) {
+                showProductListing();
+                return;
+            }
+            
+            // Reset listing mode if entering product view
+            document.body.classList.remove('listing-mode');
+            
+            if (!PRODUCTS[product]) {
+                showError('Product not found. Please select a product from the list below.');
+                setTimeout(() => showProductListing(), 100);
+                return;
+            }
+            
+            const config = PRODUCTS[product];
+            const markdownUrl = `${config.folder}/docs.md`;
+            
+            // Update page title and header
+            document.title = `${config.name} Documentation | LarkSpur Industries`;
+            document.getElementById('product-name').textContent = config.name;
+            document.getElementById('product-subtitle').textContent = config.subtitle;
+            
+            // Show sidebar and restore layout
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.display = 'block';
+            const docLayout = document.querySelector('.doc-layout');
+            docLayout.style.display = 'grid';
+            
+            try {
+                const response = await fetch(markdownUrl);
+                if (!response.ok) throw new Error('Failed to load documentation file');
+                
+                let markdown = await response.text();
+                
+                // Extract headings for sidebar BEFORE processing
+                const headings = extractHeadings(markdown);
+                buildSidebar(headings);
+                
+                // Process custom button syntax with product folder context
+                markdown = processButtons(markdown, config.folder);
+                
+                // Parse markdown to HTML
+                let html = marked.parse(markdown);
+                
+                // Process heading IDs
+                html = processHeadingIds(html);
+                
+                // Fix relative image paths
+                html = fixImagePaths(html, config.folder);
+                
+                document.getElementById('markdown-content').innerHTML = html;
+                
+                // Setup scroll spy
+                setupScrollSpy();
+                
+            } catch (error) {
+                console.error('Error loading documentation:', error);
+                showError('The documentation file could not be loaded. Please check that docs.md exists.');
+            }
+        }
+        
+        // Smooth scroll and active state management
+        function setupScrollSpy() {
+            const links = document.querySelectorAll('.sidebar a[href^="#"]');
+            const sections = Array.from(links).map(link => {
+                const id = link.getAttribute('href').slice(1);
+                return document.getElementById(id);
+            }).filter(Boolean);
+            
+            // Smooth scroll on click
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // Update active state
+                        links.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Update active state on scroll
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+        
+        // Load markdown when page loads
+        document.addEventListener('DOMContentLoaded', loadMarkdown);
+    </script>
+</body>
+</html>
