@@ -93,7 +93,7 @@ At full 10A load, the regulator dissipates approx. 3-4W. The PCB has an **alumin
 
 All four USB-C ports are connected in parallel and current-limited at the device level. Each port advertises 3A capability via CC resistors.
 
-We recommend at most powering 2-3 coprocessors (Raspberry Pi, Orange Pi) with the Marigold-5. The remaining port can be used for other devices. The total current draw should not exceed 10A.
+We recommend at most powering 2-3 coprocessors (Raspberry Pi, Orange Pi). The remaining port can be used for other devices. The total current draw should not exceed 10A.
 
 **Typical Use Cases:**
 - Raspberry Pi 4/5 (2-3A typical)
