@@ -5,26 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>LarkSpur Industries | Reasonable Hardware for FRC Robotics</title>
-    <meta name="title" content="LarkSpur Industries | Reasonable Hardware for FRC Robotics">
-    <meta name="description" content="LarkSpur Industries designs reliable, open hardware for FRC robotics. Creator of the Marigold-5 USB-C power module. Built in Virginia, USA by Isaac Subudhi.">
-    <meta name="keywords" content="FRC robotics, FIRST Robotics, robot power module, USB-C power, Marigold-5, robotics hardware, open hardware, competition robotics">
+    <title>LarkSpur Industries | Reasonable Products & Prices at Open Values</title>
+    <meta name="title" content="LarkSpur Industries | Reasonable Products & Prices at Open Values">
+    <meta name="description" content="LarkSpur Industries designs reliable, open-source hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module. Built in Virginia, USA by Isaac Subudhi.">
+    <meta name="keywords" content="FIRST robotics, robot power module, USB-C power, Marigold-5, robotics hardware, open hardware, open source, competition robotics, affordable robotics">
     <meta name="author" content="Isaac Subudhi">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://larkspur.industries/">
-    <meta property="og:title" content="LarkSpur Industries | Reasonable Hardware for FRC Robotics">
-    <meta property="og:description" content="Reliable, open hardware for FRC robotics. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs. Built in Virginia, USA.">
+    <meta property="og:title" content="LarkSpur Industries | Reasonable Products & Prices at Open Values">
+    <meta property="og:description" content="Open-source hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs, $39.99. Built in Virginia, USA.">
     <meta property="og:image" content="https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
     <meta property="og:site_name" content="LarkSpur Industries">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://larkspur.industries/">
-    <meta property="twitter:title" content="LarkSpur Industries | Reasonable Hardware for FRC Robotics">
-    <meta property="twitter:description" content="Reliable, open hardware for FRC robotics. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs. Built in Virginia, USA.">
+    <meta property="twitter:title" content="LarkSpur Industries | Reasonable Products & Prices at Open Values">
+    <meta property="twitter:description" content="Open-source hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs, $39.99. Built in Virginia, USA.">
     <meta property="twitter:image" content="https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
     
     <!-- Canonical URL -->
@@ -38,7 +38,8 @@
       "name": "LarkSpur Industries",
       "url": "https://larkspur.industries",
       "logo": "https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png",
-      "description": "Reasonable hardware for FRC robotics",
+      "description": "Reasonable products and prices at open values for FIRST robotics",
+      "slogan": "Reasonable products and prices at open values",
       "address": {
         "@type": "PostalAddress",
         "addressRegion": "VA",
@@ -56,20 +57,116 @@
     
     <link rel="stylesheet" href="style.css">
     <style>
-        .about-section {
+        .motto {
+            text-align: center;
+            color: var(--accent);
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section {
             margin-top: 3rem;
             border-top: 1px solid var(--border);
             padding-top: 1.5rem;
-            color: #aaa;
-            font-size: 0.9rem;
-            line-height: 1.6;
         }
-        .about-title {
+        
+        .section-title {
             color: var(--text-muted);
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-icon {
+            color: var(--accent);
+        }
+        
+        .section-content {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .section-content p {
             margin-bottom: 0.8rem;
+        }
+        
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .docs-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .docs-card {
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s;
+        }
+        
+        .docs-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .docs-card-title {
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .docs-card-desc {
+            color: #888;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+        
+        .highlight-box {
+            background: #0f0f0f;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .highlight-box strong {
+            color: var(--text-main);
+        }
+        
+        @media (max-width: 768px) {
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .motto {
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+            }
         }
     </style>
 </head>
@@ -83,13 +180,17 @@
             <div style="font-size: 0.8rem; color: #444;">EST. 2025</div>
         </div>
 
+        <div class="motto">
+            Reasonable Products and Prices at Open Values
+        </div>
+
         <!-- Featured Product Card -->
         <div class="card">
             <div class="project-title">CURRENT RELEASE</div>
             <div class="product-name">MARIGOLD-5</div>
             
             <div style="font-size: 0.9rem; line-height: 1.4; margin-bottom: 1.5rem; color: #ccc;">
-                A rugged USB-C power module built for the chaos of FRC competition. 12V in, 4x 3A outputs. No more fragile micro-USB cables or brownouts.
+                A powerful USB-C power module built for the chaos of FIRST robotics competition. No more custom wiring or brownouts with the Marigold-5.
             </div>
 
             <div class="grid-specs">
@@ -115,18 +216,73 @@
             <a href="marigold-5.html" class="btn">VIEW PRODUCT & ORDER -></a>
         </div>
 
+        <!-- Documentation Section -->
+        <div class="docs-section">
+            <div class="section-title">
+                <span class="section-icon">📖</span>
+                DOCUMENTATION & RESOURCES
+            </div>
+            
+            <div style="color: #999; font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.5;">
+                Complete documentation, integration guides, and CAD files for all LarkSpur products.
+            </div>
+            
+            <div class="docs-grid">
+                <a href="docs.html?product=marigold-5" class="docs-card">
+                    <div class="docs-card-title">
+                        🔧 Technical Specs
+                    </div>
+                    <div class="docs-card-desc">
+                        Electrical architecture, pinouts, and specifications
+                    </div>
+                </a>
+                
+                <a href="docs.html?product=marigold-5#installation" class="docs-card">
+                    <div class="docs-card-title">
+                        ⚙️ Installation Guide
+                    </div>
+                    <div class="docs-card-desc">
+                        Step-by-step mounting and wiring instructions
+                    </div>
+                </a>
+                
+                <a href="docs.html?product=marigold-5#downloads" class="docs-card">
+                    <div class="docs-card-title">
+                        💾 CAD Downloads
+                    </div>
+                    <div class="docs-card-desc">
+                        STEP files, case drawings, and 3D models
+                    </div>
+                </a>
+                
+                <a href="docs.html?product=marigold-5#troubleshooting" class="docs-card">
+                    <div class="docs-card-title">
+                        🛠️ Troubleshooting
+                    </div>
+                    <div class="docs-card-desc">
+                        Common issues and solutions
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <!-- About / Mission Section -->
-        <div class="about-section">
-            <div class="about-title">ABOUT</div>
-            <p>
-                LarkSpur Industries is a small design lab run by Isaac Subudhi, focused on building cool, open, and reliable hardware for robotics.
-            </p>
-            <p>
-                We believe competition robots deserve better than hacked-together electronics with electrical tape. Our goal is to design parts that are reasonable, work flawlessly, and respect your budget.
-            </p>
-            <p>
-                Everything we make is designed in Virginia, USA.
-            </p>
+        <div class="section">
+            <div class="section-title">
+                <span class="section-icon">❀</span>
+                ABOUT LARKSPUR INDUSTRIES
+            </div>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <strong>Mission:</strong> Building cool, open, and reliable hardware for robotics teams.
+                </div>
+                <p>
+                    LarkSpur Industries is a small design lab run by Isaac Subudhi, based in Virginia, USA.
+                </p>
+                <p>
+                    We believe competition robots deserve better than hacked-together electronics with electrical tape. Our goal is to design parts that are reasonable, work flawlessly, and respect your budget.
+                </p>
+            </div>
         </div>
 
         <div class="footer">
