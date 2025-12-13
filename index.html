@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❀</text></svg>">
     
     <!-- Primary Meta Tags -->
     <title>LarkSpur Industries | Reasonable Products & Prices at Open Values</title>
@@ -14,21 +16,23 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://larkspur.industries/">
+    <meta property="og:url" content="https://larkspurindustries.com/">
     <meta property="og:title" content="LarkSpur Industries | Reasonable Products & Prices at Open Values">
     <meta property="og:description" content="Open-source hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs, $39.99. Built in Virginia, USA.">
-    <meta property="og:image" content="https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
+    <meta property="og:image" content="https://larkspurindustries.com/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="LarkSpur Industries">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://larkspur.industries/">
+    <meta property="twitter:url" content="https://larkspurindustries.com/">
     <meta property="twitter:title" content="LarkSpur Industries | Reasonable Products & Prices at Open Values">
     <meta property="twitter:description" content="Open-source hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs, $39.99. Built in Virginia, USA.">
-    <meta property="twitter:image" content="https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
+    <meta property="twitter:image" content="https://larkspurindustries.com/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://larkspur.industries/">
+    <link rel="canonical" href="https://larkspurindustries.com/">
     
     <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
@@ -36,8 +40,8 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "LarkSpur Industries",
-      "url": "https://larkspur.industries",
-      "logo": "https://larkspur.industries/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png",
+      "url": "https://larkspurindustries.com",
+      "logo": "https://larkspurindustries.com/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png",
       "description": "Reasonable products and prices at open values for FIRST robotics",
       "slogan": "Reasonable products and prices at open values",
       "address": {
@@ -106,46 +110,14 @@
         .docs-section {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            padding: 1.5rem;
-            margin-top: 2rem;
+            padding: 1.25rem 1.5rem;
         }
         
-        .docs-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1rem;
+        .docs-section .section-title {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
         }
         
-        .docs-card {
-            background: #0a0a0a;
-            border: 1px solid var(--border);
-            padding: 1rem;
-            text-decoration: none;
-            display: block;
-            transition: all 0.2s;
-        }
-        
-        .docs-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        
-        .docs-card-title {
-            color: var(--text-main);
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .docs-card-desc {
-            color: #888;
-            font-size: 0.75rem;
-            line-height: 1.4;
-        }
         
         .highlight-box {
             background: #0f0f0f;
@@ -159,10 +131,6 @@
         }
         
         @media (max-width: 768px) {
-            .docs-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .motto {
                 font-size: 0.75rem;
                 letter-spacing: 1px;
@@ -208,43 +176,7 @@
                 Complete documentation, integration guides, and CAD files for all LarkSpur products.
             </div>
             
-            <div class="docs-grid">
-                <a href="docs.html" class="docs-card">
-                    <div class="docs-card-title">
-                        🔧 Technical Specs
-                    </div>
-                    <div class="docs-card-desc">
-                        Electrical architecture, pinouts, and specifications
-                    </div>
-                </a>
-                
-                <a href="docs.html" class="docs-card">
-                    <div class="docs-card-title">
-                        ⚙️ Installation Guide
-                    </div>
-                    <div class="docs-card-desc">
-                        Step-by-step mounting and wiring instructions
-                    </div>
-                </a>
-                
-                <a href="docs.html" class="docs-card">
-                    <div class="docs-card-title">
-                        💾 CAD Downloads
-                    </div>
-                    <div class="docs-card-desc">
-                        STEP files, case drawings, and 3D models
-                    </div>
-                </a>
-                
-                <a href="docs.html" class="docs-card">
-                    <div class="docs-card-title">
-                        🛠️ Troubleshooting
-                    </div>
-                    <div class="docs-card-desc">
-                        Common issues and solutions
-                    </div>
-                </a>
-            </div>
+            <a href="docs.html" class="btn">VIEW ALL DOCS -></a>
         </div>
 
         <!-- About / Mission Section -->
@@ -276,3 +208,4 @@
 
 </body>
 </html>
+
