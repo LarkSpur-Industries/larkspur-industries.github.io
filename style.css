@@ -10,7 +10,7 @@
 }
 
 body {
-    font-family: "Courier New", Courier, monospace;
+    font-family: var(--font-main);
     background-color: var(--bg);
     color: var(--text-main);
     display: flex;

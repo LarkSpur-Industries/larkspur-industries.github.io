@@ -2,7 +2,7 @@
 
 > **Reasonable Products and Prices at Open Values**
 
-Official website for LarkSpur Industries, a small design lab building hardware for FIRST robotics teams.
+Official website for LarkSpur Industries, a small hardware design company building hardware for FIRST robotics teams.
 
 ## Live Site
 
@@ -18,24 +18,6 @@ Official website for LarkSpur Industries, a small design lab building hardware f
 - [Marked.js](https://marked.js.org/) for markdown rendering
 - [Google Model Viewer](https://modelviewer.dev/) for 3D product previews
 - Hosted on GitHub Pages
-
-## Structure
-
-```
-├── index.html          # Homepage
-├── marigold-5.html     # Product page
-├── docs.html           # Documentation viewer
-├── style.css           # Global styles
-├── docs/
-│   └── marigold-5/
-│       ├── docs.md     # Product documentation
-│       ├── img/        # Product images
-│       ├── pdf/        # Downloadable PDFs
-│       └── 3d/         # 3D model files
-├── sitemap.xml
-├── robots.txt
-└── CNAME
-```
 
 ## Contact
 
