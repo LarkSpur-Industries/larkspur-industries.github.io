@@ -7,7 +7,7 @@
 
 The **Marigold-5** is a synchronous step-down (buck) DC-DC converter module designed to provide a regulated 5.1V rail for FIRST Robotics Competition applications. It accepts a wide input voltage range (7V–18V) suitable for FRC lead-acid battery architecture and distributes power via four USB-C receptacles and one auxiliary output.
 
-Built around the **Texas Instruments TPS56A37**, it solves the common headache of powering coprocessors (Raspberry Pi, Orange Pi) and other devices, such as network equipment, by providing robust, high-current 5V power with secure mounting.
+Built around the **Texas Instruments TPS56A37**, it solves the common headache of powering co-processors (Raspberry Pi, Orange Pi) and other devices, such as network equipment, by providing robust, high-current 5V power with secure mounting.
 
 ---
 
@@ -134,7 +134,7 @@ BUTTON("STEP File", "3d/Marigold-5_V1.0A.step")
 
 ### Step 3: USB-C Devices
 
-1. Connect your coprocessors and peripherals via USB-C cables
+1. Connect your co-processors and peripherals via USB-C cables
 2. Make sure device total current draw does not exceed 10A
 3. Use high-quality USB-C cables rated for 3A+
 
@@ -174,7 +174,7 @@ BUTTON("STEP File", "3d/Marigold-5_V1.0A.step")
 During high-current maneuvers (acceleration, pushing matches), the robot battery voltage can sag from 
 12.5V down to 6-7V for several seconds. This is normal FRC battery behavior.
 
-**Why does this matter for coprocessors?**
+**Why does this matter for co-processors?**
 Most generic 12V→5V USB adapters have a minimum input voltage of 9-10V. When battery voltage drops 
 below this threshold, the adapter shuts down, rebooting your co-processor.
 

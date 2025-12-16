@@ -48,7 +48,7 @@
         "https://larkspurindustries.com/docs/marigold-5/img/Marigold-5_V1.0A-Top.png",
         "https://larkspurindustries.com/docs/marigold-5/img/Marigold-5_V1.0A-Side.png"
       ],
-      "description": "Compact DC-DC power module engineered for FIRST Robotics Competition. Provides four high-current USB-C ports to power coprocessors, cameras, and peripherals from robot's 12V supply.",
+      "description": "Compact DC-DC power module engineered for FIRST Robotics Competition. Provides four high-current USB-C ports to power co-processors, cameras, and peripherals from robot's 12V supply.",
       "sku": "MARIGOLD-5-V1.0A",
       "mpn": "MARIGOLD-5",
       "brand": {
@@ -75,6 +75,41 @@
     <!-- Google's Model Viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <style>
+        /* Gentle sway animation for background */
+        @keyframes gentleSway {
+            0%, 100% {
+                transform: translate(0, 0) scale(1.05);
+            }
+            25% {
+                transform: translate(1%, -0.5%) scale(1.05) rotate(0.2deg);
+            }
+            50% {
+                transform: translate(0.5%, 0.5%) scale(1.05) rotate(-0.1deg);
+            }
+            75% {
+                transform: translate(-0.5%, -0.3%) scale(1.05) rotate(0.15deg);
+            }
+        }
+
+        /* Background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('content/img/larkspur_flowers.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15; /* Adjust this value: 0 (invisible) to 1 (full opacity) */
+            filter: brightness(0.4); /* Adjust this value: lower = darker */
+            z-index: -1;
+            pointer-events: none;
+            animation: gentleSway 20s ease-in-out infinite; /* Adjust duration: higher = slower */
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -386,7 +421,7 @@
             </div>
 
             <div style="font-size: 0.9rem; line-height: 1.5; color: #ccc; margin-bottom: 1.5rem;">
-                The Marigold-5 is a compact DC-DC power module engineered for the FIRST Robotics Competition. It provides four high-current USB-C ports to power coprocessors, and other peripherals directly from the robot's 12V supply.
+                The Marigold-5 is a compact DC-DC power module engineered for the FIRST Robotics Competition. It provides four high-current USB-C ports to power co-processors, and other peripherals directly from the robot's 12V supply.
             </div>
 
             <a href="https://square.link/u/PsINvPEL" class="btn btn-primary" target="_blank">BUY NOW - $39.99</a>
@@ -409,9 +444,9 @@
                 </p>
                 
                 <p style="margin-bottom: 1rem;">
-                    <strong style="color: var(--accent);">Built for Modern Vision Systems:</strong> 
-                    AprilTag tracking with PhotonVision or Limelight requires significant processing power. 
-                    Power dual coprocessors for redundant vision, or run your Raspberry Pi, network switch, 
+                    <strong style="color: var(--accent);">Built Hungry Devices:</strong> 
+                    Vision systems require significant processing power. 
+                    Power dual co-processors for redundant vision, or run your Raspberry Pi, network switch, 
                     and LED ring from a single module. 10A total output means you don't have to choose 
                     between devices.
                 </p>
@@ -425,7 +460,7 @@
                 
                 <p style="margin-bottom: 0;">
                     <strong style="color: var(--accent);">Designed for FRC:</strong> 
-                    We've lost matches to power failures. We've watched coprocessors reboot during autonomous. 
+                    We've lost matches to power failures. We've watched co-processors reboot during autonomous. 
                     We've seen reversed polarity connections destroy boards in the pit. Marigold-5 is designed 
                     to address the real problems teams face at competition.
                 </p>
@@ -434,7 +469,7 @@
 
             <div class="section-title">WHAT'S IN THE BOX</div>
             <ul class="box-list">
-                <li><span>1x Marigold-5 Module</span> <span style="color:#666">Fully Assembled</span></li>
+                <li><span>1x Marigold-5</span> <span style="color:#666">Fully Assembled</span></li>
                 <li><span>2x 6-32 Screws</span> <span style="color:#666">Input Power Hardware</span></li>
                 <li><span>2x 4-40 Screws</span> <span style="color:#666">Aux Output Hardware</span></li>
                 <li><span>1x LarkSpur Sticker</span> <span style="color:#666">Vinyl</span></li>
@@ -449,7 +484,7 @@
 
         <div class="footer">
             <span>© 2025 LARKSPUR INDUSTRIES</span>
-            <span style="margin-left: auto;">Richmond, Virginia, USA</span>
+            <span style="margin-left: auto;">Richmond, VA</span>
         </div>
     </div>
 

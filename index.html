@@ -61,6 +61,43 @@
     
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Fade-in animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gentle sway animation for background */
+        @keyframes gentleSway {
+            0%, 100% {
+                transform: translate(0, 0) scale(1.05);
+            }
+            25% {
+                transform: translate(1%, -0.5%) scale(1.05) rotate(0.2deg);
+            }
+            50% {
+                transform: translate(0.5%, 0.5%) scale(1.05) rotate(-0.1deg);
+            }
+            75% {
+                transform: translate(-0.5%, -0.3%) scale(1.05) rotate(0.15deg);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+
         .motto {
             text-align: center;
             color: var(--accent);
@@ -129,11 +166,62 @@
         .highlight-box strong {
             color: var(--text-main);
         }
+
+        /* Background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('content/img/larkspur_flowers.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15; /* Adjust this value: 0 (invisible) to 1 (full opacity) */
+            filter: brightness(0.4); /* Adjust this value: lower = darker */
+            z-index: -1;
+            pointer-events: none;
+            animation: gentleSway 20s ease-in-out infinite; /* Adjust duration: higher = slower */
+        }
+
+        /* Product image */
+        .product-image-container {
+            width: 100%;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            background: #1a1a1a;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .product-image-container:hover {
+            border-color: var(--accent);
+        }
+
+        .product-image {
+            width: 100%;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image-container:hover .product-image {
+            transform: scale(1.05);
+        }
         
         @media (max-width: 768px) {
             .motto {
                 font-size: 0.75rem;
                 letter-spacing: 1px;
+            }
+
+            .product-image-container {
+                padding: 1rem;
             }
         }
     </style>
@@ -141,24 +229,30 @@
 <body>
 
     <div class="container">
-        <div class="header">
+        <div class="header fade-in">
             <div>
                 <span class="flower">❀</span> LARKSPUR INDUSTRIES
             </div>
             <div style="font-size: 0.8rem; color: #444;">EST. 2025</div>
         </div>
 
-        <div class="motto">
+        <div class="motto fade-in delay-1">
             Reasonable Hardware. Fair Prices. Open Values.
         </div>
 
         <!-- Featured Product Card -->
-        <div class="card">
+        <div class="card fade-in delay-2">
             <div class="project-title">CURRENT RELEASE</div>
             <div class="product-name">MARIGOLD-5</div>
             
-            <div style="font-size: 0.9rem; line-height: 1.4; margin-bottom: 1.5rem; color: #ccc;">
-                A USB-C power module engineered for powering power co-processors, and other peripherals. Designed to handle brownouts, and real FRC matches.
+            <a href="marigold-5.html" class="product-image-container">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Corner.png" 
+                     alt="Marigold-5 USB-C Power Module" 
+                     class="product-image">
+            </a>
+            
+            <div style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: #ccc;">
+                A USB-C power module engineered for powering co-processors and other peripherals. Designed to handle brownouts and real FRC matches.
             </div>
 
             <!-- Links to the internal product page -->
@@ -166,7 +260,7 @@
         </div>
 
         <!-- Documentation Section -->
-        <div class="docs-section">
+        <div class="docs-section fade-in delay-3">
             <div class="section-title">
                 <span class="section-icon">📖</span>
                 DOCUMENTATION & RESOURCES
@@ -180,7 +274,7 @@
         </div>
 
         <!-- About / Mission Section -->
-        <div class="section">
+        <div class="section fade-in delay-4">
             <div class="section-title">
                 <span class="section-icon">❀</span>
                 ABOUT LARKSPUR INDUSTRIES
@@ -202,7 +296,7 @@
             <a href="docs.html" class="link">DOCS</a>
             <a href="https://github.com/LarkSpur-Industries" class="link">GITHUB</a>
             <a href="mailto:larkspur.industries.official@gmail.com" class="link">CONTACT</a>
-            <span style="margin-left: auto;">Richmond, Virginia, USA</span>
+            <span style="margin-left: auto;">Richmond, VA</span>
         </div>
     </div>
 
