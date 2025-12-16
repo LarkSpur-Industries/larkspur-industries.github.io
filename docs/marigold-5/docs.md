@@ -41,6 +41,12 @@ Built around the **Texas Instruments TPS56A37**, it solves the common headache o
 
 > **Note:** This device does not support USB-PD negotiation for voltages > 5V.
 
+### 3.3 Why 5.1V Instead Of 5V?
+
+The 5.1V output is **intentional**. Many USB cables, especially longer or lower-quality ones, introduce resistance (typically 0.1–0.5Ω). At 3A load, this creates a voltage drop of **0.3V–1.5V**. Starting at 5.1V ensures the device receives ≥4.75V at the connector, staying within USB spec even under full load.
+
+Many high-quality USB power supplies output 5.1V–5.2V for the reasons above. This is especially common in industrial and embedded applications, such as FRC Robots, where cable runs may be longer or current demands higher.
+
 ---
 
 ## 4. Mechanical & Thermal {#mechanical}
@@ -161,6 +167,20 @@ BUTTON("STEP File", "3d/Marigold-5_V1.0A.step")
 - Improve thermal contact with robot frame, check heatsink.
 - Ensure adequate airflow around the module
 - Check ambient temperature < 60°C
+
+### Understanding Brownouts
+
+**What is a brownout?**
+During high-current maneuvers (acceleration, pushing matches), the robot battery voltage can sag from 
+12.5V down to 6-7V for several seconds. This is normal FRC battery behavior.
+
+**Why does this matter for coprocessors?**
+Most generic 12V→5V USB adapters have a minimum input voltage of 9-10V. When battery voltage drops 
+below this threshold, the adapter shuts down, rebooting your co-processor.
+
+**How Marigold-5 solves this:**
+The TPS56A37 buck converter maintains stable 5.1V output down to 7V input. During a match
+when your battery sags to 7.5V, Marigold-5 keeps the power running stable for all devices connected.
 
 ---
 

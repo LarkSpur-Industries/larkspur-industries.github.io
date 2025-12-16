@@ -2,21 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://larkspurindustries.com/</loc>
-    <lastmod>2025-12-10</lastmod>
-    <priority>1.00</priority>
+    <lastmod>2025-12-16</lastmod>
   </url>
   <url>
     <loc>https://larkspurindustries.com/marigold-5.html</loc>
-    <lastmod>2025-12-10</lastmod>
-    <priority>0.90</priority>
+    <lastmod>2025-12-16</lastmod>
   </url>
   <url>
     <loc>https://larkspurindustries.com/docs.html</loc>
+    <lastmod>2025-12-16</lastmod>
+  </url>
+  <url>
+    <loc>https://larkspurindustries.com/docs/marigold-5/pdf/Marigold-5_V1.0A-GettingStarted.pdf</loc>
     <lastmod>2025-12-10</lastmod>
-    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://larkspurindustries.com/docs/marigold-5/3d/Marigold-5_V1.0A.step</loc>
+    <lastmod>2025-12-10</lastmod>
   </url>
 </urlset>
-
-
-
-
