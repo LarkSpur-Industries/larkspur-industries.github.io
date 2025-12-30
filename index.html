@@ -7,18 +7,18 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❀</text></svg>">
     
     <!-- Primary Meta Tags -->
-    <title>LarkSpur Industries | Reasonable Products & Prices at Open Values</title>
-    <meta name="title" content="LarkSpur Industries | Reasonable Products & Prices at Open Values">
-    <meta name="description" content="LarkSpur Industries designs reliable, open-source hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module. Built in Virginia, USA by Isaac Subudhi.">
-    <meta name="keywords" content="FIRST robotics, robot power module, USB-C power, Marigold-5, robotics hardware, open hardware, open source, competition robotics, affordable robotics">
+    <title>LarkSpur Industries | Reasonable Hardware. Fair Prices. Open Values.</title>
+    <meta name="title" content="LarkSpur Industries | Reasonable Hardware. Fair Prices. Open Values.">
+    <meta name="description" content="LarkSpur Industries designs reliable, affordable hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module. Built in Virginia, USA by Isaac Subudhi.">
+    <meta name="keywords" content="FIRST robotics, robot power module, USB-C power, Marigold-5, robotics hardware, PhotonVision, FRC, competition robotics, affordable robotics">
     <meta name="author" content="Isaac Subudhi">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://larkspurindustries.com/">
-    <meta property="og:title" content="LarkSpur Industries | Reasonable Products & Prices at Open Values">
-    <meta property="og:description" content="Open-source hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs, $39.99. Built in Virginia, USA.">
+    <meta property="og:title" content="LarkSpur Industries | Reasonable Hardware. Fair Prices. Open Values.">
+    <meta property="og:description" content="Hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs, $39.99. Built in Virginia, USA.">
     <meta property="og:image" content="https://larkspurindustries.com/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -27,8 +27,8 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://larkspurindustries.com/">
-    <meta property="twitter:title" content="LarkSpur Industries | Reasonable Products & Prices at Open Values">
-    <meta property="twitter:description" content="Open-source hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs, $39.99. Built in Virginia, USA.">
+    <meta property="twitter:title" content="LarkSpur Industries | Reasonable Hardware. Fair Prices. Open Values.">
+    <meta property="twitter:description" content="Hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 4x 3A outputs, $39.99. Built in Virginia, USA.">
     <meta property="twitter:image" content="https://larkspurindustries.com/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png">
     
     <!-- Canonical URL -->
@@ -42,8 +42,8 @@
       "name": "LarkSpur Industries",
       "url": "https://larkspurindustries.com",
       "logo": "https://larkspurindustries.com/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png",
-      "description": "Reasonable products and prices at open values for FIRST robotics",
-      "slogan": "Reasonable products and prices at open values",
+      "description": "Reasonable Hardware. Fair Prices. Open Values. For FIRST robotics",
+      "slogan": "Reasonable Hardware. Fair Prices. Open Values.",
       "address": {
         "@type": "PostalAddress",
         "addressRegion": "VA",
@@ -59,8 +59,46 @@
     }
     </script>
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fonts.css">
     <style>
+        /* Fade-in animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gentle sway animation for background */
+        @keyframes gentleSway {
+            0%, 100% {
+                transform: translate(0, 0) scale(1.05);
+            }
+            25% {
+                transform: translate(1%, -0.5%) scale(1.05) rotate(0.2deg);
+            }
+            50% {
+                transform: translate(0.5%, 0.5%) scale(1.05) rotate(-0.1deg);
+            }
+            75% {
+                transform: translate(-0.5%, -0.3%) scale(1.05) rotate(0.15deg);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+
         .motto {
             text-align: center;
             color: var(--accent);
@@ -129,11 +167,62 @@
         .highlight-box strong {
             color: var(--text-main);
         }
+
+        /* Background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('content/img/larkspur_flowers.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15; /* Adjust this value: 0 (invisible) to 1 (full opacity) */
+            filter: brightness(0.4); /* Adjust this value: lower = darker */
+            z-index: -1;
+            pointer-events: none;
+            animation: gentleSway 20s ease-in-out infinite; /* Adjust duration: higher = slower */
+        }
+
+        /* Product image */
+        .product-image-container {
+            width: 100%;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            background: #1a1a1a;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .product-image-container:hover {
+            border-color: var(--accent);
+        }
+
+        .product-image {
+            width: 100%;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image-container:hover .product-image {
+            transform: scale(1.05);
+        }
         
         @media (max-width: 768px) {
             .motto {
                 font-size: 0.75rem;
                 letter-spacing: 1px;
+            }
+
+            .product-image-container {
+                padding: 1rem;
             }
         }
     </style>
@@ -141,24 +230,30 @@
 <body>
 
     <div class="container">
-        <div class="header">
+        <div class="header fade-in">
             <div>
                 <span class="flower">❀</span> LARKSPUR INDUSTRIES
             </div>
             <div style="font-size: 0.8rem; color: #444;">EST. 2025</div>
         </div>
 
-        <div class="motto">
-            Reasonable Products and Prices at Open Values
+        <div class="motto fade-in delay-1">
+            Reasonable Hardware. Fair Prices. Open Values.
         </div>
 
         <!-- Featured Product Card -->
-        <div class="card">
+        <div class="card fade-in delay-2">
             <div class="project-title">CURRENT RELEASE</div>
             <div class="product-name">MARIGOLD-5</div>
             
-            <div style="font-size: 0.9rem; line-height: 1.4; margin-bottom: 1.5rem; color: #ccc;">
-                A powerful USB-C power module built for the chaos of the FIRST robotics competition. No more custom wiring or brownouts!
+            <a href="marigold-5.html" class="product-image-container">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0A-Corner.png" 
+                     alt="Marigold-5 USB-C Power Module" 
+                     class="product-image">
+            </a>
+            
+            <div style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: #ccc;">
+                A USB-C power module engineered for powering co-processors and other peripherals. Designed to handle robot brownouts and real FRC matches.
             </div>
 
             <!-- Links to the internal product page -->
@@ -166,21 +261,21 @@
         </div>
 
         <!-- Documentation Section -->
-        <div class="docs-section">
+        <div class="docs-section fade-in delay-3">
             <div class="section-title">
                 <span class="section-icon">📖</span>
                 DOCUMENTATION & RESOURCES
             </div>
             
             <div style="color: #999; font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.5;">
-                Complete documentation, integration guides, and CAD files for all LarkSpur products.
+                Complete documentation, integration guides, and CAD files for all LarkSpur Industries products.
             </div>
             
             <a href="docs.html" class="btn">VIEW ALL DOCS -></a>
         </div>
 
         <!-- About / Mission Section -->
-        <div class="section">
+        <div class="section fade-in delay-4">
             <div class="section-title">
                 <span class="section-icon">❀</span>
                 ABOUT LARKSPUR INDUSTRIES
@@ -190,7 +285,7 @@
                     <strong>Mission:</strong> Building cool, open, and reliable hardware for robotics teams.
                 </div>
                 <p>
-                    LarkSpur Industries is a small design lab run by Isaac Subudhi, based in Virginia, USA.
+                    LarkSpur Industries is a small hardware design company run by Isaac Subudhi, based in Richmond, Virginia. 
                 </p>
                 <p>
                     We believe competition robots deserve better than hacked-together electronics with electrical tape. Our goal is to design parts that are reasonable, work flawlessly, and respect your budget.
@@ -202,7 +297,7 @@
             <a href="docs.html" class="link">DOCS</a>
             <a href="https://github.com/LarkSpur-Industries" class="link">GITHUB</a>
             <a href="mailto:larkspur.industries.official@gmail.com" class="link">CONTACT</a>
-            <span style="margin-left: auto;">VA, USA</span>
+            <span style="margin-left: auto;">Richmond, VA</span>
         </div>
     </div>
 

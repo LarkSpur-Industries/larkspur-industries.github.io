@@ -2,7 +2,7 @@
 
 > **Reasonable Products and Prices at Open Values**
 
-Official website for LarkSpur Industries, a small design company building hardware for FIRST robotics teams.
+Official website for LarkSpur Industries, a small hardware design company building hardware for FIRST robotics teams.
 
 ## Live Site
 
