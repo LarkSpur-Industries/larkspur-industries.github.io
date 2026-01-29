@@ -1,12 +1,13 @@
 {
     "name": "larkspur-industries-website",
     "version": "1.0.0",
-    "description": "Static site build system for LarkSpur Industries",
+    "description": "LarkSpur Industries Website",
     "main": "build.js",
     "scripts": {
       "build": "node build.js"
     },
-    "author": "Isaac Subudhi",
-    "license": "MIT"
+    "dependencies": {
+      "marked": "^12.0.0"
+    }
   }
   

@@ -4,3 +4,6 @@ node_modules/
 # Generated files (built by GitHub Actions)
 index.html
 marigold-5.html
+docs.html
+docs-marigold-5.html
+docs-warranty.html
