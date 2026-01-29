@@ -3,7 +3,7 @@ const path = require('path');
 const { marked } = require('marked');
 
 // Import meta configuration
-const metaConfig = require('./meta-config.js');
+const { generateMetaTags, pages } = require('./meta-config.js');
 
 // Product configuration
 const PRODUCTS = {
@@ -101,6 +101,19 @@ function generateSidebarHtml(headings) {
     }).join('\n');
 }
 
+// Inject meta tags into HTML
+function injectMetaTags(html, pageKey) {
+    // Check if meta config exists for this page
+    if (!pages[pageKey]) {
+        console.warn(`  ⚠ No meta config found for: ${pageKey}`);
+        // Remove placeholder if no meta tags available
+        return html.replace(/{{META_TAGS}}/g, '');
+    }
+    
+    const metaTags = generateMetaTags(pageKey);
+    return html.replace(/{{META_TAGS}}/g, metaTags);
+}
+
 // Generate documentation HTML for a product
 function generateDocsHtml(productKey, config) {
     const markdownPath = path.join(config.folder, 'docs.md');
@@ -145,11 +158,8 @@ function generateDocsHtml(productKey, config) {
         .replace(/{{MAIN_CONTENT}}/g, contentHtml)
         .replace(/{{PRODUCT_KEY}}/g, productKey);
     
-    // Inject meta tags if available
-    if (metaConfig && metaConfig[productKey]) {
-        const meta = metaConfig[productKey];
-        html = injectMetaTags(html, meta);
-    }
+    // Try to inject meta tags (will warn if not found, which is OK for docs)
+    html = injectMetaTags(html, `docs-${productKey}`);
     
     return html;
 }
@@ -173,35 +183,13 @@ function generateProductPage(productKey, config) {
         return;
     }
     
-    // You can add template variable replacement here if needed
-    let html = template
-        .replace(/{{PRODUCT_KEY}}/g, productKey);
+    // Replace template variables
+    let html = template.replace(/{{PRODUCT_KEY}}/g, productKey);
     
-    // Inject meta tags if available
-    if (metaConfig && metaConfig[`${productKey}-product`]) {
-        const meta = metaConfig[`${productKey}-product`];
-        html = injectMetaTags(html, meta);
-    }
+    // Inject meta tags using productKey (e.g., 'marigold-5')
+    html = injectMetaTags(html, productKey);
     
     writeFile(config.productOutputFile, html);
-}
-
-// Inject meta tags into HTML
-function injectMetaTags(html, meta) {
-    const metaTags = `
-    <meta name="description" content="${meta.description}">
-    <meta name="keywords" content="${meta.keywords}">
-    <meta property="og:title" content="${meta.ogTitle}">
-    <meta property="og:description" content="${meta.ogDescription}">
-    <meta property="og:image" content="${meta.ogImage}">
-    <meta property="og:url" content="${meta.ogUrl}">
-    <meta name="twitter:title" content="${meta.twitterTitle}">
-    <meta name="twitter:description" content="${meta.twitterDescription}">
-    <meta name="twitter:image" content="${meta.twitterImage}">`;
-    
-    // Insert before </head>
-    return html.replace('</head>', `${metaTags}
-</head>`);
 }
 
 // Generate index.html from template
@@ -212,11 +200,8 @@ function generateIndex() {
         return;
     }
     
-    // Inject meta tags for home page
-    let html = template;
-    if (metaConfig && metaConfig.home) {
-        html = injectMetaTags(html, metaConfig.home);
-    }
+    // Inject meta tags for home page (use 'index' as page key)
+    let html = injectMetaTags(template, 'index');
     
     writeFile('index.html', html);
 }
