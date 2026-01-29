@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{META_TAGS}}
+            
+            <link rel="stylesheet" href="css/fonts.css">
+            <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header fade-in">
+            <div>
+                <span class="flower">❀</span> LARKSPUR INDUSTRIES
+            </div>
+            <div style="font-size: 0.8rem; color: #444;">EST. 2025</div>
+        </div>
+        
+        <div class="motto fade-in delay-1">
+            Reasonable Hardware. Fair Prices. Open Values.
+        </div>
+        
+        <!-- Featured Product Card -->
+        <div class="card fade-in delay-2">
+            <div class="project-title">CURRENT RELEASE</div>
+            <div class="product-name">MARIGOLD-5</div>
+            
+            <!-- Product Carousel (Desktop + Mobile) - Links to product page on click -->
+            <a href="marigold-5.html" class="product-carousel-link" id="productCarouselLink">
+                <div class="product-carousel-wrapper" id="productCarouselWrapper">
+                    <div class="product-carousel-container" id="productCarouselContainer">
+                        <div class="product-carousel-slide">
+                            <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png" 
+                                 alt="Marigold-5 USB-C Power Module"
+                                 width="600"
+                                 height="600"
+                                 loading="eager"
+                                 decoding="async">
+                        </div>
+                    </div>
+                    <div class="product-carousel-counter" id="productCarouselCounter">1 / 3</div>
+                </div>
+            </a>
+            
+            <div style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: #ccc;">
+                A USB-C power module designed for powering co-processors and other peripherals. Built for reliability, ease of use, and handling robot brownouts.
+            </div>
+            <!-- Links to the internal product page -->
+            <a href="marigold-5.html" class="btn">VIEW PRODUCT & ORDER -></a>
+        </div>
+        
+        <!-- Documentation Section -->
+        <div class="docs-section fade-in delay-3">
+            <div class="section-title">
+                <span class="section-icon">📖</span>
+                DOCUMENTATION & RESOURCES
+            </div>
+            
+            <div style="color: #999; font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.5;">
+                Guides, information, and relevant files for all products.
+            </div>
+            
+            <a href="docs.html" class="btn">VIEW ALL DOCS -></a>
+        </div>
+        
+        <!-- About / Mission Section -->
+        <div class="section fade-in delay-4">
+            <div class="section-title">
+                <span class="section-icon">❀</span>
+                ABOUT LARKSPUR INDUSTRIES
+            </div>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <strong>Mission:</strong> Building cool, open, and reliable hardware for robotics teams.
+                </div>
+                <p>
+                    LarkSpur Industries is a small hardware design company run by Isaac Subudhi, based in Richmond, Virginia.
+                </p>
+                <p>
+                    We believe competition robots deserve better than hacked-together electronics with electrical tape. Our goal is to design parts that are reliable, work flawlessly, and respect your budget.
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a href="docs.html" class="link">DOCS</a>
+            <a href="https://github.com/LarkSpur-Industries" class="link">GITHUB</a>
+            <a href="docs.html?product=warranty" class="link">WARRANTY</a>
+            <a href="mailto:larkspur.industries.official@gmail.com" class="link">CONTACT</a>
+            <span style="margin-left: auto;">Richmond, VA</span>
+        </div>
+    </div>
+    
+    <script>
+        // Product carousel images for home page
+        const productImages = [
+            {
+                src: "docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png",
+                alt: "Marigold-5 Corner USB View",
+                caption: "Corner USB View"
+            },
+            {
+                src: "docs/marigold-5/img/Marigold-5_V1.0-Corner.png",
+                alt: "Marigold-5 Corner View",
+                caption: "Corner View"
+            },
+            {
+                src: "docs/marigold-5/img/Marigold-5_V1.0-Top.png",
+                alt: "Marigold-5 Top View",
+                caption: "Top View"
+            }
+        ];
+        
+        // ============ PRODUCT CAROUSEL MANAGEMENT ============
+        const productCarouselContainer = document.getElementById("productCarouselContainer");
+        const productCarouselCounter = document.getElementById("productCarouselCounter");
+        const productCarouselLink = document.getElementById("productCarouselLink");
+        
+        let currentProductCarouselIndex = 0;
+        let productCarouselTouchStartX = 0;
+        let productCarouselAutoPlayInterval = null;
+        const PRODUCT_CAROUSEL_AUTO_PLAY_INTERVAL = 5000; // 5 seconds
+        const SWIPE_THRESHOLD = 30;
+        let isCarouselSwiping = false;
+        
+        function updateProductCarouselDisplay() {
+            const slide = productImages[currentProductCarouselIndex];
+            productCarouselContainer.innerHTML = `
+                <div class="product-carousel-slide">
+                    <img src="${slide.src}" 
+                         width="600" height="600"
+                         alt="${slide.alt}"
+                         loading="lazy"
+                         decoding="async">
+                </div>
+            `;
+            productCarouselCounter.textContent = `${currentProductCarouselIndex + 1} / ${productImages.length}`;
+            
+            // Re-attach touch handlers
+            attachProductCarouselTouchHandlers();
+            
+            // Restart auto-play
+            resetProductCarouselAutoPlay();
+        }
+        
+        function nextProductCarouselSlide() {
+            currentProductCarouselIndex = (currentProductCarouselIndex + 1) % productImages.length;
+            updateProductCarouselDisplay();
+        }
+        
+        function prevProductCarouselSlide() {
+            currentProductCarouselIndex = (currentProductCarouselIndex - 1 + productImages.length) % productImages.length;
+            updateProductCarouselDisplay();
+        }
+        
+        function attachProductCarouselTouchHandlers() {
+            const currentSlide = productCarouselContainer.querySelector('.product-carousel-slide');
+            if (!currentSlide) return;
+            
+            currentSlide.addEventListener('touchstart', (e) => {
+                productCarouselTouchStartX = e.changedTouches[0].screenX;
+                isCarouselSwiping = false;
+            }, { passive: true });
+            
+            currentSlide.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].screenX;
+                const diff = productCarouselTouchStartX - touchEndX;
+                
+                if (Math.abs(diff) > SWIPE_THRESHOLD) {
+                    isCarouselSwiping = true;
+                    if (diff > 0) {
+                        nextProductCarouselSlide(); // Swipe left, next
+                    } else {
+                        prevProductCarouselSlide(); // Swipe right, prev
+                    }
+                }
+            }, { passive: true });
+        }
+        
+        function startProductCarouselAutoPlay() {
+            productCarouselAutoPlayInterval = setInterval(nextProductCarouselSlide, PRODUCT_CAROUSEL_AUTO_PLAY_INTERVAL);
+        }
+        
+        function stopProductCarouselAutoPlay() {
+            if (productCarouselAutoPlayInterval) {
+                clearInterval(productCarouselAutoPlayInterval);
+                productCarouselAutoPlayInterval = null;
+            }
+        }
+        
+        function resetProductCarouselAutoPlay() {
+            stopProductCarouselAutoPlay();
+            startProductCarouselAutoPlay();
+        }
+        
+        // Handle link click - only navigate if not swiping
+        productCarouselLink.addEventListener('click', (e) => {
+            if (isCarouselSwiping) {
+                e.preventDefault();
+                isCarouselSwiping = false;
+            }
+            // If not swiping, allow natural link navigation
+        });
+        
+        // Pause auto-play when user manually swipes
+        document.addEventListener('touchstart', () => {
+            if (productCarouselAutoPlayInterval) {
+                stopProductCarouselAutoPlay();
+            }
+        }, { passive: true });
+        
+        // Resume auto-play after user finishes interacting
+        document.addEventListener('touchend', () => {
+            if (!productCarouselAutoPlayInterval) {
+                startProductCarouselAutoPlay();
+            }
+        }, { passive: true });
+        
+        // Initialize product carousel
+        updateProductCarouselDisplay();
+        startProductCarouselAutoPlay();
+        
+        // Stop auto-play on page visibility change
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopProductCarouselAutoPlay();
+            } else {
+                startProductCarouselAutoPlay();
+            }
+        });
+    </script>
+</body>
+</html>

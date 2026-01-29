@@ -1,0 +1,6 @@
+# Node
+node_modules/
+
+# Generated files (built by GitHub Actions)
+index.html
+marigold-5.html

@@ -8,11 +8,7 @@ Official website for LarkSpur Industries, a small hardware design company buildi
 
 🌐 [larkspurindustries.com](https://larkspurindustries.com)
 
-## Products
-
-- **Marigold-5:** A compact 4-port USB-C power module for FRC robots. 12V input, 10A total output (3A per port).
-
-## Tech Stack
+## Stack
 
 - Static HTML/CSS/JS
 - [Marked.js](https://marked.js.org/) for markdown rendering
