@@ -9,7 +9,7 @@ const { generateMetaTags, pages } = require('./meta-config.js');
 const PRODUCTS = {
     'marigold-5': {
         name: 'MARIGOLD-5',
-        subtitle: 'REFERENCE MANUAL',
+        subtitle: 'DC-DC USB-C Power Module',
         folder: 'docs/marigold-5',
         docsOutputFile: 'docs-marigold-5.html',
         productTemplate: 'src/templates/marigold-5.template.html',
@@ -17,7 +17,7 @@ const PRODUCTS = {
     },
     'warranty': {
         name: 'HARDWARE WARRANTY',
-        subtitle: 'WARRANTY & SUPPORT POLICY',
+        subtitle: '',
         folder: 'docs/warranty',
         docsOutputFile: 'docs-warranty.html',
         productTemplate: null,
@@ -229,7 +229,6 @@ function generateDocsListing() {
             <div>
                 <span class="flower">❀</span> <span>DOCUMENTATION</span>
             </div>
-            <div style="font-size: 0.8rem; color: #666;">TECHNICAL REFERENCES & GUIDES</div>
         </div>
         
         <div style="margin-top: 2rem;">
