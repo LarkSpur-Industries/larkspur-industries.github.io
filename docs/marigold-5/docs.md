@@ -242,7 +242,7 @@ The PG circuit includes built-in deglitch timing to prevent false triggers from 
 
 ---
 
-### USB Devices Not Charging or Booting
+### USB Devices Not Booting or Charging
 
 **Cable quality issues:**
 - Try a different USB-C cable rated for 3A
@@ -255,7 +255,7 @@ The PG circuit includes built-in deglitch timing to prevent false triggers from 
 
 **Device compatibility:**
 - Verify your device accepts 5V input (not 9V, 12V, or 20V PD)
-- Some laptops require USB-PD negotiation and will not charge from this module
+- Some devices require USB-PD negotiation and will not charge from this module
 
 ---
 
@@ -305,12 +305,6 @@ BUTTON("Case Drawing (PDF)", "pdf/Marigold-5_V1.0B_Drawing.pdf", "_blank")
 
 BUTTON("STEP File", "3d/Marigold-5_V1.0B.step", "_blank")  
 BUTTON("GLTF Model", "3d/Marigold-5_V1.0B.gltf", "_blank")
-
-### Additional Images
-
-BUTTON("Corner View", "img/Marigold-5_V1.0-Corner.png", "_blank")  
-BUTTON("Side View", "img/Marigold-5_V1.0-Side.png", "_blank")  
-BUTTON("Top View", "img/Marigold-5_V1.0-Top.png", "_blank")
 
 ---
 
@@ -368,23 +362,13 @@ BUTTON("Top View", "img/Marigold-5_V1.0-Top.png", "_blank")
 ![Marigold-5 Case Drawing](pdf/Marigold-5_V1.0B_Drawing.png)
 *Figure 10.1: Mechanical Drawing with Dimensions*
 
-### 10.5 Component Details
-
-| Component | Part Number | Description |
-|-----------|-------------|-------------|
-| DC-DC Controller | TI TPS56A37RPAR | 10A synchronous buck converter |
-| Input Terminal Block | TBLH10-350-04BK | 4-position spring cage, 3.5mm pitch |
-| USB-C Receptacle | [TBD] | Mid-mount, through-hole |
-| Input TVS Diode | [TBD] | 22V clamping voltage |
-| Reverse Polarity FET | [TBD] | P-channel MOSFET |
-
 ---
 
 ## 11. Warranty & Support {#support}
 
 ### Warranty Information
 
-**Larkspur Industries provides a 1-year limited warranty on the Marigold-5.**  
+**Larkspur Industries provides a warranty on the Marigold-5.**  
 For complete warranty terms and RMA process, see our [Warranty Policy](../warranty/docs.html).
 
 ### Contact Information
@@ -398,8 +382,6 @@ For technical support, sales inquiries, or feedback:
 ### Community Resources
 
 - **GitHub:** [github.com/LarkSpur-Industries](https://github.com/LarkSpur-Industries) — Open-source design files, example code, and community contributions
-- **Chief Delphi:** Search "Marigold-5" for FRC team reviews and installation tips
-
 ---
 
 **Document Revision:** V1.0B  
