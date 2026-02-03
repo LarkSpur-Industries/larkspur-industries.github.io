@@ -15,6 +15,14 @@ const PRODUCTS = {
         productTemplate: 'src/templates/marigold-5.template.html',
         productOutputFile: 'marigold-5.html'
     },
+    'locking-cable': {
+        name: 'MARIGOLD-5 LOCKING CABLE',
+        subtitle: 'A secure connection for USB-C devices',
+        folder: 'docs/cables',
+        docsOutputFile: 'docs-locking-cable.html',
+        productTemplate: 'src/templates/locking_cable-template.html',
+        productOutputFile: 'locking-cable.html'
+    },
     'warranty': {
         name: 'HARDWARE WARRANTY',
         subtitle: 'Warranty Information for Hardware Products',
