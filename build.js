@@ -17,7 +17,7 @@ const PRODUCTS = {
     },
     'warranty': {
         name: 'HARDWARE WARRANTY',
-        subtitle: '',
+        subtitle: 'Warranty Information for Hardware Products',
         folder: 'docs/warranty',
         docsOutputFile: 'docs-warranty.html',
         productTemplate: null,
@@ -205,7 +205,6 @@ function generateIndex() {
     
     writeFile('index.html', html);
 }
-
 // Generate docs listing page
 function generateDocsListing() {
     let listingHtml = `<!DOCTYPE html>
@@ -218,6 +217,21 @@ function generateDocsListing() {
     <title>Documentation | LarkSpur Industries</title>
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .doc-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+            display: block;
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+        .doc-card:hover {
+            border-color: var(--accent);
+        }
+    </style>
 </head>
 <body style="align-items: center; justify-content: center; min-height: 100vh;">
     <div class="container" style="max-width: 600px;">
@@ -237,11 +251,10 @@ function generateDocsListing() {
     // Add product cards
     for (const [key, config] of Object.entries(PRODUCTS)) {
         listingHtml += `
-            <div style="background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1.5rem;">
+            <a href="${config.docsOutputFile}" class="doc-card">
                 <h3 style="color: var(--highlight); margin-top: 0; margin-bottom: 0.5rem; font-size: 1.3rem;">${config.name}</h3>
-                <p style="color: #ccc; margin-bottom: 1rem; font-size: 0.9rem;">${config.subtitle}</p>
-                <a href="${config.docsOutputFile}" class="btn">View Documentation</a>
-            </div>
+                <p style="color: #ccc; margin-bottom: 0; font-size: 0.9rem;">${config.subtitle}</p>
+            </a>
 `;
     }
 
