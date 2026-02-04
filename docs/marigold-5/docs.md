@@ -369,7 +369,7 @@ BUTTON("GLTF Model", "3d/Marigold-5_V1.0B.gltf", "_blank")
 ### Warranty Information
 
 **Larkspur Industries provides a warranty on the Marigold-5.**  
-For complete warranty terms and RMA process, see our [Warranty Policy](../warranty/docs.html).
+For complete warranty terms and RMA process, see our [Warranty Policy](https://larkspurindustries.com/docs-warranty.html).
 
 ### Contact Information
 
@@ -381,9 +381,9 @@ For technical support, sales inquiries, or feedback:
 
 ### Community Resources
 
-- **GitHub:** [github.com/LarkSpur-Industries](https://github.com/LarkSpur-Industries) — Open-source design files, example code, and community contributions
+- **GitHub:** [github.com/LarkSpur-Industries](https://github.com/LarkSpur-Industries)
 ---
 
-**Document Revision:** V1.0B  
+**Document Revision:** V1.2 
 **Last Updated:** February 3, 2026  
-**© 2026 Larkspur Industries. All rights reserved.**
+**© 2026 Larkspur Industries**
