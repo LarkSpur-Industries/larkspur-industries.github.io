@@ -569,30 +569,6 @@ a.link:hover {
     padding: 5px;
 }
 
-/* Logo in Header */
-.header .site-logo {
-    height: 50px; 
-    width: auto;
-    max-width: 100%;
-    display: block;
-    margin: 0; 
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .header .site-logo {
-        height: 40px;
-        max-width: 280px; /* Prevent logo from being too wide on tablets */
-    }
-}
-
-@media (max-width: 480px) {
-    .header .site-logo {
-        height: 30px;
-        max-width: 200px; /* Prevent logo from being too wide on mobile */
-    }
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .motto {

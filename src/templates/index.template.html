@@ -2,18 +2,42 @@
 <html lang="en">
     <head>
         {{META_TAGS}}
-            <link rel="stylesheet" href="css/fonts.css">
-            <link rel="stylesheet" href="css/style.css">
-</head>
+        <link rel="stylesheet" href="css/fonts.css">
+        <link rel="stylesheet" href="css/style.css">
+        <style>
+            /* Inline logo styles to override any CSS issues */
+            .header .site-logo {
+                height: 50px !important;
+                width: auto !important;
+                max-width: 100% !important;
+                display: block !important;
+                margin: 0 !important;
+            }
+            
+            @media (max-width: 768px) {
+                .header .site-logo {
+                    height: 40px !important;
+                    max-width: 280px !important;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .header .site-logo {
+                    height: 30px !important;
+                    max-width: 200px !important;
+                }
+            }
+        </style>
+    </head>
 <body>
     <div class="container">
         <!-- Logo Header -->
         <div class="header fade-in">
-            <img src="content/logos/larkspur-logo-large-grey.png" 
-            alt="Larkspur Industries" 
-            class="site-logo"
-            loading="eager"
-            decoding="async">       
+            <img src="content/logos/larkspur-logo-large-grey.webp" 
+                 alt="Larkspur Industries" 
+                 class="site-logo"
+                 loading="eager"
+                 decoding="async">       
             <div style="font-size: 0.8rem; color: #444; margin-top: 0.5rem;">EST. 2025</div>
         </div>
     
