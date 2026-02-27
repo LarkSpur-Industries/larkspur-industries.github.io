@@ -222,7 +222,7 @@ function generateDocsListing() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="icon" type="image/webp" href="content/logos/favicon-docs.webp"
-    <title>Documentation | LarkSpur Industries</title>
+    <title></title>
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -279,36 +279,45 @@ function generateDocsListing() {
     writeFile('docs.html', listingHtml);
 }
 
-// Main build function
+function generateShop() {
+    const template = readFile('src/templates/shop.template.html');
+    if (!template) {
+        console.error('✗ Failed to load shop template');
+        return;
+    }
+    let html = injectMetaTags(template, 'shop');
+    writeFile('shop.html', html);
+}
+
+
+// ── UPDATE the build() function — add the two highlighted lines ───────────────
+
 function build() {
     console.log('\n🔨 Building LarkSpur Industries Website...\n');
-    
-    // Generate index page
+
     console.log('📄 Building home page...');
     generateIndex();
-    
-    // Generate product pages and documentation
+
+    console.log('🛒 Building shop page...');   // <-- ADD THIS LINE
+    generateShop();                             // <-- ADD THIS LINE
+
     console.log('\n📦 Building product pages and documentation...');
     for (const [key, config] of Object.entries(PRODUCTS)) {
         console.log(`\n  ${config.name}:`);
-        
-        // Generate product page (if it has one)
         generateProductPage(key, config);
-        
-        // Generate documentation page
         const docsHtml = generateDocsHtml(key, config);
         if (docsHtml) {
             writeFile(config.docsOutputFile, docsHtml);
         }
     }
-    
-    // Generate docs listing page
+
     console.log('\n📚 Building docs listing page...');
     generateDocsListing();
-    
+
     console.log('\n✅ Build complete!\n');
     console.log('Generated files:');
     console.log('  • index.html (homepage)');
+    console.log('  • shop.html (shop page)');   // <-- ADD THIS LINE
     console.log('  • docs.html (documentation listing)');
     for (const [key, config] of Object.entries(PRODUCTS)) {
         if (config.productOutputFile) {

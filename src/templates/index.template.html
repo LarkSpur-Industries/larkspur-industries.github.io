@@ -5,250 +5,520 @@
         <link rel="stylesheet" href="css/fonts.css">
         <link rel="stylesheet" href="css/style.css">
         <style>
-            /* Inline logo styles to override any CSS issues */
-            .header .site-logo {
-                height: 50px !important;
-                width: auto !important;
-                max-width: 100% !important;
-                display: block !important;
-                margin: 0 !important;
+            /* ── NAV ───────────────────────────────────────────── */
+            .site-nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 0;
             }
-            
-            @media (max-width: 768px) {
-                .header .site-logo {
-                    height: 40px !important;
-                    max-width: 280px !important;
-                }
+            .site-nav .nav-logo {
+                height: 32px;
+                width: auto;
+                display: block;
+                opacity: 0.9;
             }
-            
-            @media (max-width: 480px) {
-                .header .site-logo {
-                    height: 30px !important;
-                    max-width: 200px !important;
+            .site-nav .nav-links {
+                display: flex;
+                gap: 1.5rem;
+                align-items: center;
+            }
+            .site-nav .nav-links a {
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                text-decoration: none;
+                letter-spacing: 0.8px;
+                text-transform: uppercase;
+                transition: color 0.15s;
+            }
+            .site-nav .nav-links a:hover { color: var(--text-main); }
+            .site-nav .nav-links .nav-cta {
+                color: var(--text-main);
+                border: 1px solid var(--border);
+                padding: 0.3rem 0.75rem;
+            }
+            .site-nav .nav-links .nav-cta:hover {
+                background: var(--text-main);
+                color: var(--bg);
+            }
+
+            /* ── HERO ──────────────────────────────────────────── */
+            .hero {
+                padding: 2.5rem 0 2rem;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 2rem;
+            }
+            .hero-headline {
+                font-size: 2rem;
+                font-weight: bold;
+                color: var(--highlight);
+                line-height: 1.2;
+                margin-bottom: 0.75rem;
+                letter-spacing: -0.5px;
+            }
+            .hero-sub {
+                font-size: 0.9rem;
+                color: #888;
+                line-height: 1.6;
+                max-width: 440px;
+                margin-bottom: 1.5rem;
+            }
+            .hero-actions {
+                display: flex;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+            }
+            .hero-actions .btn {
+                width: auto;
+                padding: 0.65rem 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            /* ── FEATURED PRODUCT ──────────────────────────────── */
+            .featured-product {
+                background: var(--card-bg);
+                border: 1px solid var(--border);
+                margin-bottom: 2rem;
+                overflow: hidden;
+            }
+            .featured-badge {
+                background: var(--accent);
+                color: #fff;
+                font-size: 0.65rem;
+                font-weight: bold;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                padding: 0.3rem 0.75rem;
+                display: inline-block;
+            }
+            .featured-inner {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+            }
+            .featured-image-col {
+                border-right: 1px solid var(--border);
+                background: #111;
+                display: flex;
+                flex-direction: column;
+            }
+            .featured-info-col {
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+            }
+            .featured-product-name {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: var(--highlight);
+                margin-bottom: 0.25rem;
+                letter-spacing: 0.5px;
+            }
+            .featured-subtitle {
+                font-size: 0.8rem;
+                color: var(--text-muted);
+                margin-bottom: 1rem;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+            }
+            .featured-price {
+                font-size: 1.6rem;
+                font-weight: bold;
+                color: var(--highlight);
+                margin-bottom: 1rem;
+                font-family: "Courier New", Courier, monospace;
+            }
+            .featured-price .price-note {
+                font-size: 0.7rem;
+                color: var(--text-muted);
+                font-weight: normal;
+                margin-left: 0.4rem;
+            }
+            .featured-specs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+                margin-bottom: 1.25rem;
+                padding: 1rem;
+                background: #0d0d0d;
+                border: 1px solid #222;
+            }
+            .featured-spec-item {
+                display: flex;
+                flex-direction: column;
+                gap: 0.15rem;
+            }
+            .featured-spec-label {
+                font-size: 0.65rem;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+            }
+            .featured-spec-val {
+                font-size: 0.85rem;
+                color: var(--text-main);
+                font-family: "Courier New", Courier, monospace;
+            }
+            .featured-desc {
+                font-size: 0.85rem;
+                color: #999;
+                line-height: 1.6;
+                margin-bottom: 1.25rem;
+                flex: 1;
+            }
+            .featured-btns {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .featured-btns .btn {
+                font-size: 0.8rem;
+                padding: 0.7rem 0;
+            }
+
+            /* ── PRODUCTS GRID ─────────────────────────────────── */
+            .products-section { margin-bottom: 2rem; }
+            .section-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--border);
+                padding-bottom: 0.5rem;
+            }
+            .section-header h2 {
+                font-size: 0.75rem;
+                font-weight: bold;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                margin: 0;
+            }
+            .section-header a {
+                font-size: 0.75rem;
+                color: var(--accent);
+                text-decoration: none;
+                letter-spacing: 0.5px;
+            }
+            .products-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .product-card {
+                background: var(--card-bg);
+                border: 1px solid var(--border);
+                text-decoration: none;
+                display: block;
+                transition: border-color 0.2s;
+                overflow: hidden;
+            }
+            .product-card:hover { border-color: var(--accent); }
+            .product-card-img {
+                width: 100%;
+                aspect-ratio: 1/1;
+                background: #111;
+                padding: 1rem;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-bottom: 1px solid var(--border);
+            }
+            .product-card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+            .product-card-info { padding: 0.75rem 1rem; }
+            .product-card-name {
+                font-size: 0.9rem;
+                font-weight: bold;
+                color: var(--highlight);
+                margin-bottom: 0.2rem;
+            }
+            .product-card-tagline {
+                font-size: 0.75rem;
+                color: #666;
+                margin-bottom: 0.5rem;
+                line-height: 1.4;
+            }
+            .product-card-price {
+                font-size: 0.85rem;
+                font-family: "Courier New", Courier, monospace;
+                color: var(--text-main);
+            }
+            .product-card-price.coming-soon {
+                color: #555;
+                font-size: 0.75rem;
+                letter-spacing: 0.5px;
+            }
+
+            /* ── ABOUT STRIP ───────────────────────────────────── */
+            .about-strip {
+                border: 1px solid var(--border);
+                border-left: 3px solid var(--accent);
+                padding: 1.25rem 1.5rem;
+                margin-bottom: 2rem;
+                background: var(--card-bg);
+            }
+            .about-strip-title {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--accent);
+                margin-bottom: 0.4rem;
+            }
+            .about-strip-text {
+                font-size: 0.85rem;
+                color: #999;
+                line-height: 1.6;
+                margin: 0;
+            }
+            .about-strip-text strong { color: var(--text-main); }
+
+            /* ── CAROUSEL ──────────────────────────────────────── */
+            .featured-carousel-container {
+                width: 100%;
+                overflow: hidden;
+                background: #111;
+                padding: 1rem;
+                box-sizing: border-box;
+                cursor: pointer;
+                touch-action: pan-y;
+                aspect-ratio: 1/1;
+            }
+            .featured-carousel-slide {
+                width: 100%;
+                height: 100%;
+                animation: slideIn 0.3s ease-out forwards;
+            }
+            .featured-carousel-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+            }
+            .featured-carousel-counter {
+                font-size: 0.7rem;
+                color: #555;
+                text-align: center;
+                padding: 0.4rem;
+                letter-spacing: 0.5px;
+            }
+
+            /* ── RESPONSIVE ────────────────────────────────────── */
+            @media (max-width: 580px) {
+                .hero-headline { font-size: 1.5rem; }
+                .featured-inner { grid-template-columns: 1fr; }
+                .featured-image-col {
+                    border-right: none;
+                    border-bottom: 1px solid var(--border);
                 }
+                .products-grid { grid-template-columns: 1fr; }
+                .site-nav .nav-links .nav-label { display: none; }
             }
         </style>
     </head>
 <body>
     <div class="container">
-        <!-- Logo Header -->
-        <div class="header fade-in">
-            <img src="content/logos/larkspur-logo-large-grey.webp" 
-                 alt="Larkspur Industries" 
-                 class="site-logo"
-                 loading="eager"
-                 decoding="async">       
-            <div style="font-size: 0.8rem; color: #444; margin-top: 0.5rem;">EST. 2025</div>
-        </div>
-    
-        <!-- Featured Product Card -->
-        <div class="card fade-in delay-2">
-            <div class="project-title">CURRENT RELEASE</div>
-            <div class="product-name">MARIGOLD-5</div>
-            
-            <!-- Product Carousel (Desktop + Mobile) - Links to product page on click -->
-            <a href="marigold-5.html" class="product-carousel-link" id="productCarouselLink">
-                <div class="product-carousel-wrapper" id="productCarouselWrapper">
-                    <div class="product-carousel-container" id="productCarouselContainer">
-                        <div class="product-carousel-slide">
-                            <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png" 
-                                 alt="Marigold-5 USB-C Power Module"
-                                 width="600"
-                                 height="600"
-                                 loading="eager"
-                                 decoding="async">
-                        </div>
-                    </div>
-                    <div class="product-carousel-counter" id="productCarouselCounter">1 / 3</div>
-                </div>
+
+        <!-- NAV -->
+        <nav class="site-nav fade-in">
+            <a href="index.html">
+                <img src="content/logos/larkspur-logo-large-grey.webp"
+                     alt="Larkspur Industries"
+                     class="nav-logo"
+                     loading="eager"
+                     decoding="async">
             </a>
-            
-            <div style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; color: #ccc;">
-                A USB-C power module designed for powering co-processors and other peripherals. Built for reliability, ease of use, and handling robot brownouts.
+            <div class="nav-links">
+                <a href="docs.html" class="nav-label">Docs</a>
+                <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener" class="nav-label">GitHub</a>
+                <a href="mailto:larkspur.industries.official@gmail.com" class="nav-label">Contact</a>
+                <a href="shop.html" class="nav-cta">Shop</a>
             </div>
-            <!-- Links to the internal product page -->
-            <a href="marigold-5.html" class="btn">VIEW PRODUCT & ORDER -></a>
+        </nav>
+
+        <!-- HERO -->
+        <div class="hero fade-in delay-1">
+            <div class="hero-headline">Hardware that keeps<br>your robot running.</div>
+            <div class="hero-sub">
+                Reasonable prices and reliable electronics for FIRST Robotics teams.
+                Our products are built for the ease of teams and to handle the challenges of competition.
+            </div>
+            <div class="hero-actions">
+                <a href="shop.html" class="btn btn-primary">Shop Products -&gt;</a>
+                <a href="docs.html" class="btn">View Docs</a>
+            </div>
         </div>
-        
-        <!-- Documentation Section -->
-        <div class="docs-section fade-in delay-3">
-            <div class="section-title">
-                <span class="section-icon">📖</span>
-                DOCUMENTATION & RESOURCES
-            </div>
-            
-            <div style="color: #999; font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.5;">
-                Guides, information, and relevant files for all products.
-            </div>
-            
-            <a href="docs.html" class="btn">VIEW ALL DOCS -></a>
-        </div>
-        
-        <!-- About / Mission Section -->
-        <div class="section fade-in delay-4">
-            <div class="section-title">
-                <span class="section-icon">❀</span>
-                ABOUT LARKSPUR INDUSTRIES
-            </div>
-            <div class="section-content">
-                <div class="highlight-box">
-                    <strong>Mission:</strong> Building cool, open, and reliable hardware for robotics teams.
+
+        <!-- FEATURED PRODUCT -->
+        <div class="featured-product fade-in delay-2">
+            <div class="featured-badge">&#9733; Current Release</div>
+            <div class="featured-inner">
+
+                <div class="featured-image-col">
+                    <a href="marigold-5.html" id="featuredCarouselLink" style="display:block; text-decoration:none;">
+                        <div class="featured-carousel-container" id="featuredCarouselContainer">
+                            <div class="featured-carousel-slide">
+                                <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png"
+                                     alt="Marigold-5 USB-C Power Module"
+                                     width="600" height="600"
+                                     loading="eager" decoding="async">
+                            </div>
+                        </div>
+                    </a>
+                    <div class="featured-carousel-counter" id="featuredCarouselCounter">1 / 3</div>
                 </div>
-                <p>
-                    LarkSpur Industries is a small hardware design company run by Isaac Subudhi, based in Richmond, Virginia.
-                </p>
-                <p>
-                    We believe competition robots deserve better than hacked-together electronics with electrical tape. Our goal is to design parts that are reliable, work flawlessly, and respect your budget.
-                </p>
+
+                <div class="featured-info-col">
+                    <div class="featured-product-name">MARIGOLD-5</div>
+                    <div class="featured-subtitle">DC-DC USB-C Power Module</div>
+
+                    <div class="featured-price">
+                        $24.99
+                        <span class="price-note">+ shipping</span>
+                    </div>
+
+                    <div class="featured-desc">
+                        Keeps your co-processor alive on robots and during battery brownouts.
+                        Easy to use, with plenty of power (10A), and replaces in minutes between matches.
+                    </div>
+
+                    <div class="featured-btns">
+                        <a href="marigold-5.html"
+                           class="btn btn-primary"
+                           target="_blank" rel="noopener noreferrer">
+                            BUY NOW - $24.99
+                        </a>
+                        <a href="docs-marigold-5.html" class="btn">Read the Docs</a>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
+        <!-- ALL PRODUCTS -->
+        <div class="products-section fade-in delay-3">
+            <div class="section-header">
+                <h2>All Products</h2>
+                <a href="shop.html">View all -&gt;</a>
+            </div>
+            <div class="products-grid">
+                <a href="marigold-5.html" class="product-card">
+                    <div class="product-card-img">
+                        <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.png"
+                             alt="Marigold-5"
+                             width="400" height="400"
+                             loading="lazy" decoding="async">
+                    </div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">MARIGOLD-5</div>
+                        <div class="product-card-tagline">USB-C power module for FRC co-processors</div>
+                        <div class="product-card-price">$24.99</div>
+                    </div>
+                </a>
+                <a href="locking-cable.html" class="product-card">
+                    <div class="product-card-img">
+                        <img src="docs/cables/img/locking-cable.png"
+                             alt="Marigold-5 Locking Cable"
+                             width="400" height="400"
+                             loading="lazy" decoding="async">
+                    </div>
+                    <div class="product-card-info">
+                        <div class="product-card-name">LOCKING CABLE</div>
+                        <div class="product-card-tagline">Vibration-resistant USB-C cable for Marigold-5</div>
+                        <div class="product-card-price coming-soon">COMING SOON</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- ABOUT STRIP -->
+        <div class="about-strip fade-in delay-4">
+            <div class="about-strip-title">About Larkspur Industries</div>
+            <p class="about-strip-text">
+                We are a small hardware design company based in Richmond, Virginia ran by Isaac Subudhi.
+                Our goal is to deliver quality products at reasonable prices for competitive robotics and more.
+            </p>
+        </div>
+
+        <!-- FOOTER -->
         <div class="footer">
             <a href="docs.html" class="link">DOCS</a>
             <a href="https://github.com/LarkSpur-Industries" class="link">GITHUB</a>
-            <a href="docs.html?product=warranty" class="link">WARRANTY</a>
+            <a href="docs-warranty.html" class="link">WARRANTY</a>
             <a href="mailto:larkspur.industries.official@gmail.com" class="link">CONTACT</a>
-            <span style="margin-left: auto;">Richmond, VA</span>
+            <span style="margin-left: auto;">&#169; 2026 LARKSPUR INDUSTRIES</span>
         </div>
     </div>
-    
+
     <script>
-        // Product carousel images for home page
-        const productImages = [
-            {
-                src: "docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png",
-                alt: "Marigold-5 Corner USB View",
-                caption: "Corner USB View"
-            },
-            {
-                src: "docs/marigold-5/img/Marigold-5_V1.0-Corner.png",
-                alt: "Marigold-5 Corner View",
-                caption: "Corner View"
-            },
-            {
-                src: "docs/marigold-5/img/Marigold-5_V1.0-Top.png",
-                alt: "Marigold-5 Top View",
-                caption: "Top View"
-            }
+        var featuredImages = [
+            { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png', alt: 'Corner USB View' },
+            { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner.png',     alt: 'Corner View'     },
+            { src: 'docs/marigold-5/img/Marigold-5_V1.0-Top.png',        alt: 'Top View'        }
         ];
-        
-        // ============ PRODUCT CAROUSEL MANAGEMENT ============
-        const productCarouselContainer = document.getElementById("productCarouselContainer");
-        const productCarouselCounter = document.getElementById("productCarouselCounter");
-        const productCarouselLink = document.getElementById("productCarouselLink");
-        
-        let currentProductCarouselIndex = 0;
-        let productCarouselTouchStartX = 0;
-        let productCarouselAutoPlayInterval = null;
-        const PRODUCT_CAROUSEL_AUTO_PLAY_INTERVAL = 5000; // 5 seconds
-        const SWIPE_THRESHOLD = 30;
-        let isCarouselSwiping = false;
-        
-        function updateProductCarouselDisplay() {
-            const slide = productImages[currentProductCarouselIndex];
-            productCarouselContainer.innerHTML = `
-                <div class="product-carousel-slide">
-                    <img src="${slide.src}" 
-                         width="600" height="600"
-                         alt="${slide.alt}"
-                         loading="lazy"
-                         decoding="async">
-                </div>
-            `;
-            productCarouselCounter.textContent = `${currentProductCarouselIndex + 1} / ${productImages.length}`;
-            
-            // Re-attach touch handlers
-            attachProductCarouselTouchHandlers();
-            
-            // Restart auto-play
-            resetProductCarouselAutoPlay();
+
+        var featuredContainer = document.getElementById('featuredCarouselContainer');
+        var featuredCounter   = document.getElementById('featuredCarouselCounter');
+        var featuredLink      = document.getElementById('featuredCarouselLink');
+
+        var featuredIdx      = 0;
+        var featuredTouchX   = 0;
+        var featuredInterval = null;
+        var isSwiping        = false;
+
+        var INTERVAL_MS     = 5000;
+        var SWIPE_THRESHOLD = 30;
+
+        function renderFeatured() {
+            var s = featuredImages[featuredIdx];
+            featuredContainer.innerHTML =
+                '<div class="featured-carousel-slide">' +
+                '<img src="' + s.src + '" alt="' + s.alt + '" width="600" height="600" loading="lazy" decoding="async">' +
+                '</div>';
+            featuredCounter.textContent = (featuredIdx + 1) + ' / ' + featuredImages.length;
+            bindTouch();
+            resetAuto();
         }
-        
-        function nextProductCarouselSlide() {
-            currentProductCarouselIndex = (currentProductCarouselIndex + 1) % productImages.length;
-            updateProductCarouselDisplay();
-        }
-        
-        function prevProductCarouselSlide() {
-            currentProductCarouselIndex = (currentProductCarouselIndex - 1 + productImages.length) % productImages.length;
-            updateProductCarouselDisplay();
-        }
-        
-        function attachProductCarouselTouchHandlers() {
-            const currentSlide = productCarouselContainer.querySelector('.product-carousel-slide');
-            if (!currentSlide) return;
-            
-            currentSlide.addEventListener('touchstart', (e) => {
-                productCarouselTouchStartX = e.changedTouches[0].screenX;
-                isCarouselSwiping = false;
+
+        function nextSlide() { featuredIdx = (featuredIdx + 1) % featuredImages.length; renderFeatured(); }
+        function prevSlide() { featuredIdx = (featuredIdx - 1 + featuredImages.length) % featuredImages.length; renderFeatured(); }
+
+        function bindTouch() {
+            var slide = featuredContainer.querySelector('.featured-carousel-slide');
+            if (!slide) return;
+            slide.addEventListener('touchstart', function(e) {
+                featuredTouchX = e.changedTouches[0].screenX;
+                isSwiping = false;
             }, { passive: true });
-            
-            currentSlide.addEventListener('touchend', (e) => {
-                const touchEndX = e.changedTouches[0].screenX;
-                const diff = productCarouselTouchStartX - touchEndX;
-                
+            slide.addEventListener('touchend', function(e) {
+                var diff = featuredTouchX - e.changedTouches[0].screenX;
                 if (Math.abs(diff) > SWIPE_THRESHOLD) {
-                    isCarouselSwiping = true;
-                    if (diff > 0) {
-                        nextProductCarouselSlide(); // Swipe left, next
-                    } else {
-                        prevProductCarouselSlide(); // Swipe right, prev
-                    }
+                    isSwiping = true;
+                    if (diff > 0) { nextSlide(); } else { prevSlide(); }
                 }
             }, { passive: true });
         }
-        
-        function startProductCarouselAutoPlay() {
-            productCarouselAutoPlayInterval = setInterval(nextProductCarouselSlide, PRODUCT_CAROUSEL_AUTO_PLAY_INTERVAL);
-        }
-        
-        function stopProductCarouselAutoPlay() {
-            if (productCarouselAutoPlayInterval) {
-                clearInterval(productCarouselAutoPlayInterval);
-                productCarouselAutoPlayInterval = null;
-            }
-        }
-        
-        function resetProductCarouselAutoPlay() {
-            stopProductCarouselAutoPlay();
-            startProductCarouselAutoPlay();
-        }
-        
-        // Handle link click - only navigate if not swiping
-        productCarouselLink.addEventListener('click', (e) => {
-            if (isCarouselSwiping) {
-                e.preventDefault();
-                isCarouselSwiping = false;
-            }
-            // If not swiping, allow natural link navigation
+
+        function startAuto() { featuredInterval = setInterval(nextSlide, INTERVAL_MS); }
+        function stopAuto()  { if (featuredInterval) { clearInterval(featuredInterval); featuredInterval = null; } }
+        function resetAuto() { stopAuto(); startAuto(); }
+
+        featuredLink.addEventListener('click', function(e) {
+            if (isSwiping) { e.preventDefault(); isSwiping = false; }
         });
-        
-        // Pause auto-play when user manually swipes
-        document.addEventListener('touchstart', () => {
-            if (productCarouselAutoPlayInterval) {
-                stopProductCarouselAutoPlay();
-            }
-        }, { passive: true });
-        
-        // Resume auto-play after user finishes interacting
-        document.addEventListener('touchend', () => {
-            if (!productCarouselAutoPlayInterval) {
-                startProductCarouselAutoPlay();
-            }
-        }, { passive: true });
-        
-        // Initialize product carousel
-        updateProductCarouselDisplay();
-        startProductCarouselAutoPlay();
-        
-        // Stop auto-play on page visibility change
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                stopProductCarouselAutoPlay();
-            } else {
-                startProductCarouselAutoPlay();
-            }
+        document.addEventListener('touchstart', function() { stopAuto(); }, { passive: true });
+        document.addEventListener('touchend',   function() { if (!featuredInterval) { startAuto(); } }, { passive: true });
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) { stopAuto(); } else { startAuto(); }
         });
+
+        renderFeatured();
+        startAuto();
     </script>
 </body>
 </html>

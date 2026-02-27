@@ -34,9 +34,9 @@ This device is designed for FIRST Robotics Competition use and complies with FRC
 
 ---
 
-## 4. Quick Start Guide {#quickstart}
+## 4. Installation & Setup {#installation}
 
-### What You'll Need
+### 4.1 What You'll Need
 - Marigold-5 module
 - 16-22 AWG wire (red and black)
 - Wire strippers
@@ -44,43 +44,12 @@ This device is designed for FIRST Robotics Competition use and complies with FRC
 - USB-C cable rated for 3A
 - Mounting hardware (#4-40 screws or zip ties)
 
-### Installation in 4 Steps
-
-**Step 1: Mount the Device**
-1. Identify a mounting location near your co-processor
-2. Use either:
-   - Two #4-40 screws with 1.25" spacing, or
-   - Zip ties through the integrated mounting points
-3. Secure firmly but do not over-tighten
-
-**Step 2: Wire Input Power**
-1. Strip 7-8mm (approximately 5/16") of insulation from red and black wires
-2. Press the **white push button** on the terminal block
-3. Insert red wire into **BATT+**, black wire into **GND**
-4. Release button and verify by gently tugging both wires
-5. Install 15-20A breaker in PDH port **before** connecting to battery
-
-**Step 3: Connect Your Device**
-1. Plug USB-C cable into Marigold-5's USB-C port
-2. Connect other end to your co-processor (Raspberry Pi, Orange Pi, etc.)
-3. If using our locking cable, secure the retention screw to the case
-
-**Step 4: Power On & Test**
-1. Turn on robot main power
-2. Verify the **STATUS LED** is orange (solid)
-3. Check that your co-processor boots normally
-4. Optionally, measure 5.1V ± 0.1V at auxiliary output pins with multimeter
-
 ---
 
-## 5. Installation Guide {#installation}
-
-### 5.1 Mounting Options
+### 4.2 Mounting
 
 ![Marigold-5 Top View](img/Marigold-5_V1.0-Top.webp)
-*Figure 5.1: Top View Showing Mounting Points*
-
-The Marigold-5 provides two mounting methods:
+*Figure 4.1: Top View Showing Mounting Points*
 
 **Option 1: Screw Mounting (Recommended)**
 - Two #4-40 threaded inserts with 1.25" spacing
@@ -89,22 +58,24 @@ The Marigold-5 provides two mounting methods:
 
 **Option 2: Zip Tie Mounting**
 - Four integrated zip tie points on case perimeter
-- Quick installation 
-- Recommended for low-vibration applications only
+- Quick installation
+- May become loose over time
 
-### 5.2 Wiring & Connections
+---
+
+### 4.3 Wiring Input Power
 
 ![Wiring Diagram](img/Marigold-5_V1.0-Wiring.webp)
-*Figure 5.2: Wiring Diagram*
+*Figure 4.2: Wiring Diagram*
 
-### Input Power Terminal Block
-
-**Connector:** TBLH10-350-04BK Spring Cage Terminal Block
+**Input Connector:** TBLH10-350-04BK Spring Cage Terminal Block
 
 **Specifications:**
-- **Rated Current:** 10A (UL), 17.5A (IEC) per contact
-- **Wire Gauge:** 16-24 AWG (0.2-1.5mm²)
-- **Strip Length:** 7-8mm (very important)
+| Parameter | Value |
+|-----------|-------|
+| Rated Current | 10A (UL), 17.5A (IEC) per contact |
+| Wire Gauge | 16-24 AWG (0.2–1.5mm²) |
+| Strip Length | 7-8mm |
 
 **Pinout:**
 | Pin | Function | Wire Color |
@@ -114,44 +85,34 @@ The Marigold-5 provides two mounting methods:
 | GND | Ground | Black |
 | GND | Ground | Black |
 
-
 **How to Wire:**
-1. **Strip exactly 7-8mm**, too short and the wire won't make contact; too long creates shock hazard
-2. Press white push button on top of terminal block
-3. Insert stripped wire fully until it bottoms out
-4. Release button, spring clamp automatically secures wire
-5. Tug-test: Wire should not pull out with moderate force
+1. Strip exactly **7–8mm** of insulation, too short and the wire won't make contact, too long creates a fragile connection
+2. Press the **white push button** on the terminal block
+3. Insert red wire into **BATT+**, black wire into **GND**, push fully until the wire bottoms out
+4. Release the button, the spring clamp automatically secures the wire
+5. Tug-test both wires to confirm they are seated
+6. Install a **15–20A breaker** in your PDH port before connecting to the battery
 
-**Breaker Sizing:**
-- Use **15-20A breaker** in your robot's Power Distribution Hub (PDH)
-- This protects the device and wiring from sustained overcurrent
-- Do not use breakers larger than 20A
+---
 
-**Built-In Protections:**
-- **Reverse Polarity Protection:** PMOS prevents damage if wires are swapped
-- **Voltage Spike Protection:** TVS diode clamps input transients
-- **Undervoltage Lockout (UVLO):** Disables output below 4.2V to prevent unstable operation
+### 4.4 Connecting Your Devices
 
 #### USB-C Output Port
 
-**Role:** Source (DFP, Downstream Facing Port)  
-**Current Advertisement:** 10 kΩ pull-up on CC pins (Legacy 3A capability)  
-**Data Lines:** D+/D- floating (power only, no data transfer)  
+ - **Role:** Source (DFP) 
+ - **Advertised Current:** 3A (Legacy, via 10 kΩ CC pull-up) 
+ - **USB-PD:** Not supported
 
-> **Note:** This device does not support USB Power Delivery (PD) negotiation. It provides fixed 5.1V output. 
+Plug your USB-C cable into the Marigold-5 port and the other end into your co-processor. If using a locking cable, secure the retention screw.
 
-**Typical Use Cases:**
 | Device | Typical Current Draw |
 |--------|---------------------|
-| Raspberry Pi 4/5 | 2-4A |
-| Orange Pi 5 | 2-5A |
-| Arduino/ESP32 | 0.2-0.5A |
+| Raspberry Pi 4/5 | 2–4A |
+| Orange Pi 5 | 2–5A |
+| Arduino/ESP32 | 0.2–0.5A |
 | LED Strips | Varies (check specs) |
 
-**Cable Selection:**
-- Use cables rated for **3A minimum**
-- Avoid cheap cables with thin gauge wire (creates voltage drop)
-- Our locking USB-C cable is recommended for on robots
+Use cables rated for **3A minimum**. Thin or low-quality cables cause voltage drop, our locking USB-C cable is recommended for robot or high vibration use.
 
 #### Auxiliary Output Header
 
@@ -162,14 +123,18 @@ The Marigold-5 provides two mounting methods:
 | (+) | 5.1V Output |
 | (-) | Ground |
 
-**Use Cases:**
-- Cooling fans
-- LED indicators
-- Arduino/microcontroller power
-- Network switches (5V models)
+Suitable for cooling fans, LED indicators, Arduino/microcontroller power, and 5V network switches. The auxiliary output shares the **10A total system limit** with the USB-C port (e.g., if USB-C draws 3A, the auxiliary header has 7A available).
 
-**Current Sharing:**  
-The auxiliary output shares the 10A total system limit with the USB-C port. Example: If USB-C draws 3A, auxiliary header has 7A available.
+---
+
+### 4.5 Power On & Verify
+
+1. Turn on robot main power
+2. Confirm the **STATUS LED** is **orange (solid)**, this indicates stable 5.1V output
+3. Check that your co-processor boots normally
+4. Optionally, measure **5.1V ± 0.1V** at the auxiliary output pins with a multimeter
+
+If the STATUS LED is off, see the [Troubleshooting](#troubleshooting) section.
 
 ---
 
@@ -177,7 +142,8 @@ The auxiliary output shares the 10A total system limit with the USB-C port. Exam
 
 ### Why 5.1V Instead of 5.0V?
 
-The 5.1V output is **intentional and by design**. Here's why:
+
+The 5.1V output is intentional and by design. Here's why:
 
 **The Problem:**  
 USB cables, especially longer or lower-quality ones, introduce resistance (typically 0.1–0.5Ω per meter). At 3A load, Ohm's Law tells us:
