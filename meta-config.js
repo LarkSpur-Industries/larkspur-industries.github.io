@@ -25,35 +25,56 @@ const commonMeta = `
 // Page-specific metadata
 const pages = {
   'index': {
-    title: 'LarkSpur Industries | Reasonable Hardware. Fair Prices. Open Values.',
+    title: 'LarkSpur Industries | FRC Robotics Hardware | Fair Prices. Open Values.',
     description: 'LarkSpur Industries designs reliable, affordable hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module.',
     keywords: 'FIRST robotics, robot power module, USB-C power, Marigold-5, robotics hardware, PhotonVision, FRC, competition robotics, affordable robotics',
     ogType: 'website',
-    ogTitle: 'LarkSpur Industries | Reasonable Hardware. Fair Prices. Open Values.',
+    ogTitle: 'LarkSpur Industries | FRC Robotics Hardware | Fair Prices. Open Values.',
     ogDescription: 'Hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 1x USB-C 3A+ output, $24.99.',
     ogImage: siteMeta.defaultImage,
     canonicalUrl: `${baseUrl}/`,
     structuredData: {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "LarkSpur Industries",
-      "url": baseUrl,
-      "logo": siteMeta.defaultImage,
-      "description": "Reasonable Hardware. Fair Prices. Open Values. For FIRST robotics",
-      "slogan": "Reasonable Hardware. Fair Prices. Open Values.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressRegion": "VA",
-        "addressCountry": "US"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Isaac Subudhi"
-      },
-      "sameAs": [
-        "https://github.com/LarkSpur-Industries"
-      ]
-    }
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "LarkSpur Industries",
+  "alternateName": "Larkspur Industries",
+  "url": baseUrl,
+  "logo": `${baseUrl}/content/logos/larkspur-logo-large-grey.webp`,
+  "description": "LarkSpur Industries is a small hardware design company based in Richmond, Virginia, founded by Isaac Subudhi. We design reliable, affordable electronics for FIRST Robotics Competition teams, including the Marigold-5 USB-C power module.",
+  "slogan": "Reasonable Hardware. Fair Prices. Open Values.",
+  "foundingDate": "2025",
+  "foundingLocation": "Richmond, Virginia, USA",
+  "areaServed": "US",
+  "knowsAbout": ["FIRST Robotics Competition", "FRC electronics", "DC-DC power conversion", "CAN bus devices", "robotics hardware"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Richmond",
+    "addressRegion": "VA",
+    "addressCountry": "US"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Isaac Subudhi"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "LarkSpur Industries Products",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Product",
+          "name": "Marigold-5 USB-C Power Module",
+          "description": "DC-DC power module for FRC co-processors. 6-18V input, regulated 5.1V output, 10A total.",
+          "url": `${baseUrl}/marigold-5.html`
+        }
+      }
+    ]
+  },
+  "sameAs": [
+    "https://github.com/LarkSpur-Industries"
+  ]
+}
   },
   
   'marigold-5': {
