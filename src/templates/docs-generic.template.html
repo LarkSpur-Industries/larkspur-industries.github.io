@@ -11,20 +11,32 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* ── Layout: override global centering for full-width docs ── */
+        html {
+            /* clip instead of hidden — visually the same but does NOT create
+               a scroll container, so position:sticky on .sidebar keeps working */
+            overflow-x: clip;
+        }
+
         body {
             align-items: stretch;
             justify-content: flex-start;
-            padding: 0;
+            padding: 0 !important;   /* kill the 20px body padding from style.css */
+            margin: 0;
             min-height: 100vh;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: clip;
+            box-sizing: border-box;
         }
 
-        /* .container from style.css is normally max-width:600px centered.
-           For docs we use a full-width wrapper instead. */
+        /* .container from style.css is max-width:600px centered — not used here.
+           docs-root spans the full viewport. */
         .docs-root {
             width: 100%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
         }
 
         /* ── Progress bar ────────────────────────────────────────── */
@@ -661,29 +673,54 @@
                 grid-template-columns: 1fr;
             }
 
+            /* Measure nav height via JS and set --nav-h; fallback 41px */
             .sidebar {
                 position: fixed;
-                top: 41px;
+                top: var(--nav-h, 41px);
                 left: 0;
-                width: 260px;
+                width: 80vw;
+                max-width: 300px;
                 z-index: 90;
                 transform: translateX(-100%);
                 transition: transform 0.25s ease;
                 background: #0d0d0d;
                 border-right: 1px solid #333;
-                height: calc(100vh - 41px);
+                /* Use dvh so the sidebar truly fills to the bottom of
+                   the visible screen regardless of browser chrome */
+                height: calc(100dvh - var(--nav-h, 41px));
+                /* Fallback for browsers without dvh */
+                height: calc(100vh - var(--nav-h, 41px));
             }
 
             .sidebar.open {
                 transform: translateX(0);
             }
 
+            /* Dim backdrop when sidebar is open */
+            .sidebar-backdrop {
+                display: none;
+                position: fixed;
+                inset: 0;
+                top: var(--nav-h, 41px);
+                background: rgba(0,0,0,0.55);
+                z-index: 89;
+            }
+
+            .sidebar-backdrop.open {
+                display: block;
+            }
+
             .mobile-sidebar-toggle {
                 display: block;
             }
 
+            /* Hide keyboard shortcut hint — not useful on touch */
+            .search-trigger .kbd {
+                display: none;
+            }
+
             .content-wrapper {
-                padding: 1.5rem 1.25rem 3rem;
+                padding: 1.5rem 1.1rem 3rem;
             }
 
             .content h1 { font-size: 1.5rem; }
@@ -692,6 +729,7 @@
                 font-size: 0.8rem;
                 display: block;
                 overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             #back-to-top {
@@ -736,6 +774,9 @@
 
 <!-- Back to top -->
 <button id="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+
+<!-- Sidebar backdrop (mobile) -->
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
 <div class="docs-root">
 
@@ -797,18 +838,36 @@
     // ── Sidebar mobile toggle ────────────────────────────────────
     const sidebar = document.getElementById('sidebar');
     const toggle = document.getElementById('sidebar-toggle');
+    const backdrop = document.getElementById('sidebar-backdrop');
+
+    // Measure real nav height and set CSS variable so sidebar top/height
+    // tracks accurately regardless of font scaling or padding changes
+    function setNavHeight() {
+        const nav = document.querySelector('.top-nav');
+        if (nav) {
+            document.documentElement.style.setProperty(
+                '--nav-h', nav.getBoundingClientRect().height + 'px'
+            );
+        }
+    }
+    setNavHeight();
+    window.addEventListener('resize', setNavHeight);
+
+    function openSidebar() {
+        sidebar.classList.add('open');
+        backdrop.classList.add('open');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('open');
+    }
 
     toggle.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
     });
 
-    document.addEventListener('click', (e) => {
-        if (sidebar.classList.contains('open') &&
-            !sidebar.contains(e.target) &&
-            e.target !== toggle) {
-            sidebar.classList.remove('open');
-        }
-    });
+    backdrop.addEventListener('click', closeSidebar);
 
     // ── Reading progress bar ─────────────────────────────────────
     const progressBar = document.getElementById('progress-bar');
@@ -851,14 +910,14 @@
     window.addEventListener('scroll', updateActive, { passive: true });
     updateActive();
 
-    // Smooth scroll
+    // Smooth scroll + close sidebar on mobile
     navLinks.forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
             const target = document.querySelector(link.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                if (window.innerWidth <= 768) sidebar.classList.remove('open');
+                closeSidebar();
+                setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
             }
         });
     });

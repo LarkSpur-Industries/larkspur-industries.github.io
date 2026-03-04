@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#0a0a0a">
+        <link rel="icon" type="image/webp" href="content/logos/favicon-docs.webp">
         {{META_TAGS}}
         <link rel="stylesheet" href="css/fonts.css">
         <link rel="stylesheet" href="css/style.css">
@@ -64,7 +68,6 @@
             }
 
             /* ── PRODUCT CARD ───────────────────────────────────── */
-            /* Full-width stacked card: image on top, info below   */
             .product-card-full {
                 background: var(--card-bg);
                 border: 1px solid var(--border);
@@ -103,6 +106,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                min-width: 0;
             }
             .pcard-label {
                 font-size: 0.62rem;
@@ -170,14 +174,32 @@
             }
             .pcard-actions .btn {
                 flex: 1;
-                min-width: 100px;
+                min-width: 80px;
                 font-size: 0.78rem;
-                padding: 0.6rem 0;
+                padding: 0.6rem 0.5rem;
+                box-sizing: border-box;
             }
 
+            /* ── RESPONSIVE ─────────────────────────────────────── */
             @media (max-width: 480px) {
-                .pcard-top { grid-template-columns: 110px 1fr; }
+                .pcard-top {
+                    grid-template-columns: 100px 1fr;
+                }
+                .pcard-name {
+                    font-size: 1rem;
+                }
+                .pcard-price {
+                    font-size: 1rem;
+                }
                 .site-nav .nav-links .nav-label { display: none; }
+                /* Stack action buttons vertically on very small screens */
+                .pcard-actions {
+                    flex-direction: column;
+                }
+                .pcard-actions .btn {
+                    flex: none;
+                    width: 100%;
+                }
             }
         </style>
     </head>
