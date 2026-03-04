@@ -12,15 +12,13 @@
     <style>
         /* ── Layout: override global centering for full-width docs ── */
         html {
-            /* clip instead of hidden — visually the same but does NOT create
-               a scroll container, so position:sticky on .sidebar keeps working */
             overflow-x: clip;
         }
 
         body {
             align-items: stretch;
             justify-content: flex-start;
-            padding: 0 !important;   /* kill the 20px body padding from style.css */
+            padding: 0 !important;
             margin: 0;
             min-height: 100vh;
             width: 100%;
@@ -29,14 +27,30 @@
             box-sizing: border-box;
         }
 
-        /* .container from style.css is max-width:600px centered — not used here.
-           docs-root spans the full viewport. */
+        /* The global gentleSway animation uses translate(1%, ...) which bleeds
+           ~4px off the right edge on mobile since position:fixed escapes clip.
+           Replace it with a scale-only version that stays within bounds. */
+        body::before {
+            animation: docsGentleSway 20s ease-in-out infinite;
+        }
+
+        @keyframes docsGentleSway {
+            0%, 100% { transform: scale(1.05); }
+            50%       { transform: scale(1.06) rotate(0.15deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before { animation: none; transform: scale(1.05); }
+        }
+
         .docs-root {
             width: 100%;
+            max-width: 100vw;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
+            overflow-x: clip;
         }
 
         /* ── Progress bar ────────────────────────────────────────── */
@@ -949,41 +963,123 @@
     });
 
     // ── Search ───────────────────────────────────────────────────
-    // Build index from headings + their text content
+    // Build index: each heading + surrounding paragraph text as context
     const searchIndex = [];
 
     document.querySelectorAll('.content h2[id], .content h3[id]').forEach(heading => {
-        // Collect following paragraph text as context
         let contextParts = [];
         let sibling = heading.nextElementSibling;
         let count = 0;
         while (sibling && count < 3) {
             const tag = sibling.tagName.toLowerCase();
             if (/^h[123]$/.test(tag)) break;
-            if (tag === 'p') {
-                contextParts.push(sibling.textContent.trim());
-                count++;
-            }
+            if (tag === 'p') { contextParts.push(sibling.textContent.trim()); count++; }
             sibling = sibling.nextElementSibling;
         }
-
         searchIndex.push({
-            id: heading.id,
-            level: parseInt(heading.tagName[1]),
-            title: heading.textContent.replace('#', '').trim(),
-            context: contextParts.join(' ').slice(0, 200)
+            id:      heading.id,
+            level:   parseInt(heading.tagName[1]),
+            title:   heading.textContent.replace('#', '').trim(),
+            context: contextParts.join(' ').slice(0, 300)
         });
     });
 
-    const overlay = document.getElementById('search-overlay');
-    const searchInput = document.getElementById('search-input');
+    // Fuse.js — loaded after DOM ready via script tag below
+    let fuse = null;
+
+    function initFuse() {
+        if (typeof Fuse === 'undefined' || fuse) return;
+        fuse = new Fuse(searchIndex, {
+            keys: [
+                { name: 'title',   weight: 0.7 },
+                { name: 'context', weight: 0.3 }
+            ],
+            includeMatches:     true,
+            minMatchCharLength: 2,
+            threshold:          0.6,  // raised: catches transpositions like "deivce" → "device"
+            distance:           200,
+            ignoreLocation:     true,
+            useExtendedSearch:  false,
+            findAllMatches:     true  // don't stop at first match in a field
+        });
+    }
+
+    // Levenshtein distance between two strings
+    function levenshtein(a, b) {
+        const m = a.length, n = b.length;
+        const dp = Array.from({ length: m + 1 }, (_, i) => [i]);
+        for (let j = 0; j <= n; j++) dp[0][j] = j;
+        for (let i = 1; i <= m; i++)
+            for (let j = 1; j <= n; j++)
+                dp[i][j] = a[i-1] === b[j-1]
+                    ? dp[i-1][j-1]
+                    : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+        return dp[m][n];
+    }
+
+    // Returns true if any word in `text` is within `maxDist` edits of `word`
+    function fuzzyWordMatch(text, word, maxDist) {
+        const tWords = text.toLowerCase().split(/\W+/);
+        return tWords.some(tw => {
+            if (Math.abs(tw.length - word.length) > maxDist) return false;
+            return levenshtein(tw, word) <= maxDist;
+        });
+    }
+
+    // Levenshtein-based fallback search when Fuse returns nothing
+    function levenshteinSearch(q) {
+        const words = q.toLowerCase().split(/\s+/).filter(w => w.length >= 2);
+        if (!words.length) return [];
+
+        // Allow 1 edit for short words, 2 for longer ones
+        const maxDist = w => w.length <= 4 ? 1 : 2;
+
+        return searchIndex.filter(item => {
+            const haystack = (item.title + ' ' + item.context).toLowerCase();
+            return words.every(w => fuzzyWordMatch(haystack, w, maxDist(w)));
+        }).map(item => ({
+            item,
+            titleHtml:   highlightPlain(item.title,                    q),
+            contextHtml: item.context ? highlightPlain(item.context.slice(0, 140), q) : ''
+        }));
+    }
+
+    // Highlight matched character ranges returned by Fuse
+    function highlightRanges(text, ranges) {
+        if (!ranges || !ranges.length) return escapeHtml(text);
+        let result = '';
+        let lastIdx = 0;
+        // ranges are [start, end] inclusive pairs, already sorted
+        ranges.forEach(([start, end]) => {
+            result += escapeHtml(text.slice(lastIdx, start));
+            result += '<mark>' + escapeHtml(text.slice(start, end + 1)) + '</mark>';
+            lastIdx = end + 1;
+        });
+        result += escapeHtml(text.slice(lastIdx));
+        return result;
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // Fallback plain highlight for exact-match terms (when Fuse isn't ready)
+    function highlightPlain(text, query) {
+        if (!query) return escapeHtml(text);
+        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return escapeHtml(text).replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+    }
+
+    const overlay      = document.getElementById('search-overlay');
+    const searchInput  = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
-    const openBtn = document.getElementById('search-open-btn');
-    const closeBtn = document.getElementById('search-close-btn');
+    const openBtn      = document.getElementById('search-open-btn');
+    const closeBtn     = document.getElementById('search-close-btn');
 
     let focusedIndex = -1;
 
     function openSearch() {
+        initFuse();
         overlay.classList.add('open');
         searchInput.value = '';
         renderResults('');
@@ -998,20 +1094,16 @@
 
     openBtn.addEventListener('click', openSearch);
     closeBtn.addEventListener('click', closeSearch);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
 
-    overlay.addEventListener('click', e => {
-        if (e.target === overlay) closeSearch();
-    });
-
-    // Keyboard shortcut: Cmd+K / Ctrl+K
+    // Keyboard shortcuts
     document.addEventListener('keydown', e => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
             e.preventDefault();
             overlay.classList.contains('open') ? closeSearch() : openSearch();
         }
-        if (e.key === 'Escape' && overlay.classList.contains('open')) {
-            closeSearch();
-        }
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeSearch();
+
         if (overlay.classList.contains('open')) {
             const items = searchResults.querySelectorAll('.search-result-item');
             if (e.key === 'ArrowDown') {
@@ -1022,50 +1114,71 @@
                 e.preventDefault();
                 focusedIndex = Math.max(focusedIndex - 1, 0);
                 updateFocus(items);
-            } else if (e.key === 'Enter') {
-                if (focusedIndex >= 0 && items[focusedIndex]) {
-                    items[focusedIndex].click();
-                }
+            } else if (e.key === 'Enter' && focusedIndex >= 0 && items[focusedIndex]) {
+                items[focusedIndex].click();
             }
         }
     });
 
     function updateFocus(items) {
         items.forEach((item, i) => item.classList.toggle('focused', i === focusedIndex));
-        if (items[focusedIndex]) {
-            items[focusedIndex].scrollIntoView({ block: 'nearest' });
-        }
-    }
-
-    function highlight(text, query) {
-        if (!query) return text;
-        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+        if (items[focusedIndex]) items[focusedIndex].scrollIntoView({ block: 'nearest' });
     }
 
     function renderResults(query) {
         focusedIndex = -1;
-        const q = query.trim().toLowerCase();
+        const q = query.trim();
 
         if (!q) {
             searchResults.innerHTML = '<div class="search-empty">Start typing to search…</div>';
             return;
         }
 
-        const matches = searchIndex.filter(item =>
-            item.title.toLowerCase().includes(q) ||
-            item.context.toLowerCase().includes(q)
-        );
+        let results;
 
-        if (!matches.length) {
-            searchResults.innerHTML = '<div class="search-empty">No results for "' + query + '"</div>';
+        if (fuse) {
+            // Fuzzy search via Fuse.js
+            const fuseResults = fuse.search(q, { limit: 12 });
+
+            if (fuseResults.length) {
+                results = fuseResults.map(r => {
+                    const titleMatches   = r.matches?.find(m => m.key === 'title')?.indices   || [];
+                    const contextMatches = r.matches?.find(m => m.key === 'context')?.indices || [];
+                    return {
+                        item:        r.item,
+                        titleHtml:   highlightRanges(r.item.title, titleMatches),
+                        contextHtml: r.item.context
+                                         ? highlightRanges(r.item.context.slice(0, 140), contextMatches)
+                                         : ''
+                    };
+                });
+            } else {
+                // Fuse found nothing — try Levenshtein word-level matching
+                // This catches multi-transposition typos Fuse's Bitap misses
+                results = levenshteinSearch(q);
+            }
+        } else {
+            // Fallback: plain substring match
+            const ql = q.toLowerCase();
+            results = searchIndex
+                .filter(item => item.title.toLowerCase().includes(ql) || item.context.toLowerCase().includes(ql))
+                .slice(0, 12)
+                .map(item => ({
+                    item,
+                    titleHtml:   highlightPlain(item.title, q),
+                    contextHtml: item.context ? highlightPlain(item.context.slice(0, 140), q) : ''
+                }));
+        }
+
+        if (!results.length) {
+            searchResults.innerHTML = '<div class="search-empty">No results for "' + escapeHtml(q) + '"</div>';
             return;
         }
 
-        searchResults.innerHTML = matches.map(item => `
+        searchResults.innerHTML = results.map(({ item, titleHtml, contextHtml }) => `
             <a class="search-result-item" href="#${item.id}" data-id="${item.id}">
-                <span class="result-heading">${highlight(item.title, query)}</span>
-                ${item.context ? `<span class="result-context">${highlight(item.context.slice(0, 120), query)}</span>` : ''}
+                <span class="result-heading">${titleHtml}</span>
+                ${contextHtml ? `<span class="result-context">${contextHtml}</span>` : ''}
             </a>
         `).join('');
 
@@ -1084,5 +1197,9 @@
     searchInput.addEventListener('input', () => renderResults(searchInput.value));
 })();
 </script>
+<!-- Fuse.js — lightweight fuzzy search, loaded after page content -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"
+        integrity="sha512-GhdEMWXBDGIr4jcSkLkFIuQdI7YEaxJRXSvZNmHPlWbqzZTPDHEqmDNQo1dADlXRZF6bwdaM4LT1bO0GC9ng=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 </body>
 </html>
