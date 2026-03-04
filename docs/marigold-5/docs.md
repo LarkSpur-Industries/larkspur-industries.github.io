@@ -114,6 +114,14 @@ Plug your USB-C cable into the Marigold-5 port and the other end into your co-pr
 
 Use cables rated for **3A minimum**. Thin or low-quality cables cause voltage drop, our locking USB-C cable is recommended for robot or high vibration use.
 
+#### Co-Processor Wiring Diagrams
+
+![Wiring Diagram](img/OPI5B_Wiring_Diagram.webp)
+*Figure 4.3: Orange Pi 5B Wiring Diagram*
+
+![Wiring Diagram](img/RPI5_Wiring_Diagram.webp)
+*Figure 4.4: Raspberry Pi 5 Wiring Diagram*
+
 #### Auxiliary Output Header
 
 **Connector:** 2.54mm pitch pin header
