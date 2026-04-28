@@ -1,371 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Larkspur Industries Locking USB-C Cable - Industrial grade, high-flex, secure connection for FRC robots and harsh environments.">
-        <title>Larkspur Industries - Locking USB-C Cable</title>
+<head>
+    {{META_TAGS}}
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .breadcrumb {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.75rem;
+            font-size: 0.75rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .breadcrumb a { color: #555; text-decoration: none; transition: color 0.15s; }
+        .breadcrumb a:hover { color: #aaa; }
+        .breadcrumb .sep { color: #2a2a2a; }
+        .breadcrumb .current { color: #999; }
 
-            <link rel="stylesheet" href="css/fonts.css">
-            <link rel="stylesheet" href="css/style.css">
-
-
-        <style>
-        .model-container {
-            position: relative;
-            width: 100%;
-            height: 350px;
-            background-color: #1a1a1a;
+        .product-wrap {
+            background: var(--card-bg);
             border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .product-label {
+            font-size: 0.7rem; color: #555; text-transform: uppercase;
+            letter-spacing: 1.2px; margin-bottom: 0.25rem; font-weight: 500;
+        }
+        .product-title {
+            font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;
+        }
+        .coming-soon-badge {
+            display: inline-block;
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.3px; color: #555;
+            border: 1px solid #2a2a2a;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+        }
+        .product-img-wrap {
+            background: #0d0d0d;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            aspect-ratio: 2/1;
+            opacity: 0.55;
         }
-
-        model-viewer {
-            width: 100%;
-            height: 100%;
-            --poster-color: #1a1a1a;
-        }
-
-        .load-model-btn {
-            padding: 1rem 2rem;
-            background: var(--text-main);
-            color: var(--bg);
-            border: 1px solid var(--text-main);
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            font-family: "Courier New", Courier, monospace;
-            transition: all 0.2s;
-            z-index: 10;
-        }
-
-        .load-model-btn:hover {
-            background: transparent;
-            color: var(--text-main);
-        }
-
-        .load-model-btn:disabled {
-            opacity: 0.7;
-            cursor: wait;
-        }
-
-        .model-label {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 0.7rem;
-            color: #888;
-            pointer-events: none;
-        }
-
-        @media (max-width: 768px) {
-            .model-container {
-                height: 280px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .model-container {
-                height: 250px;
-            }
-
-            .load-model-btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.85rem;
-            }
+        .product-img-wrap img {
+            max-height: 180px;
+            object-fit: contain;
         }
     </style>
 </head>
-
-
 <body>
-    <!-- Image Gallery Modal -->
-    <div id="imgModal" class="modal" aria-hidden="true">
-        <div class="modal-content">
-            <div class="modal-counter" id="modalCounter">1 / 1</div>
-            <button class="modal-close" aria-label="Close modal">&times;</button>
-            <button class="modal-nav prev" aria-label="Previous image">&#10094;</button>
-            <img class="modal-img" id="modalImg" alt="Locking Cable Detail View" width="1200" height="900" loading="eager" decoding="async">
-            <button class="modal-nav next" aria-label="Next image">&#10095;</button>
-            <div class="modal-caption" id="modalCaption">Cable View</div>
+<div id="grain"></div>
+
+<!-- NAV -->
+<div class="site-nav-wrap">
+    <nav class="site-nav">
+        <a href="index.html">
+            <img src="content/logos/larkspur-logo-large-grey.webp" alt="LarKSpur Industries" class="nav-logo">
+        </a>
+        <div class="nav-links">
+            <a href="docs.html" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Docs
+            </a>
+            <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="mailto:larkspur.industries.official@gmail.com" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Contact
+            </a>
         </div>
+        <a href="shop.html" class="nav-cta">Shop</a>
+    </nav>
+</div>
+
+<div class="container">
+
+    <div class="breadcrumb fade-in">
+        <a href="index.html">Home</a>
+        <span class="sep">/</span>
+        <a href="shop.html">Shop</a>
+        <span class="sep">/</span>
+        <span class="current">Locking Cable</span>
     </div>
 
-    <div class="container">
-        <div style="margin-bottom: 1rem; font-size: 0.8rem;">
-            <a href="index.html" class="link"><- BACK TO HOME</a>
+    <div class="product-wrap fade-in delay-1">
+        <div class="product-label">Cable</div>
+        <div class="product-title">LOCKING CABLE</div>
+        <div class="coming-soon-badge">Coming Soon</div>
+
+        <div class="product-img-wrap">
+            <img src="docs/cables/img/locking-cable.png" alt="Marigold-5 Locking Cable" loading="eager">
         </div>
 
-        <div class="card">
-            <div class="product-name">Marigold-5 Locking Cable</div>
+        <p style="font-size:0.9rem;color:#bbb;line-height:1.7;margin-bottom:1.5rem;">
+            A screw-locking USB-C cable built for Marigold-5. Physically secures to the port so vibrations and collisions can't pull it loose, rated for 240W and 20Gbps with braided + foil shielding.
+        </p>
 
-            <!-- Placeholder for 3D model if one existed, or main product image -->
-            <div class="gallery-grid" id="galleryGrid">
-                <img src="docs/cables/img/locking-cable.png" 
-                     width="600" height="600" 
-                     class="gallery-img" 
-                     alt="Marigold-5 Locking Cable"
-                     loading="eager" 
-                     decoding="async"
-                     data-index="0">
-            </div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:0 0 1.5rem;">
 
-            <!-- Mobile Carousel -->
-            <div class="carousel-wrapper" id="carouselWrapper">
-                <div class="carousel-container" id="carouselContainer">
-                    <div class="carousel-slide">
-                        <img src="docs/cables/img/locking-cable.png" 
-                             width="600" height="600"
-                             alt="Marigold-5 Locking Cable"
-                             loading="eager"
-                             decoding="async">
-                    </div>
+        <div class="section-label">Specifications</div>
+        <div class="spec-grid" style="margin-bottom:1.75rem;">
+            <div class="spec-cell"><div class="spec-key">Connector</div><div class="spec-val">Screw-Lock USB-C</div></div>
+            <div class="spec-cell"><div class="spec-key">Power Rating</div><div class="spec-val">240W</div></div>
+            <div class="spec-cell"><div class="spec-key">Data Speed</div><div class="spec-val">20Gbps</div></div>
+            <div class="spec-cell"><div class="spec-key">Shielding</div><div class="spec-val">Braided + Foil</div></div>
+        </div>
+
+        <div class="section-label">Why Locking Cable?</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:1.75rem;">
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">Stays Connected</div>
+                    <div class="highlight-bar-body">Standard USB-C cables disconnect under vibration and impact. The screw-lock mechanism keeps the cable physically secured to Marigold-5's port throughout the match.</div>
                 </div>
-                <div class="carousel-counter" id="carouselCounter">1 / 1</div>
             </div>
-
-            <div style="font-size: 0.9rem; line-height: 1.5; color: #ccc; margin-bottom: 1.5rem;">
-                The Marigold-5 Locking Cable provides a secure, vibration-resistant connection for USB-C devices. Designed to fit with the Marigold-5 power module, it ensures power and data integrity even during high-impact collisions.
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">High Performance</div>
+                    <div class="highlight-bar-body">Rated for 240W and 20Gbps, more than enough headroom for any co-processor load.</div>
+                </div>
             </div>
-
-            <a href="#" class="btn btn-primary">COMING SOON</a>
-
-            <div class="section-title">TECHNICAL SPECIFICATIONS</div>
-            <div class="grid-specs">
-                <div class="spec-row"><span class="spec-key">Length</span><span class="spec-val">12in (0.3m)</span></div>
-                <div class="spec-row"><span class="spec-key">Connectors</span><span class="spec-val">USB-C to USB-C</span></div>
-                <div class="spec-row"><span class="spec-key">Locking Mechanism</span><span class="spec-val">Dual Single Screw</span></div>
-                <div class="spec-row"><span class="spec-key">Power Rating</span><span class="spec-val">240W (48V / 5A)</span></div>
-                <div class="spec-row"><span class="spec-key">Data Speed</span><span class="spec-val">20Gbps (USB 3.2 Gen 2)</span></div>
-                 <div class="spec-row"><span class="spec-key">Shielding</span><span class="spec-val">Braided + Foil</span></div>
-            </div>
-
-            <div class="section-title">WHY LOCKING CABLES?</div>
-            <div style="font-size: 0.9rem; line-height: 1.7; color: #ccc; margin-bottom: 1.5rem;">
-                <p style="margin-bottom: 1rem;">
-                    <strong style="color: var(--accent);">Vibration Immune:</strong> 
-                    Standard USB-C cables rely on friction. In FRC robots, heavy vibrations and impacts 
-                    can wiggle connectors loose, causing momentary power loss or data disconnection. 
-                    Our screw-locking mechanism physically secures the plug to the port.
-                </p>
-
-                <p style="margin-bottom: 1rem;">
-                    <strong style="color: var(--accent);">High Power Handling:</strong> 
-                    Rated for up to 240W, this cable easily handles the full 10A output of the Marigold-5 
-                    without voltage drop or overheating.
-                </p>
-
-                <p style="margin-bottom: 1rem;">
-                    <strong style="color: var(--accent);">Industrial Durability:</strong> 
-                    Reinforced strain relief and a tough outer jacket protect against abrasion 
-                    and sharp edges inside your robot chassis. The locking screws are knurled for 
-                    easy hand-tightening.
-                </p>
-            </div>
-
-            <div class="section-title">COMPATIBILITY</div>
-            <ul class="box-list">
-                <li><span>Marigold-5 Power Module</span> <span style="color:#666">Native Locking Support</span></li>
-                <li><span>Orange Pi 5 / Raspberry Pi 5</span> <span style="color:#666">Standard USB-C Fit</span></li>
-                <li><span>Limelight / PhotonVision Cameras</span> <span style="color:#666">High-Speed Data</span></li>
-            </ul>
         </div>
 
-        <div class="footer">
-            <span>© 2025 LARKSPUR INDUSTRIES</span>
-            <span style="margin-left: auto;">Richmond, VA</span>
-        </div>
+        <a href="shop.html" class="btn btn-block">← Back to Shop</a>
     </div>
 
+    <footer class="footer">
+        <a href="docs.html">Docs</a>
+        <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener">GitHub</a>
+        <a href="docs-warranty.html">Warranty</a>
+        <a href="mailto:larkspur.industries.official@gmail.com">Contact</a>
+        <span class="footer-copy">© 2026 Larkspur Industries</span>
+    </footer>
+</div>
 
-    <script>
-        // Gallery data
-        const galleryImages = [
-            {
-                src: "docs/cables/img/locking-cable.png",
-                alt: "Marigold-5 Locking Cable",
-                caption: "Main View"
-            }
-        ];
-
-        // ============ MODAL MANAGEMENT ============
-        const modal = document.getElementById("imgModal");
-        const modalImg = document.getElementById("modalImg");
-        const modalCounter = document.getElementById("modalCounter");
-        const modalCaption = document.getElementById("modalCaption");
-
-        let currentImageIndex = 0;
-        let isModalOpen = false;
-        let touchStartX = 0;
-
-        // Desktop gallery click handler
-        document.getElementById("galleryGrid").addEventListener('click', (e) => {
-            const img = e.target.closest('.gallery-img');
-            if (img) {
-                const index = parseInt(img.dataset.index);
-                openModal(index);
-            }
-        });
-
-        function openModal(index) {
-            if (index < 0 || index >= galleryImages.length) return;
-
-            currentImageIndex = index;
-            const image = galleryImages[currentImageIndex];
-
-            modalImg.src = image.src;
-            modalImg.alt = image.alt;
-            modalCaption.textContent = image.caption;
-            modalCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
-
-            modal.style.display = "flex";
-            modal.setAttribute('aria-hidden', 'false');
-            isModalOpen = true;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.style.display = "none";
-            modal.setAttribute('aria-hidden', 'true');
-            isModalOpen = false;
-            document.body.style.overflow = '';
-        }
-
-        function navigateImage(direction) {
-            let newIndex = currentImageIndex + direction;
-            if (newIndex < 0) newIndex = galleryImages.length - 1;
-            else if (newIndex >= galleryImages.length) newIndex = 0;
-            openModal(newIndex);
-        }
-
-        // Modal controls
-        document.querySelector('.modal-close').addEventListener('click', closeModal);
-        document.querySelector('.modal-nav.prev').addEventListener('click', (e) => {
-            e.stopPropagation();
-            navigateImage(-1);
-        });
-        document.querySelector('.modal-nav.next').addEventListener('click', (e) => {
-            e.stopPropagation();
-            navigateImage(1);
-        });
-
-        // Close modal on background click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        // Keyboard navigation for modal
-        document.addEventListener('keydown', (e) => {
-            if (!isModalOpen) return;
-
-            switch(e.key) {
-                case 'ArrowLeft':
-                    e.preventDefault();
-                    navigateImage(-1);
-                    break;
-                case 'ArrowRight':
-                    e.preventDefault();
-                    navigateImage(1);
-                    break;
-                case 'Escape':
-                    e.preventDefault();
-                    closeModal();
-                    break;
-            }
-        });
-
-        // Touch/Swipe for modal
-        modal.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        modal.addEventListener('touchend', (e) => {
-            const touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            const threshold = 50;
-
-            if (Math.abs(diff) > threshold) {
-                if (diff > 0) {
-                    navigateImage(1);
-                } else {
-                    navigateImage(-1);
-                }
-            }
-        }, { passive: true });
-
-        // ============ CAROUSEL MANAGEMENT ============
-        const carouselContainer = document.getElementById("carouselContainer");
-        const carouselCounter = document.getElementById("carouselCounter");
-
-        let currentCarouselIndex = 0;
-        let carouselTouchStartX = 0;
-
-        // Click on carousel image to open modal
-        carouselContainer.addEventListener('click', () => {
-            openModal(currentCarouselIndex);
-        });
-
-        function updateCarouselDisplay() {
-            const slide = galleryImages[currentCarouselIndex];
-            carouselContainer.innerHTML = `
-                <div class="carousel-slide">
-                    <img src="${slide.src}" 
-                         width="600" height="600"
-                         alt="${slide.alt}"
-                         loading="lazy"
-                         decoding="async">
-                </div>
-            `;
-            carouselCounter.textContent = `${currentCarouselIndex + 1} / ${galleryImages.length}`;
-
-            // Re-attach click handler after DOM update
-            carouselContainer.addEventListener('click', () => {
-                openModal(currentCarouselIndex);
-            });
-
-            // Re-attach touch handlers
-            attachCarouselTouchHandlers();
-        }
-
-        function nextCarouselSlide() {
-            currentCarouselIndex = (currentCarouselIndex + 1) % galleryImages.length;
-            updateCarouselDisplay();
-        }
-
-        function prevCarouselSlide() {
-            currentCarouselIndex = (currentCarouselIndex - 1 + galleryImages.length) % galleryImages.length;
-            updateCarouselDisplay();
-        }
-
-        function attachCarouselTouchHandlers() {
-            const currentSlide = carouselContainer.querySelector('.carousel-slide');
-            if (!currentSlide) return;
-
-            currentSlide.addEventListener('touchstart', (e) => {
-                carouselTouchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            currentSlide.addEventListener('touchend', (e) => {
-                const touchEndX = e.changedTouches[0].screenX;
-                const diff = carouselTouchStartX - touchEndX;
-                const threshold = 30;
-
-                if (Math.abs(diff) > threshold) {
-                    if (diff > 0) {
-                        nextCarouselSlide(); // Swipe left, next
-                    } else {
-                        prevCarouselSlide(); // Swipe right, prev
-                    }
-                }
-            }, { passive: true });
-        }
-
-        // Initialize carousel
-        updateCarouselDisplay();
-
-    </script>
+<script>
+    var navWrap = document.querySelector('.site-nav-wrap');
+    var lastY = 0;
+    window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        navWrap.style.transform = (y > lastY && y > 80) ? 'translateY(-120%)' : 'translateY(0)';
+        navWrap.style.transition = 'transform 0.25s ease';
+        lastY = y;
+    }, { passive: true });
+</script>
 </body>
 </html>

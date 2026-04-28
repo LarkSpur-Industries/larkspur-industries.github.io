@@ -1,524 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        {{META_TAGS}}
-        <link rel="stylesheet" href="css/fonts.css">
-        <link rel="stylesheet" href="css/style.css">
-        <style>
-            /* ── NAV ───────────────────────────────────────────── */
-            .site-nav {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.75rem 0;
-                border-bottom: 1px solid var(--border);
-                margin-bottom: 0;
-            }
-            .site-nav .nav-logo {
-                height: 32px;
-                width: auto;
-                display: block;
-                opacity: 0.9;
-            }
-            .site-nav .nav-links {
-                display: flex;
-                gap: 1.5rem;
-                align-items: center;
-            }
-            .site-nav .nav-links a {
-                font-size: 0.75rem;
-                color: var(--text-muted);
-                text-decoration: none;
-                letter-spacing: 0.8px;
-                text-transform: uppercase;
-                transition: color 0.15s;
-            }
-            .site-nav .nav-links a:hover { color: var(--text-main); }
-            .site-nav .nav-links .nav-cta {
-                color: var(--text-main);
-                border: 1px solid var(--border);
-                padding: 0.3rem 0.75rem;
-            }
-            .site-nav .nav-links .nav-cta:hover {
-                background: var(--text-main);
-                color: var(--bg);
-            }
+<head>
+    {{META_TAGS}}
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── HERO ──────────────────────────────────────────── */
+        .hero {
+            padding: 3rem 0 2.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .hero-headline {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+        .hero-headline .rotating-word {
+            color: var(--accent);
+            display: inline-block;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            white-space: nowrap;
+        }
+        .hero-headline .rotating-word.hidden {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        .hero-sub {
+            font-size: 0.92rem;
+            color: #777;
+            line-height: 1.7;
+            margin-bottom: 1.75rem;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+        .hero-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-img img {
+            width: 100%;
+            max-width: 300px;
+            object-fit: contain;
+            cursor: pointer;
+        }
 
-            /* ── HERO ──────────────────────────────────────────── */
-            .hero {
-                padding: 2.5rem 0 2rem;
-                border-bottom: 1px solid var(--border);
-                margin-bottom: 2rem;
-            }
-            .hero-headline {
-                font-size: 2rem;
-                font-weight: bold;
-                color: var(--highlight);
-                line-height: 1.2;
-                margin-bottom: 0.75rem;
-                letter-spacing: -0.5px;
-            }
-            .hero-sub {
-                font-size: 0.9rem;
-                color: #888;
-                line-height: 1.6;
-                max-width: 440px;
-                margin-bottom: 1.5rem;
-            }
-            .hero-actions {
-                display: flex;
-                gap: 0.75rem;
-                flex-wrap: wrap;
-            }
-            .hero-actions .btn {
-                width: auto;
-                padding: 0.65rem 1.5rem;
-                font-size: 0.8rem;
-            }
+        /* ── FEATURED PRODUCT ──────────────────────────────── */
+        .featured-product {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .featured-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .featured-image-col {
+            border-right: 1px solid var(--border);
+            background: var(--card-bg);
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+        }
+        .featured-carousel-wrap {
+            flex: 1;
+            padding: 1.25rem;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .featured-carousel-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 4px;
+        }
+        .carousel-dots {
+            padding: 0.5rem 0.75rem 0.75rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.45rem;
+            align-items: center;
+        }
+        .carousel-dot {
+            height: 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            background: #333;
+            transition: background 0.2s, width 0.2s;
+            width: 6px;
+        }
+        .carousel-dot.active {
+            background: var(--accent);
+            width: 18px;
+        }
+        .featured-info-col {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .featured-label {
+            font-size: 0.72rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        .featured-name {
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.55rem;
+        }
+        .featured-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.25rem;
+        }
+        .featured-price .price-note {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #666;
+            margin-left: 0.3rem;
+        }
+        .featured-desc {
+            font-size: 0.875rem;
+            color: #888;
+            line-height: 1.68;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+        .featured-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
-            /* ── FEATURED PRODUCT ──────────────────────────────── */
-            .featured-product {
-                background: var(--card-bg);
-                border: 1px solid var(--border);
-                margin-bottom: 2rem;
-                overflow: hidden;
-            }
-            .featured-badge {
-                background: var(--accent);
-                color: #fff;
-                font-size: 0.65rem;
-                font-weight: bold;
-                letter-spacing: 1.5px;
-                text-transform: uppercase;
-                padding: 0.3rem 0.75rem;
-                display: inline-block;
-            }
-            .featured-inner {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 0;
-            }
+        /* ── PRODUCTS GRID ─────────────────────────────────── */
+        .products-section {
+            margin-bottom: 2.5rem;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .section-header h2 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1.3px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+        }
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-decoration: none;
+            display: block;
+            transition: border-color 0.18s;
+            overflow: hidden;
+        }
+        .product-card:hover { border-color: var(--accent); }
+        .product-card.unavailable:hover { border-color: var(--border); cursor: default; }
+        .product-card-img {
+            background: var(--card-bg);
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border);
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .product-card.unavailable .product-card-img { opacity: 0.4; }
+        .product-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .product-card-info { padding: 0.85rem 1rem; }
+        .product-card-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+        .product-card-tagline {
+            font-size: 0.78rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .product-card-price {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .product-card-price.coming-soon { color: #3a3a3a; }
+
+        /* ── ABOUT ─────────────────────────────────────────── */
+        .about-strip {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 1.75rem 1.75rem 1.75rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .about-strip-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+        .about-strip p {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.65;
+            margin-bottom: 0.5rem;
+        }
+        .about-strip p:first-of-type {
+            font-size: 1rem;
+            color: #bbb;
+            margin-bottom: 0.75rem;
+        }
+        .about-strip p:last-child { margin-bottom: 0; }
+
+        /* ── RESPONSIVE ────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .hero { padding: 1.25rem 0 1rem; margin-bottom: 1.25rem; }
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-img  { display: none; }
+            .hero-headline { font-size: 1.7rem; }
+            .featured-inner { grid-template-columns: 1fr; }
             .featured-image-col {
-                border-right: 1px solid var(--border);
-                background: #111;
-                display: flex;
-                flex-direction: column;
-            }
-            .featured-info-col {
-                padding: 1.5rem;
-                display: flex;
-                flex-direction: column;
-            }
-            .featured-product-name {
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: var(--highlight);
-                margin-bottom: 0.25rem;
-                letter-spacing: 0.5px;
-            }
-            .featured-subtitle {
-                font-size: 0.8rem;
-                color: var(--text-muted);
-                margin-bottom: 1rem;
-                letter-spacing: 0.5px;
-                text-transform: uppercase;
-            }
-            .featured-price {
-                font-size: 1.6rem;
-                font-weight: bold;
-                color: var(--highlight);
-                margin-bottom: 1rem;
-                font-family: "Courier New", Courier, monospace;
-            }
-            .featured-price .price-note {
-                font-size: 0.7rem;
-                color: var(--text-muted);
-                font-weight: normal;
-                margin-left: 0.4rem;
-            }
-            .featured-specs {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 0.5rem;
-                margin-bottom: 1.25rem;
-                padding: 1rem;
-                background: #0d0d0d;
-                border: 1px solid #222;
-            }
-            .featured-spec-item {
-                display: flex;
-                flex-direction: column;
-                gap: 0.15rem;
-            }
-            .featured-spec-label {
-                font-size: 0.65rem;
-                color: var(--text-muted);
-                text-transform: uppercase;
-                letter-spacing: 0.8px;
-            }
-            .featured-spec-val {
-                font-size: 0.85rem;
-                color: var(--text-main);
-                font-family: "Courier New", Courier, monospace;
-            }
-            .featured-desc {
-                font-size: 0.85rem;
-                color: #999;
-                line-height: 1.6;
-                margin-bottom: 1.25rem;
-                flex: 1;
-            }
-            .featured-btns {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            .featured-btns .btn {
-                font-size: 0.8rem;
-                padding: 0.7rem 0;
-            }
-
-            /* ── PRODUCTS GRID ─────────────────────────────────── */
-            .products-section { margin-bottom: 2rem; }
-            .section-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: baseline;
-                margin-bottom: 1rem;
+                border-right: none;
                 border-bottom: 1px solid var(--border);
-                padding-bottom: 0.5rem;
+                min-height: 0;
+                max-height: 260px;
             }
-            .section-header h2 {
-                font-size: 0.75rem;
-                font-weight: bold;
-                color: var(--text-muted);
-                text-transform: uppercase;
-                letter-spacing: 1.5px;
-                margin: 0;
-            }
-            .section-header a {
-                font-size: 0.75rem;
-                color: var(--accent);
-                text-decoration: none;
-                letter-spacing: 0.5px;
-            }
-            .products-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-            }
-            .product-card {
-                background: var(--card-bg);
-                border: 1px solid var(--border);
-                text-decoration: none;
-                display: block;
-                transition: border-color 0.2s;
-                overflow: hidden;
-            }
-            .product-card:hover { border-color: var(--accent); }
-            .product-card-img {
-                width: 100%;
-                aspect-ratio: 1/1;
-                background: #111;
-                padding: 1rem;
-                box-sizing: border-box;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-bottom: 1px solid var(--border);
-            }
-            .product-card-img img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
-            .product-card-info { padding: 0.75rem 1rem; }
-            .product-card-name {
-                font-size: 0.9rem;
-                font-weight: bold;
-                color: var(--highlight);
-                margin-bottom: 0.2rem;
-            }
-            .product-card-tagline {
-                font-size: 0.75rem;
-                color: #666;
-                margin-bottom: 0.5rem;
-                line-height: 1.4;
-            }
-            .product-card-price {
-                font-size: 0.85rem;
-                font-family: "Courier New", Courier, monospace;
-                color: var(--text-main);
-            }
-            .product-card-price.coming-soon {
-                color: #555;
-                font-size: 0.75rem;
-                letter-spacing: 0.5px;
-            }
-
-            /* ── ABOUT STRIP ───────────────────────────────────── */
-            .about-strip {
-                border: 1px solid var(--border);
-                border-left: 3px solid var(--accent);
-                padding: 1.25rem 1.5rem;
-                margin-bottom: 2rem;
-                background: var(--card-bg);
-            }
-            .about-strip-title {
-                font-size: 0.75rem;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                color: var(--accent);
-                margin-bottom: 0.4rem;
-            }
-            .about-strip-text {
-                font-size: 0.85rem;
-                color: #999;
-                line-height: 1.6;
-                margin: 0;
-            }
-            .about-strip-text strong { color: var(--text-main); }
-
-            /* ── CAROUSEL ──────────────────────────────────────── */
-            .featured-carousel-container {
-                width: 100%;
-                overflow: hidden;
-                background: #111;
-                padding: 1rem;
-                box-sizing: border-box;
-                cursor: pointer;
-                touch-action: pan-y;
-                aspect-ratio: 1/1;
-            }
-            .featured-carousel-slide {
-                width: 100%;
-                height: 100%;
-                animation: slideIn 0.3s ease-out forwards;
-            }
-            .featured-carousel-slide img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                display: block;
-            }
-            .featured-carousel-counter {
-                font-size: 0.7rem;
-                color: #555;
-                text-align: center;
-                padding: 0.4rem;
-                letter-spacing: 0.5px;
-            }
-
-            /* ── RESPONSIVE ────────────────────────────────────── */
-            @media (max-width: 580px) {
-                .hero-headline { font-size: 1.5rem; }
-                .featured-inner { grid-template-columns: 1fr; }
-                .featured-image-col {
-                    border-right: none;
-                    border-bottom: 1px solid var(--border);
-                }
-                .products-grid { grid-template-columns: 1fr; }
-                .site-nav .nav-links .nav-label { display: none; }
-            }
-        </style>
-    </head>
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
 <body>
-    <div class="container">
+<div id="grain"></div>
 
-        <!-- NAV -->
-        <nav class="site-nav fade-in">
-            <a href="index.html">
-                <img src="content/logos/larkspur-logo-large-grey.webp"
-                     alt="Larkspur Industries"
-                     class="nav-logo"
-                     loading="eager"
-                     decoding="async">
+<!-- NAV -->
+<div class="site-nav-wrap">
+    <nav class="site-nav">
+        <a href="index.html">
+            <img src="content/logos/larkspur-logo-large-grey.webp" alt="LarKSpur Industries" class="nav-logo">
+        </a>
+        <div class="nav-links">
+            <a href="docs.html" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Docs
             </a>
-            <div class="nav-links">
-                <a href="docs.html" class="nav-label">Docs</a>
-                <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener" class="nav-label">GitHub</a>
-                <a href="mailto:larkspur.industries.official@gmail.com" class="nav-label">Contact</a>
-                <a href="shop.html" class="nav-cta">Shop</a>
-            </div>
-        </nav>
-
-        <!-- HERO -->
-        <div class="hero fade-in delay-1">
-            <div class="hero-headline">Hardware that keeps<br>your robot running.</div>
-            <div class="hero-sub">
-                Reasonable prices and reliable electronics for FIRST Robotics teams.
-                Our products are built for the ease of teams and to handle the challenges of competition.
-            </div>
-            <div class="hero-actions">
-                <a href="shop.html" class="btn btn-primary">Shop Products -&gt;</a>
-                <a href="docs.html" class="btn">View Docs</a>
-            </div>
+            <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="mailto:larkspur.industries.official@gmail.com" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Contact
+            </a>
         </div>
+        <a href="shop.html" class="nav-cta">Shop</a>
+    </nav>
+</div>
 
-        <!-- FEATURED PRODUCT -->
-        <div class="featured-product fade-in delay-2">
-            <div class="featured-badge">&#9733; Current Release</div>
-            <div class="featured-inner">
+<div class="container">
 
-                <div class="featured-image-col">
-                    <a href="marigold-5.html" id="featuredCarouselLink" style="display:block; text-decoration:none;">
-                        <div class="featured-carousel-container" id="featuredCarouselContainer">
-                            <div class="featured-carousel-slide">
-                                <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png"
-                                     alt="Marigold-5 USB-C Power Module"
-                                     width="600" height="600"
-                                     loading="eager" decoding="async">
-                            </div>
-                        </div>
-                    </a>
-                    <div class="featured-carousel-counter" id="featuredCarouselCounter">1 / 3</div>
+    <!-- HERO -->
+    <div class="hero fade-in">
+        <div class="hero-grid">
+            <div>
+                <div class="hero-headline">
+                    Hardware that keeps<br>
+                    your robot <span class="rotating-word" id="rotatingWord">running.</span>
                 </div>
-
-                <div class="featured-info-col">
-                    <div class="featured-product-name">MARIGOLD-5</div>
-                    <div class="featured-subtitle">DC-DC USB-C Power Module</div>
-
-                    <div class="featured-price">
-                        $24.99
-                        <span class="price-note">+ shipping</span>
-                    </div>
-
-                    <div class="featured-desc">
-                        Keeps your co-processor alive on robots and during battery brownouts.
-                        Easy to use, with plenty of power (10A), and replaces in minutes between matches.
-                    </div>
-
-                    <div class="featured-btns">
-                        <a href="marigold-5.html"
-                           class="btn btn-primary"
-                           target="_blank" rel="noopener noreferrer">
-                            BUY NOW - $24.99
-                        </a>
-                        <a href="docs-marigold-5.html" class="btn">Read the Docs</a>
-                    </div>
+                <p class="hero-sub">
+                    Affordable, reliable electronics for FIRST Robotics teams. Designed to handle the pressure of competition and hardware swaps in minutes between matches.
+                </p>
+                <div class="hero-actions">
+                    <a href="shop.html" class="btn btn-primary">Shop Products</a>
+                    <a href="docs.html" class="btn">View Docs</a>
                 </div>
             </div>
-        </div>
-
-        <!-- ALL PRODUCTS -->
-        <div class="products-section fade-in delay-3">
-            <div class="section-header">
-                <h2>All Products</h2>
-                <a href="shop.html">View all -&gt;</a>
-            </div>
-            <div class="products-grid">
-                <a href="marigold-5.html" class="product-card">
-                    <div class="product-card-img">
-                        <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.png"
-                             alt="Marigold-5"
-                             width="400" height="400"
-                             loading="lazy" decoding="async">
-                    </div>
-                    <div class="product-card-info">
-                        <div class="product-card-name">MARIGOLD-5</div>
-                        <div class="product-card-tagline">USB-C power module for FRC co-processors</div>
-                        <div class="product-card-price">$24.99</div>
-                    </div>
-                </a>
-                <a href="locking-cable.html" class="product-card">
-                    <div class="product-card-img">
-                        <img src="docs/cables/img/locking-cable.png"
-                             alt="Marigold-5 Locking Cable"
-                             width="400" height="400"
-                             loading="lazy" decoding="async">
-                    </div>
-                    <div class="product-card-info">
-                        <div class="product-card-name">LOCKING CABLE</div>
-                        <div class="product-card-tagline">Vibration-resistant USB-C cable for Marigold-5</div>
-                        <div class="product-card-price coming-soon">COMING SOON</div>
-                    </div>
+            <div class="hero-img">
+                <a href="marigold-5.html">
+                    <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png" alt="Marigold-5">
                 </a>
             </div>
-        </div>
-
-        <!-- ABOUT STRIP -->
-        <div class="about-strip fade-in delay-4">
-            <div class="about-strip-title">About Larkspur Industries</div>
-            <p class="about-strip-text">
-                We are a small hardware design company based in Richmond, Virginia ran by Isaac Subudhi.
-                Our goal is to deliver quality products at reasonable prices for competitive robotics and more.
-            </p>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="footer">
-            <a href="docs.html" class="link">DOCS</a>
-            <a href="https://github.com/LarkSpur-Industries" class="link">GITHUB</a>
-            <a href="docs-warranty.html" class="link">WARRANTY</a>
-            <a href="mailto:larkspur.industries.official@gmail.com" class="link">CONTACT</a>
-            <span style="margin-left: auto;">&#169; 2026 LARKSPUR INDUSTRIES</span>
         </div>
     </div>
 
-    <script>
-        var featuredImages = [
-            { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png', alt: 'Corner USB View' },
-            { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner.png',     alt: 'Corner View'     },
-            { src: 'docs/marigold-5/img/Marigold-5_V1.0-Top.png',        alt: 'Top View'        }
-        ];
+    <!-- FEATURED PRODUCT -->
+    <div class="featured-product fade-in delay-1">
+        <div class="featured-inner">
+            <div class="featured-image-col">
+                <a href="marigold-5.html" class="featured-carousel-wrap" id="featuredCarouselWrap">
+                    <img id="featuredImg" src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png" alt="Marigold-5">
+                </a>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+            <div class="featured-info-col">
+                <div class="featured-label">DC-DC USB-C Power Module</div>
+                <div class="featured-name">MARIGOLD-5</div>
+                <div class="featured-price">$24.99 <span class="price-note">USD</span></div>
+                <p class="featured-desc">
+                    Keeps your co-processor alive during battery brownouts. Operates reliably down to 6V, with 10A of headroom for a vision system and peripherals simultaneously.
+                </p>
+                <div class="featured-btns">
+                    <a href="https://checkout.square.site/merchant/MLCT3G6R606D6/checkout/K4UYC22H5F7DH7DI7KRWP7BC" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Buy Now - $24.99 USD</a>
+                    <a href="marigold-5.html" class="btn btn-block">Product Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        var featuredContainer = document.getElementById('featuredCarouselContainer');
-        var featuredCounter   = document.getElementById('featuredCarouselCounter');
-        var featuredLink      = document.getElementById('featuredCarouselLink');
+    <!-- ALL PRODUCTS -->
+    <div class="products-section fade-in delay-2">
+        <div class="section-header">
+            <h2>All Products</h2>
+            <a href="shop.html" class="btn btn-sm btn-accent">Shop all</a>
+        </div>
+        <div class="products-grid">
+            <a href="marigold-5.html" class="product-card">
+                <div class="product-card-img">
+                    <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.png" alt="Marigold-5" loading="lazy">
+                </div>
+                <div class="product-card-info">
+                    <div class="product-card-name">MARIGOLD-5</div>
+                    <div class="product-card-tagline">USB-C power module for FRC co-processors</div>
+                    <div class="product-card-price">$24.99 USD</div>
+                </div>
+            </a>
+            <div class="product-card unavailable">
+                <div class="product-card-img">
+                    <img src="docs/cables/img/locking-cable.png" alt="Locking Cable" loading="lazy">
+                </div>
+                <div class="product-card-info">
+                    <div class="product-card-name">LOCKING CABLE</div>
+                    <div class="product-card-tagline">Vibration-resistant USB-C cable for Marigold-5</div>
+                    <div class="product-card-price coming-soon">Coming Soon</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        var featuredIdx      = 0;
-        var featuredTouchX   = 0;
-        var featuredInterval = null;
-        var isSwiping        = false;
+    <!-- ABOUT -->
+    <div class="about-strip fade-in delay-3">
+        <div class="about-strip-title">About Larkspur Industries</div>
+        <p>We're a small hardware design startup based in Richmond, Virginia, founded by Isaac Subudhi.</p>
+        <p>Our goal is to deliver quality electronics at fair prices for competitive robotics teams and anyone who needs reliable power solutions.</p>
+    </div>
 
-        var INTERVAL_MS     = 5000;
-        var SWIPE_THRESHOLD = 30;
+    <!-- FOOTER -->
+    <footer class="footer">
+        <a href="docs.html">Docs</a>
+        <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener">GitHub</a>
+        <a href="docs-warranty.html">Warranty</a>
+        <a href="mailto:larkspur.industries.official@gmail.com">Contact</a>
+        <span class="footer-copy">© 2026 Larkspur Industries</span>
+    </footer>
 
-        function renderFeatured() {
-            var s = featuredImages[featuredIdx];
-            featuredContainer.innerHTML =
-                '<div class="featured-carousel-slide">' +
-                '<img src="' + s.src + '" alt="' + s.alt + '" width="600" height="600" loading="lazy" decoding="async">' +
-                '</div>';
-            featuredCounter.textContent = (featuredIdx + 1) + ' / ' + featuredImages.length;
-            bindTouch();
-            resetAuto();
-        }
+</div>
 
-        function nextSlide() { featuredIdx = (featuredIdx + 1) % featuredImages.length; renderFeatured(); }
-        function prevSlide() { featuredIdx = (featuredIdx - 1 + featuredImages.length) % featuredImages.length; renderFeatured(); }
+<script>
+    /* ── ROTATING HEADLINE ─────────────────────────────── */
+    var words = ['running.', 'performing.', 'reliable.', 'powered.', 'protected.'];
+    var wordEl = document.getElementById('rotatingWord');
+    var wordIdx = 0;
 
-        function bindTouch() {
-            var slide = featuredContainer.querySelector('.featured-carousel-slide');
-            if (!slide) return;
-            slide.addEventListener('touchstart', function(e) {
-                featuredTouchX = e.changedTouches[0].screenX;
-                isSwiping = false;
-            }, { passive: true });
-            slide.addEventListener('touchend', function(e) {
-                var diff = featuredTouchX - e.changedTouches[0].screenX;
-                if (Math.abs(diff) > SWIPE_THRESHOLD) {
-                    isSwiping = true;
-                    if (diff > 0) { nextSlide(); } else { prevSlide(); }
-                }
-            }, { passive: true });
-        }
+    setInterval(function () {
+        wordEl.classList.add('hidden');
+        setTimeout(function () {
+            wordIdx = (wordIdx + 1) % words.length;
+            wordEl.textContent = words[wordIdx];
+            wordEl.classList.remove('hidden');
+        }, 380);
+    }, 3500);
 
-        function startAuto() { featuredInterval = setInterval(nextSlide, INTERVAL_MS); }
-        function stopAuto()  { if (featuredInterval) { clearInterval(featuredInterval); featuredInterval = null; } }
-        function resetAuto() { stopAuto(); startAuto(); }
+    /* ── FEATURED CAROUSEL ─────────────────────────────── */
+    var featImages = [
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png', alt: 'Corner USB View' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner.png',     alt: 'Corner View'     },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Top.png',        alt: 'Top View'        },
+    ];
 
-        featuredLink.addEventListener('click', function(e) {
-            if (isSwiping) { e.preventDefault(); isSwiping = false; }
+    var featImg   = document.getElementById('featuredImg');
+    var dotsEl    = document.getElementById('carouselDots');
+    var featIdx   = 0;
+    var touchStartX = 0;
+    var timer;
+
+    /* Build dots */
+    featImages.forEach(function (_, i) {
+        var d = document.createElement('div');
+        d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', function () { goTo(i); resetTimer(); });
+        dotsEl.appendChild(d);
+    });
+
+    function updateDots() {
+        document.querySelectorAll('.carousel-dot').forEach(function (d, i) {
+            d.classList.toggle('active', i === featIdx);
         });
-        document.addEventListener('touchstart', function() { stopAuto(); }, { passive: true });
-        document.addEventListener('touchend',   function() { if (!featuredInterval) { startAuto(); } }, { passive: true });
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) { stopAuto(); } else { startAuto(); }
-        });
+    }
 
-        renderFeatured();
-        startAuto();
-    </script>
+    function goTo(idx) {
+        featIdx = idx;
+        featImg.style.opacity = '0';
+        setTimeout(function () {
+            featImg.src = featImages[featIdx].src;
+            featImg.alt = featImages[featIdx].alt;
+            featImg.style.opacity = '1';
+        }, 200);
+        updateDots();
+    }
+
+    function next() { goTo((featIdx + 1) % featImages.length); }
+    function prev() { goTo((featIdx - 1 + featImages.length) % featImages.length); }
+
+    featImg.style.transition = 'opacity 0.2s ease';
+
+    function resetTimer() { clearInterval(timer); timer = setInterval(next, 5000); }
+    resetTimer();
+
+    /* Touch swipe */
+    featImg.parentElement.addEventListener('touchstart', function (e) {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    featImg.parentElement.addEventListener('touchend', function (e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 30) { diff > 0 ? next() : prev(); resetTimer(); }
+    }, { passive: true });
+
+    /* Pause on hidden */
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) clearInterval(timer); else resetTimer();
+    });
+
+    /* ── STICKY NAV HIDE ON SCROLL ─────────────────────── */
+    var navWrap = document.querySelector('.site-nav-wrap');
+    var lastY = 0;
+    window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        navWrap.style.transform = (y > lastY && y > 80) ? 'translateY(-120%)' : 'translateY(0)';
+        navWrap.style.transition = 'transform 0.25s ease';
+        lastY = y;
+    }, { passive: true });
+</script>
 </body>
 </html>

@@ -8,7 +8,7 @@ const siteMeta = {
   author: 'Isaac Subudhi',
   location: 'Richmond, VA',
   themeColor: '#0a0a0a',
-  defaultImage: `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0A-Corner.png`,
+  defaultImage: `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Corner.png`,
 };
 
 // Shared meta tags that appear on every page
@@ -76,7 +76,18 @@ const pages = {
   ]
 }
   },
-  
+
+  'shop': {
+    title: 'Shop | LarkSpur Industries',
+    description: 'Browse and buy LarkSpur Industries hardware for FIRST Robotics Competition. Reliable, affordable electronics including the Marigold-5 USB-C power module.',
+    keywords: 'LarkSpur Industries shop, buy Marigold-5, FRC hardware, FIRST Robotics electronics, USB-C power module',
+    ogType: 'website',
+    ogTitle: 'Shop - LarkSpur Industries',
+    ogDescription: 'Reliable, affordable electronics for FIRST Robotics teams. Buy the Marigold-5 USB-C power module.',
+    ogImage: `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Corner.webp`,
+    canonicalUrl: `${baseUrl}/shop.html`,
+  },
+
   'marigold-5': {
     title: 'Marigold-5 USB-C Power Module | LarkSpur Industries',
     description: 'Marigold-5: 1-port USB-C power module for FRC robots. 12V input, 1x USB-C 3A+ output, $24.99',

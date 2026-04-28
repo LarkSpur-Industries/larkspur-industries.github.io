@@ -65,68 +65,79 @@
             transition: width 0.1s linear;
         }
 
-        /* ── Top nav strip ───────────────────────────────────────── */
-        .top-nav {
+        /* ── Docs nav wrap (sticky container) ───────────────────── */
+        .docs-nav-wrap {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(10, 10, 10, 0.92);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border);
-            padding: 0.6rem 1.25rem;
+            padding: 0.6rem 1.25rem 0;
+        }
+
+        /* ── Top nav pill ────────────────────────────────────────── */
+        .top-nav {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             gap: 1rem;
+            padding: 0.6rem 1.25rem;
+            background: rgba(12, 12, 12, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 10px;
         }
 
-        .top-nav-left {
+        .top-nav-links {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 1rem;
+            margin-left: auto;
+        }
+
+        .top-nav-links a {
             font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.15s;
         }
 
-        .top-nav-right {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
+        .top-nav-links a:hover { color: var(--text-main); }
 
-        /* Search trigger button */
+        /* Search trigger button — matches .nav-cta */
         .search-trigger {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            background: #1a1a1a;
+            gap: 0.45rem;
+            background: transparent;
             border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 0.35rem 0.75rem;
+            color: var(--text-main);
+            padding: 0.28rem 0.8rem;
+            border-radius: var(--radius);
             font-size: 0.78rem;
+            font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            transition: border-color 0.15s, color 0.15s;
+            transition: background 0.15s, color 0.15s;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .search-trigger:hover {
-            border-color: #555;
-            color: var(--text-main);
+            background: var(--text-main);
+            color: var(--bg);
         }
 
         .search-trigger .kbd {
             font-size: 0.7rem;
-            background: #222;
-            border: 1px solid #444;
+            background: #1a1a1a;
+            border: 1px solid #333;
             padding: 0 0.3rem;
             border-radius: 2px;
-            color: #888;
+            color: #666;
             line-height: 1.6;
         }
 
-        .search-icon {
-            opacity: 0.6;
-        }
+        .search-icon { opacity: 0.6; }
 
         /* ── Doc layout ──────────────────────────────────────────── */
         .doc-layout {
@@ -140,8 +151,8 @@
         .sidebar {
             border-right: 1px solid var(--border);
             position: sticky;
-            top: 41px; /* height of top-nav */
-            height: calc(100vh - 41px);
+            top: var(--nav-h, 62px);
+            height: calc(100vh - var(--nav-h, 62px));
             overflow-y: auto;
             overflow-x: hidden;
             display: flex;
@@ -728,10 +739,12 @@
                 display: block;
             }
 
-            /* Hide keyboard shortcut hint — not useful on touch */
-            .search-trigger .kbd {
-                display: none;
-            }
+            /* Collapse crowded top-nav items on mobile */
+            .top-nav-all-docs { display: none; }
+            .top-nav-shop { display: none; }
+            .search-trigger .kbd { display: none; }
+            .search-label { display: none; }
+            .docs-nav-wrap { padding: 0.5rem 0.75rem 0; }
 
             .content-wrapper {
                 padding: 1.5rem 1.1rem 3rem;
@@ -795,22 +808,25 @@
 <div class="docs-root">
 
     <!-- Sticky top nav -->
-    <nav class="top-nav">
-        <div class="top-nav-left">
+    <div class="docs-nav-wrap">
+        <nav class="top-nav">
             <button class="mobile-sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">☰ MENU</button>
-            <a href="index.html" class="link">← HOME</a>
-            <a href="docs.html" class="link">ALL DOCS</a>
-        </div>
-        <div class="top-nav-right">
+            <a href="index.html">
+                <img src="content/logos/larkspur-logo-large-grey.webp" alt="LarkSpur Industries" class="nav-logo">
+            </a>
+            <div class="top-nav-links">
+                <a href="docs.html" class="top-nav-all-docs">All Docs</a>
+                <a href="shop.html" class="top-nav-shop">Shop</a>
+            </div>
             <button class="search-trigger" id="search-open-btn" aria-label="Open search">
                 <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                 </svg>
-                Search
+                <span class="search-label">Search</span>
                 <span class="kbd">⌘K</span>
             </button>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
     <div class="doc-layout">
 
@@ -839,8 +855,12 @@
 {{MAIN_CONTENT}}
                 </div>
             </div>
-            <div class="doc-footer">
-                <span>© 2025 LARKSPUR INDUSTRIES</span>
+            <div class="doc-footer" style="display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center;font-size:0.75rem;color:#888;">
+                <a href="docs.html" style="color:#888;text-decoration:none;">Docs</a>
+                <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener" style="color:#888;text-decoration:none;">GitHub</a>
+                <a href="docs-warranty.html" style="color:#888;text-decoration:none;">Warranty</a>
+                <a href="mailto:larkspur.industries.official@gmail.com" style="color:#888;text-decoration:none;">Contact</a>
+                <span style="margin-left:auto;">© 2026 Larkspur Industries</span>
             </div>
         </main>
 
@@ -857,7 +877,7 @@
     // Measure real nav height and set CSS variable so sidebar top/height
     // tracks accurately regardless of font scaling or padding changes
     function setNavHeight() {
-        const nav = document.querySelector('.top-nav');
+        const nav = document.querySelector('.docs-nav-wrap');
         if (nav) {
             document.documentElement.style.setProperty(
                 '--nav-h', nav.getBoundingClientRect().height + 'px'

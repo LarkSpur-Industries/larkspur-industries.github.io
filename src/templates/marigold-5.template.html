@@ -1,508 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        {{META_TAGS}}
-            
-            <link rel="stylesheet" href="css/fonts.css">
-            <link rel="stylesheet" href="css/style.css">
+<head>
+    {{META_TAGS}}
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── PRODUCT CARD ───────────────────────────────────── */
+        .product-wrap {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin-top: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .product-label {
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
 
+        /* ── GALLERY ────────────────────────────────────────── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .gallery-thumb {
+            border: 1px solid var(--border);
+            background: #0d0d0d;
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: border-color 0.15s;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .gallery-thumb:hover  { border-color: #555; }
+        .gallery-thumb.active { border-color: var(--accent); }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
 
-        <style>
+        /* ── PRICE + CTA ────────────────────────────────────── */
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .price-big {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .price-big .price-currency {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #666;
+            margin-left: 0.25rem;
+        }
+
+        /* ── 3D MODEL ───────────────────────────────────────── */
         .model-container {
             position: relative;
             width: 100%;
-            height: 350px;
-            background-color: #1a1a1a;
+            height: 320px;
+            background: #0d0d0d;
             border: 1px solid var(--border);
+            border-radius: var(--radius);
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
-        
         model-viewer {
             width: 100%;
             height: 100%;
-            --poster-color: #1a1a1a;
+            --poster-color: #0d0d0d;
         }
-        
-        .load-model-btn {
-            padding: 1rem 2rem;
-            background: var(--text-main);
-            color: var(--bg);
-            border: 1px solid var(--text-main);
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            font-family: "Courier New", Courier, monospace;
-            transition: all 0.2s;
-            z-index: 10;
-        }
-        
-        .load-model-btn:hover {
-            background: transparent;
-            color: var(--text-main);
-        }
-        
-        .load-model-btn:disabled {
-            opacity: 0.7;
-            cursor: wait;
-        }
-        
         .model-label {
             position: absolute;
             bottom: 10px;
             right: 10px;
             font-size: 0.7rem;
-            color: #888;
+            color: #555;
             pointer-events: none;
         }
-        
-        @media (max-width: 768px) {
-            .model-container {
-                height: 280px;
-            }
+
+        /* ── MODAL ──────────────────────────────────────────── */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        
-        @media (max-width: 480px) {
-            .model-container {
-                height: 250px;
+        .modal.open { display: flex; }
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-img {
+            max-width: 100%;
+            max-height: 88vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s;
+        }
+        .modal-close:hover { color: var(--accent); }
+
+        /* ── RESPONSIVE ─────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .product-wrap {
+                padding: 1rem;
+                margin-top: 1.1rem;
             }
-            
-            .load-model-btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.85rem;
+            .product-title {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
             }
+            .model-container { height: 200px; }
+            .price-big { font-size: 1.35rem; }
+            .price-row { margin-bottom: 1rem; }
         }
     </style>
 </head>
-
-
 <body>
-    <!-- Image Gallery Modal -->
-    <div id="imgModal" class="modal" aria-hidden="true">
-        <div class="modal-content">
-            <div class="modal-counter" id="modalCounter">1 / 3</div>
-            <button class="modal-close" aria-label="Close modal">&times;</button>
-            <button class="modal-nav prev" aria-label="Previous image">&#10094;</button>
-            <img class="modal-img" id="modalImg" alt="Marigold-5 Detail View" width="1200" height="900" loading="eager" decoding="async">
-            <button class="modal-nav next" aria-label="Next image">&#10095;</button>
-            <div class="modal-caption" id="modalCaption">Corner View</div>
-        </div>
+<div id="grain"></div>
+
+<!-- IMAGE MODAL -->
+<div id="imgModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose" aria-label="Close">&#10005;</button>
+        <img class="modal-img" id="modalImg" alt="">
     </div>
-    
-    <div class="container">
-        <div style="margin-bottom: 1rem; font-size: 0.8rem;">
-            <a href="index.html" class="link"><- BACK TO HOME</a>
+</div>
+
+<!-- NAV -->
+<div class="site-nav-wrap">
+    <nav class="site-nav">
+        <a href="index.html">
+            <img src="content/logos/larkspur-logo-large-grey.webp" alt="LarKSpur Industries" class="nav-logo">
+        </a>
+        <div class="nav-links">
+            <a href="docs.html" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Docs
+            </a>
+            <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="mailto:larkspur.industries.official@gmail.com" class="nav-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Contact
+            </a>
         </div>
-        
-        <div class="card">
-            <div class="product-name">MARIGOLD-5</div>
-            
-            <div class="model-container" id="modelContainer">
-                <button class="load-model-btn" id="loadModelBtn" type="button">
-                    LOAD 3D MODEL
-                </button>
-                <div class="model-label" id="modelLabel" style="display: none;">
-                    3D PREVIEW
+        <a href="shop.html" class="nav-cta">Shop</a>
+    </nav>
+</div>
+
+<div class="container">
+
+    <!-- PRODUCT -->
+    <div class="product-wrap fade-in">
+        <div class="product-label">Power Module</div>
+        <div class="product-title">MARIGOLD-5</div>
+
+        <!-- 3D MODEL -->
+        <div class="model-container" id="modelContainer">
+            <button class="btn btn-primary" id="loadModelBtn" type="button">Load 3D Model</button>
+            <div class="model-label" id="modelLabel" style="display:none;">3D PREVIEW</div>
+        </div>
+
+        <!-- GALLERY -->
+        <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-thumb active" data-index="0">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png" alt="Corner USB View" loading="eager" decoding="async">
+            </div>
+            <div class="gallery-thumb" data-index="1">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner.png" alt="Corner View" loading="lazy" decoding="async">
+            </div>
+            <div class="gallery-thumb" data-index="2">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.png" alt="Top View" loading="lazy" decoding="async">
+            </div>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <p style="font-size:0.9rem;color:#bbb;line-height:1.7;margin-bottom:1.5rem;">
+            The Marigold-5 is a compact DC-DC power module for the FIRST Robotics Competition. It delivers a high-current 5.1V USB-C output for co-processors plus an auxiliary port for peripherals, staying stable all the way down to 6V.
+        </p>
+
+        <!-- PRICE + CTA -->
+        <div class="price-row">
+            <span class="price-big">$24.99<span class="price-currency">USD</span></span>
+            <a href="https://checkout.square.site/merchant/MLCT3G6R606D6/checkout/K4UYC22H5F7DH7DI7KRWP7BC" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Buy Now</a>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:0 0 1.5rem;">
+
+        <!-- SPECS -->
+        <div class="section-label">Technical Specifications</div>
+        <div class="spec-grid" style="margin-bottom:1.75rem;">
+            <div class="spec-cell"><div class="spec-key">Input Voltage</div><div class="spec-val">6V – 18V</div></div>
+            <div class="spec-cell"><div class="spec-key">Output Voltage</div><div class="spec-val">5.1V Regulated</div></div>
+            <div class="spec-cell"><div class="spec-key">Max Current</div><div class="spec-val">10A Total</div></div>
+            <div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">4-40 &amp; 6-32</div></div>
+        </div>
+
+        <!-- WHY -->
+        <div class="section-label">Why Marigold-5?</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:1.75rem;">
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">Brownout-Proof Power</div>
+                    <div class="highlight-bar-body">FRC batteries sag to ~7V mid-match. Most adapters cut out at 10V. Marigold-5 stays stable all the way down to 6V, keeping your co-processor alive when it matters most.</div>
                 </div>
             </div>
-            
-            <!-- Desktop Gallery Grid -->
-            <div class="gallery-grid" id="galleryGrid">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png" 
-                     width="600" height="600" 
-                     class="gallery-img" 
-                     alt="Marigold-5 Corner USB View"
-                     loading="eager" 
-                     decoding="async"
-                     data-index="0">
-                
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner.png" 
-                     width="600" height="600" 
-                     class="gallery-img" 
-                     alt="Marigold-5 Corner View"
-                     loading="lazy" 
-                     decoding="async"
-                     data-index="1">
-                
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.png" 
-                     width="600" height="600" 
-                     class="gallery-img" 
-                     alt="Marigold-5 Top View"
-                     loading="lazy" 
-                     decoding="async"
-                     data-index="2">
-            </div>
-            
-            <!-- Mobile Carousel (swipe-activated, auto-switching) -->
-            <div class="carousel-wrapper" id="carouselWrapper">
-                <div class="carousel-container" id="carouselContainer">
-                    <div class="carousel-slide">
-                        <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png" 
-                             width="600" height="600"
-                             alt="Marigold-5 Corner USB View"
-                             loading="eager"
-                             decoding="async">
-                    </div>
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">10A of Headroom</div>
+                    <div class="highlight-bar-body">Power a vision co-processor and additional peripherals simultaneously. No compromise between devices.</div>
                 </div>
-                <div class="carousel-counter" id="carouselCounter">1 / 3</div>
             </div>
-            
-            <div style="font-size: 0.9rem; line-height: 1.5; color: #ccc; margin-bottom: 1.5rem;">
-                The Marigold-5 is a compact DC-DC power module designed for the FIRST Robotics Competition. It provides a high-current USB-C port to power co-processors, and auxiliary output to power other peripherals at 5.1V.
-            </div>
-            
-            <a href="https://square.link/u/PsINvPEL" class="btn btn-primary" target="_blank" rel="noopener noreferrer">BUY NOW - $24.99</a>
-            
-            <div class="section-title">TECHNICAL SPECIFICATIONS</div>
-            <div class="grid-specs">
-                <div class="spec-row"><span class="spec-key">Input Voltage</span><span class="spec-val">6V - 18V</span></div>
-                <div class="spec-row"><span class="spec-key">Output Voltage</span><span class="spec-val">Regulated 5.1V</span></div>
-                <div class="spec-row"><span class="spec-key">Max Current</span><span class="spec-val">10A Total</span></div>
-                <div class="spec-row"><span class="spec-key">Mounting</span><span class="spec-val">4-40 & 6-32</span></div>
-            </div>
-            
-            <div class="section-title">WHY MARIGOLD-5?</div>
-            <div style="font-size: 0.9rem; line-height: 1.7; color: #ccc; margin-bottom: 1.5rem;">
-                <p style="margin-bottom: 1rem;">
-                    <strong style="color: var(--accent);">Brownout-Proof Power:</strong> 
-                    FRC batteries sag from 12V down to 7V during matches. Most common adapters 
-                    cut out around 10V, rebooting your co-processor exactly when you need it most. Marigold-5 
-                    operates reliably down to 6V, keeping connected devices stable.
-                </p>
-                
-                <p style="margin-bottom: 1rem;">
-                    <strong style="color: var(--accent);">Built for Hungry Devices:</strong> 
-                    Vision systems require significant processing power. With Marigold-5, you can power a single co-processor
-                    or add another device using the auxiliary port. The 10A total output means you don't have to choose 
-                    between devices.
-                </p>
-                
-                <p style="margin-bottom: 1rem;">
-                    <strong style="color: var(--accent);">Quick Replacement:</strong> 
-                    The push button input connector and USB-C locking connection means you can swap 
-                    a failed unit in minutes. Perfect for when you're between qualification matches. No soldering, no DIY wiring, just a few minutes and you're back in the game.
-                </p>
-            </div>
-            
-            <div class="section-title">WHAT'S IN THE BOX</div>
-            <ul class="box-list">
-                <li><span>1x Marigold-5</span> <span style="color:#666">Fully Assembled</span></li>
-                <li><span>1x LarkSpur Sticker</span> <span style="color:#666">Vinyl</span></li>
-                <li><span>1x Quick Mount Jig</span> <span style="color:#666">Paper</span></li>
-                <li><span>1x Wiring Guide</span> <span style="color:#666">Pamphlet</span></li>
-            </ul>
-            
-            <div class="section-title">DOCUMENTATION</div>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="docs.html?product=marigold-5" class="btn" style="flex:1; min-width: 200px;">READ THE DOCS</a>
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">Quick Swap</div>
+                    <div class="highlight-bar-body">Push-button wiring connector and locking USB-C. Replace a failed unit between qualification matches, no soldering required.</div>
+                </div>
             </div>
         </div>
-        
-        <div class="footer">
-            <span>© 2026 LARKSPUR INDUSTRIES</span>
-            <span style="margin-left: auto;">Richmond, VA</span>
-        </div>
+
+        <!-- IN THE BOX -->
+        <div class="section-label">What's in the Box</div>
+        <ul class="box-list" style="margin-bottom:1.75rem;">
+            <li><span>1× Marigold-5</span><span class="note">Fully Assembled</span></li>
+            <li><span>1× Larkspur Sticker</span><span class="note">Vinyl</span></li>
+            <li><span>1× Quick Mount Jig</span><span class="note">Paper</span></li>
+            <li><span>1× Wiring Guide</span><span class="note">Pamphlet</span></li>
+        </ul>
+
+        <a href="docs-marigold-5.html" class="btn btn-block">Read the Docs</a>
     </div>
 
+    <!-- FOOTER -->
+    <footer class="footer">
+        <a href="docs.html">Docs</a>
+        <a href="https://github.com/LarkSpur-Industries" target="_blank" rel="noopener">GitHub</a>
+        <a href="docs-warranty.html">Warranty</a>
+        <a href="mailto:larkspur.industries.official@gmail.com">Contact</a>
+        <span class="footer-copy">© 2026 Larkspur Industries</span>
+    </footer>
 
-    <script>
-        // Gallery data
-        const galleryImages = [
-            {
-                src: "docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png",
-                alt: "Marigold-5 Corner USB View",
-                caption: "Corner USB View"
-            },
-            {
-                src: "docs/marigold-5/img/Marigold-5_V1.0-Corner.png",
-                alt: "Marigold-5 Corner View",
-                caption: "Corner View"
-            },
-            {
-                src: "docs/marigold-5/img/Marigold-5_V1.0-Top.png",
-                alt: "Marigold-5 Top View",
-                caption: "Top View"
-            }
-        ];
-        
-        // ============ MODAL MANAGEMENT ============
-        const modal = document.getElementById("imgModal");
-        const modalImg = document.getElementById("modalImg");
-        const modalCounter = document.getElementById("modalCounter");
-        const modalCaption = document.getElementById("modalCaption");
-        
-        let currentImageIndex = 0;
-        let isModalOpen = false;
-        let touchStartX = 0;
-        
-        // Desktop gallery click handler
-        document.getElementById("galleryGrid").addEventListener('click', (e) => {
-            const img = e.target.closest('.gallery-img');
-            if (img) {
-                const index = parseInt(img.dataset.index);
-                openModal(index);
-            }
+</div>
+
+<script>
+    /* ── GALLERY ────────────────────────────────────────── */
+    var galleryImages = [
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png', alt: 'Corner USB View' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner.png',     alt: 'Corner View'     },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Top.png',        alt: 'Top View'        },
+    ];
+    var thumbs = document.querySelectorAll('.gallery-thumb');
+
+    thumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+            thumbs.forEach(function (t) { t.classList.remove('active'); });
+            thumb.classList.add('active');
         });
-        
-        function openModal(index) {
-            if (index < 0 || index >= galleryImages.length) return;
-            
-            currentImageIndex = index;
-            const image = galleryImages[currentImageIndex];
-            
-            modalImg.src = image.src;
-            modalImg.alt = image.alt;
-            modalCaption.textContent = image.caption;
-            modalCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
-            
-            modal.style.display = "flex";
+    });
+
+    /* ── MODAL ──────────────────────────────────────────── */
+    var modal   = document.getElementById('imgModal');
+    var modalImg = document.getElementById('modalImg');
+
+    thumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+            var idx = parseInt(thumb.dataset.index);
+            modalImg.src = galleryImages[idx].src;
+            modalImg.alt = galleryImages[idx].alt;
+            modal.classList.add('open');
             modal.setAttribute('aria-hidden', 'false');
-            isModalOpen = true;
             document.body.style.overflow = 'hidden';
-        }
-        
-        function closeModal() {
-            modal.style.display = "none";
-            modal.setAttribute('aria-hidden', 'true');
-            isModalOpen = false;
-            document.body.style.overflow = '';
-        }
-        
-        function navigateImage(direction) {
-            let newIndex = currentImageIndex + direction;
-            if (newIndex < 0) newIndex = galleryImages.length - 1;
-            else if (newIndex >= galleryImages.length) newIndex = 0;
-            openModal(newIndex);
-        }
-        
-        // Modal controls
-        document.querySelector('.modal-close').addEventListener('click', closeModal);
-        document.querySelector('.modal-nav.prev').addEventListener('click', (e) => {
-            e.stopPropagation();
-            navigateImage(-1);
         });
-        document.querySelector('.modal-nav.next').addEventListener('click', (e) => {
-            e.stopPropagation();
-            navigateImage(1);
-        });
-        
-        // Close modal on background click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-        
-        // Keyboard navigation for modal
-        document.addEventListener('keydown', (e) => {
-            if (!isModalOpen) return;
-            
-            switch(e.key) {
-                case 'ArrowLeft':
-                    e.preventDefault();
-                    navigateImage(-1);
-                    break;
-                case 'ArrowRight':
-                    e.preventDefault();
-                    navigateImage(1);
-                    break;
-                case 'Escape':
-                    e.preventDefault();
-                    closeModal();
-                    break;
-            }
-        });
-        
-        // Touch/Swipe for modal
-        modal.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        
-        modal.addEventListener('touchend', (e) => {
-            const touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            const threshold = 50;
-            
-            if (Math.abs(diff) > threshold) {
-                if (diff > 0) {
-                    navigateImage(1);
-                } else {
-                    navigateImage(-1);
-                }
-            }
-        }, { passive: true });
-        
-        // ============ CAROUSEL MANAGEMENT ============
-        const carouselContainer = document.getElementById("carouselContainer");
-        const carouselCounter = document.getElementById("carouselCounter");
-        
-        let currentCarouselIndex = 0;
-        let carouselTouchStartX = 0;
-        let carouselAutoPlayInterval = null;
-        const CAROUSEL_AUTO_PLAY_INTERVAL = 5000; // 5 seconds
-        
-        // Click on carousel image to open modal
-        carouselContainer.addEventListener('click', () => {
-            openModal(currentCarouselIndex);
-        });
-        
-        function updateCarouselDisplay() {
-            const slide = galleryImages[currentCarouselIndex];
-            carouselContainer.innerHTML = `
-                <div class="carousel-slide">
-                    <img src="${slide.src}" 
-                         width="600" height="600"
-                         alt="${slide.alt}"
-                         loading="lazy"
-                         decoding="async">
-                </div>
-            `;
-            carouselCounter.textContent = `${currentCarouselIndex + 1} / ${galleryImages.length}`;
-            
-            // Re-attach click handler after DOM update
-            carouselContainer.addEventListener('click', () => {
-                openModal(currentCarouselIndex);
-            });
-            
-            // Re-attach touch handlers
-            attachCarouselTouchHandlers();
-            
-            // Restart auto-play
-            resetCarouselAutoPlay();
+    });
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+    function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    /* ── 3D MODEL ───────────────────────────────────────── */
+    var modelBtn = document.getElementById('loadModelBtn');
+    var modelContainer = document.getElementById('modelContainer');
+    var modelLabel = document.getElementById('modelLabel');
+    var modelLoaded = false;
+
+    modelBtn.addEventListener('click', async function () {
+        if (modelLoaded) return;
+        modelBtn.disabled = true;
+        modelBtn.textContent = 'Loading...';
+        try {
+            await import('https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js');
+            var mv = document.createElement('model-viewer');
+            mv.setAttribute('src', 'docs/marigold-5/3d/Marigold-5_V1.0B.gltf');
+            mv.setAttribute('alt', 'Marigold-5 3D Model');
+            mv.setAttribute('environment-image', 'neutral');
+            mv.setAttribute('exposure', '0.25');
+            mv.setAttribute('tone-mapping', 'aces');
+            mv.setAttribute('shadow-intensity', '1.5');
+            mv.setAttribute('auto-rotate', '');
+            mv.setAttribute('camera-controls', '');
+            mv.setAttribute('orientation', '90deg -90deg 180deg');
+            mv.setAttribute('camera-orbit', '45deg 75deg 105%');
+            mv.style.setProperty('--poster-color', '#0d0d0d');
+            modelBtn.style.display = 'none';
+            modelContainer.appendChild(mv);
+            modelLabel.style.display = 'block';
+            modelLoaded = true;
+        } catch (e) {
+            modelBtn.textContent = 'Error loading model';
+            modelBtn.disabled = false;
+            setTimeout(function () { modelBtn.textContent = 'Load 3D Model'; }, 3000);
         }
-        
-        function nextCarouselSlide() {
-            currentCarouselIndex = (currentCarouselIndex + 1) % galleryImages.length;
-            updateCarouselDisplay();
-        }
-        
-        function prevCarouselSlide() {
-            currentCarouselIndex = (currentCarouselIndex - 1 + galleryImages.length) % galleryImages.length;
-            updateCarouselDisplay();
-        }
-        
-        function attachCarouselTouchHandlers() {
-            const currentSlide = carouselContainer.querySelector('.carousel-slide');
-            if (!currentSlide) return;
-            
-            currentSlide.addEventListener('touchstart', (e) => {
-                carouselTouchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-            
-            currentSlide.addEventListener('touchend', (e) => {
-                const touchEndX = e.changedTouches[0].screenX;
-                const diff = carouselTouchStartX - touchEndX;
-                const threshold = 30;
-                
-                if (Math.abs(diff) > threshold) {
-                    if (diff > 0) {
-                        nextCarouselSlide(); // Swipe left, next
-                    } else {
-                        prevCarouselSlide(); // Swipe right, prev
-                    }
-                }
-            }, { passive: true });
-        }
-        
-        function startCarouselAutoPlay() {
-            carouselAutoPlayInterval = setInterval(nextCarouselSlide, CAROUSEL_AUTO_PLAY_INTERVAL);
-        }
-        
-        function stopCarouselAutoPlay() {
-            if (carouselAutoPlayInterval) {
-                clearInterval(carouselAutoPlayInterval);
-                carouselAutoPlayInterval = null;
-            }
-        }
-        
-        function resetCarouselAutoPlay() {
-            stopCarouselAutoPlay();
-            startCarouselAutoPlay();
-        }
-        
-        // Pause auto-play when user manually swipes
-        document.addEventListener('touchstart', () => {
-            if (carouselAutoPlayInterval) {
-                stopCarouselAutoPlay();
-            }
-        }, { passive: true });
-        
-        // Resume auto-play when modal closes or user finishes interacting
-        document.addEventListener('touchend', () => {
-            if (!carouselAutoPlayInterval && !isModalOpen) {
-                startCarouselAutoPlay();
-            }
-        }, { passive: true });
-        
-        // Initialize carousel
-        updateCarouselDisplay();
-        startCarouselAutoPlay();
-        
-        // Stop carousel auto-play when modal opens
-        const originalOpenModal = openModal;
-        openModal = function(index) {
-            stopCarouselAutoPlay();
-            originalOpenModal.call(this, index);
-        };
-        
-        // Resume carousel auto-play when modal closes
-        const originalCloseModal = closeModal;
-        closeModal = function() {
-            originalCloseModal.call(this);
-            startCarouselAutoPlay();
-        };
-        
-        // Stop auto-play on page visibility change
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                stopCarouselAutoPlay();
-            } else {
-                startCarouselAutoPlay();
-            }
-        });
-        
-        // ============ 3D MODEL LOADING ============
-        const modelBtn = document.getElementById('loadModelBtn');
-        const modelContainer = document.getElementById('modelContainer');
-        const modelLabel = document.getElementById('modelLabel');
-        let modelLoaded = false;
-        
-        modelBtn.addEventListener('click', async function loadModel() {
-            if (modelLoaded) return;
-            
-            modelBtn.disabled = true;
-            modelBtn.textContent = 'LOADING...';
-            
-            try {
-                await import('https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js');
-                
-                const modelViewer = document.createElement('model-viewer');
-                modelViewer.setAttribute('src', 'docs/marigold-5/3d/Marigold-5_V1.0B.gltf');
-                modelViewer.setAttribute('alt', 'Marigold-5 3D Model');
-                modelViewer.setAttribute('environment-image', 'neutral');
-                modelViewer.setAttribute('exposure', '0.25');
-                modelViewer.setAttribute('tone-mapping', 'aces');
-                modelViewer.setAttribute('shadow-intensity', '1.5');
-                modelViewer.setAttribute('shadow-softness', '0.5');
-                modelViewer.setAttribute('auto-rotate', '');
-                modelViewer.setAttribute('camera-controls', '');
-                modelViewer.setAttribute('orientation', '90deg -90deg 180deg');
-                modelViewer.setAttribute('camera-orbit', '45deg 75deg 105%');
-                modelViewer.style.setProperty('--poster-color', '#1a1a1a');
-                
-                modelBtn.style.display = 'none';
-                modelContainer.appendChild(modelViewer);
-                modelLabel.style.display = 'block';
-                modelLoaded = true;
-            } catch (error) {
-                console.error('Failed to load 3D model:', error);
-                modelBtn.textContent = 'ERROR LOADING MODEL';
-                modelBtn.disabled = false;
-                setTimeout(() => {
-                    modelBtn.textContent = 'LOAD 3D MODEL';
-                }, 3000);
-            }
-        });
-    </script>
+    });
+
+    /* ── STICKY NAV ─────────────────────────────────────── */
+    var navWrap = document.querySelector('.site-nav-wrap');
+    var lastY = 0;
+    window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        navWrap.style.transform = (y > lastY && y > 80) ? 'translateY(-120%)' : 'translateY(0)';
+        navWrap.style.transition = 'transform 0.25s ease';
+        lastY = y;
+    }, { passive: true });
+</script>
 </body>
 </html>
