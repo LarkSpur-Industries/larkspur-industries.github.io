@@ -223,8 +223,8 @@ function generateDocsListing() {
     <meta name="theme-color" content="#0a0a0a">
     <link rel="icon" type="image/webp" href="content/logos/favicon-docs.webp">
     <title>Documentation | LarkSpur Industries</title>
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fonts.css?v=2">
+    <link rel="stylesheet" href="css/style.css?v=2">
     <style>
         .page-header {
             padding: 2rem 0 1.5rem;
