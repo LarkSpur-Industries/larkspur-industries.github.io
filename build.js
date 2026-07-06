@@ -17,7 +17,6 @@ const PRODUCT_PAGES = {
 };
 
 const LEGACY_REDIRECTS = {
-  'docs.html': '/docs/',
   'docs-marigold-5.html': '/docs/marigold-5/',
   'docs-locking-cable.html': '/docs/locking-cable/',
   'docs-warranty.html': '/docs/warranty/',

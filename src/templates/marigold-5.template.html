@@ -32,7 +32,7 @@
         /* ── GALLERY ────────────────────────────────────────── */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 0.5rem;
             margin-bottom: 1.5rem;
         }
@@ -218,13 +218,16 @@
         <!-- GALLERY -->
         <div class="gallery-grid" id="galleryGrid">
             <div class="gallery-thumb active" data-index="0">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png" alt="Corner USB View" loading="eager" decoding="async">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp" alt="Marigold-5 USB-C output side" loading="eager" decoding="async">
             </div>
             <div class="gallery-thumb" data-index="1">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Corner.png" alt="Corner View" loading="lazy" decoding="async">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerTerminal.webp" alt="Marigold-5 terminal input side" loading="lazy" decoding="async">
             </div>
             <div class="gallery-thumb" data-index="2">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.png" alt="Top View" loading="lazy" decoding="async">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp" alt="Marigold-5 disassembled, case and PCB" loading="lazy" decoding="async">
+            </div>
+            <div class="gallery-thumb" data-index="3">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-PCBTop.webp" alt="Marigold-5 bare PCB top view" loading="lazy" decoding="async">
             </div>
         </div>
 
@@ -302,9 +305,10 @@
 <script>
     /* ── GALLERY ────────────────────────────────────────── */
     var galleryImages = [
-        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.png', alt: 'Corner USB View' },
-        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Corner.png',     alt: 'Corner View'     },
-        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Top.png',        alt: 'Top View'        },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp',      alt: 'Marigold-5 USB-C output side' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerTerminal.webp', alt: 'Marigold-5 terminal input side' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp',   alt: 'Marigold-5 disassembled, case and PCB' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-PCBTop.webp',         alt: 'Marigold-5 bare PCB top view' },
     ];
     var thumbs = document.querySelectorAll('.gallery-thumb');
 
