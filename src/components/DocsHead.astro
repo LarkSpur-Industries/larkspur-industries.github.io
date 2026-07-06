@@ -1,0 +1,48 @@
+---
+import DefaultHead from '@astrojs/starlight/components/Head.astro';
+
+const { entry, id } = Astro.locals.starlightRoute;
+const site = Astro.site ?? new URL('https://larkspurindustries.com');
+
+const sectionNames = {
+  'marigold-5': 'Marigold-5',
+  'locking-cable': 'Marigold-5 Locking Cable',
+};
+
+const parts = id.split('/').filter((part) => part && part !== 'index');
+const breadcrumbItems = [
+  { name: 'Home', url: new URL('/', site).href },
+  { name: 'Documentation', url: new URL('/docs/', site).href },
+];
+
+if (parts[0] && parts[0] in sectionNames) {
+  breadcrumbItems.push({
+    name: sectionNames[parts[0] as keyof typeof sectionNames],
+    url: new URL(`/docs/${parts[0]}/`, site).href,
+  });
+}
+
+if (parts.length > 1 || (parts.length === 1 && !(parts[0] in sectionNames))) {
+  breadcrumbItems.push({ name: entry.data.title, url: Astro.url.href });
+}
+
+const image = parts[0] === 'locking-cable'
+  ? new URL('/docs/cables/img/locking-cable.png', site).href
+  : new URL('/docs/marigold-5/img/Marigold-5_V1.0-Corner.webp', site).href;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.url,
+  })),
+};
+---
+
+<DefaultHead />
+<meta property="og:image" content={image} />
+<meta name="twitter:image" content={image} />
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

@@ -1,0 +1,36 @@
+---
+title: Downloads
+description: Download Marigold-5 wiring diagrams, mechanical drawings, STEP files, and GLTF models.
+---
+
+import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+
+## Documentation
+
+<CardGrid>
+  <Card title="Wiring diagram" icon="seti:image">
+    High-resolution PNG wiring reference.
+
+    <LinkButton href="/docs/marigold-5/img/Marigold-5_V1.0-Wiring.png" variant="secondary" icon="download">Download PNG</LinkButton>
+  </Card>
+  <Card title="Mechanical drawing" icon="seti:pdf">
+    Dimensioned case drawing in PDF format.
+
+    <LinkButton href="/docs/marigold-5/pdf/Marigold-5_V1.0B_Drawing.pdf" variant="secondary" icon="download">Download PDF</LinkButton>
+  </Card>
+</CardGrid>
+
+## 3D models
+
+<CardGrid>
+  <Card title="STEP model" icon="seti:config">
+    CAD model for mechanical integration.
+
+    <LinkButton href="/docs/marigold-5/3d/Marigold-5_V1.0B.step" variant="secondary" icon="download">Download STEP</LinkButton>
+  </Card>
+  <Card title="GLTF model" icon="seti:config">
+    Lightweight model for web and 3D previews.
+
+    <LinkButton href="/docs/marigold-5/3d/Marigold-5_V1.0B.gltf" variant="secondary" icon="download">Download GLTF</LinkButton>
+  </Card>
+</CardGrid>

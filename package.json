@@ -2,12 +2,20 @@
     "name": "larkspur-industries-website",
     "version": "1.0.0",
     "description": "Larkspur Industries Website",
+    "private": true,
+    "engines": {
+        "node": ">=24 <25"
+    },
     "main": "build.js",
     "scripts": {
-      "build": "node build.js"
+        "clean": "node scripts/clean.js",
+        "dev": "astro dev",
+        "build": "npm run clean && astro build && node build.js",
+        "preview": "astro preview --root .",
+        "test": "npm run build && node scripts/verify-build.js"
     },
-    "dependencies": {
-      "marked": "^12.0.0"
+    "devDependencies": {
+        "@astrojs/starlight": "^0.41.3",
+        "astro": "^7.0.6"
     }
-  }
-  
+}

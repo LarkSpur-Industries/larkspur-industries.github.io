@@ -1,5 +1,7 @@
 # Node
 node_modules/
+.astro/
+dist/
 
 # Generated files (built by GitHub Actions)
 index.html
@@ -10,4 +12,3 @@ docs-marigold-5.html
 docs-warranty.html
 docs-locking-cable.html
 locking-cable.html
-

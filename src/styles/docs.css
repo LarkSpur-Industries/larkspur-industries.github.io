@@ -1,0 +1,234 @@
+@import url('/css/fonts.css');
+
+:root,
+:root[data-theme='light'],
+:root[data-theme='dark'] {
+  --sl-font: var(--font-main, 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif);
+  --sl-font-system: var(--sl-font);
+  --sl-color-accent-low: #251c38;
+  --sl-color-accent: #a98bea;
+  --sl-color-accent-high: #e6dcff;
+  --sl-color-white: #f7f7f7;
+  --sl-color-gray-1: #e0e0e0;
+  --sl-color-gray-2: #b0b0b0;
+  --sl-color-gray-3: #777;
+  --sl-color-gray-4: #444;
+  --sl-color-gray-5: #282828;
+  --sl-color-gray-6: #151515;
+  --sl-color-black: #0a0a0a;
+  --sl-color-bg: #0a0a0a;
+  --sl-color-bg-nav: rgba(12, 12, 12, 0.96);
+  --sl-color-bg-sidebar: rgba(10, 10, 10, 0.97);
+  --sl-color-hairline: #222;
+  --sl-color-hairline-light: #2b2b2b;
+  --sl-content-width: 52rem;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a0a0a;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url('/content/img/larkspur_flowers.png') center / cover no-repeat;
+  opacity: 0.045;
+  filter: brightness(0.45) saturate(0.55);
+}
+
+header.header {
+  border-bottom: 1px solid #222;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.site-title img {
+  max-height: 2.25rem;
+  opacity: 0.92;
+}
+
+.sidebar-pane {
+  border-inline-end-color: #222;
+}
+
+.sidebar-content a[aria-current='page'] {
+  color: #bda5f4;
+}
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3 {
+  color: #fff;
+  letter-spacing: -0.015em;
+}
+
+.sl-markdown-content a:not([class]) {
+  color: #b69aef;
+}
+
+.sl-markdown-content img {
+  border: 1px solid #252525;
+  border-radius: 8px;
+  background: #111;
+}
+
+.sl-markdown-content table {
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid #252525;
+  border-radius: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.sl-markdown-content :is(th, td):first-child {
+  padding-inline-start: 1rem;
+}
+
+.sl-markdown-content :is(th, td):last-child {
+  padding-inline-end: 1rem;
+}
+
+.sl-markdown-content tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.sl-markdown-content th {
+  color: #fff;
+  background: #151515;
+}
+
+.sl-markdown-content blockquote,
+.starlight-aside {
+  border-radius: 8px;
+}
+
+starlight-theme-select,
+.mobile-preferences {
+  display: none;
+}
+
+.docs-index {
+  width: min(100%, 54rem);
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 4.5rem) 1rem 4rem;
+}
+
+.docs-index-header {
+  max-width: 42rem;
+  margin-bottom: 2rem;
+}
+
+.docs-index-header .docs-index-kicker {
+  margin: 0 0 0.55rem;
+  color: #a98bea;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.docs-index-header > p:last-child {
+  margin: 0;
+  color: #999;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.docs-index-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.docs-index-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.4rem;
+  color: inherit;
+  text-decoration: none;
+  background: rgba(17, 17, 17, 0.94);
+  border: 1px solid #252525;
+  border-radius: 8px;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.docs-index-card:hover {
+  color: inherit;
+  background: #151515;
+  border-color: #5f4d82;
+  transform: translateY(-1px);
+}
+
+.docs-index-card strong,
+.docs-index-card small {
+  display: block;
+}
+
+.docs-index-card strong {
+  color: #f5f5f5;
+  font-size: 1.05rem;
+}
+
+.docs-index-card small {
+  max-width: 42rem;
+  margin-top: 0.35rem;
+  color: #888;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.docs-index-arrow {
+  flex: 0 0 auto;
+  color: #a98bea;
+  font-size: 1.25rem;
+  transition: transform 160ms ease;
+}
+
+.docs-index-card:hover .docs-index-arrow {
+  transform: translateX(3px);
+}
+
+.docs-index-support {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  color: #888;
+  font-size: 0.9rem;
+  border-top: 1px solid #222;
+}
+
+.docs-index-support strong {
+  color: #ddd;
+}
+
+.docs-index-support a {
+  color: #b69aef;
+}
+
+@media (max-width: 30rem) {
+  .docs-index-card {
+    align-items: flex-start;
+    padding: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .docs-index-card,
+  .docs-index-arrow {
+    transition: none;
+  }
+}

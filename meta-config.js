@@ -149,21 +149,6 @@ const pages = {
     ]),
   },
 
-  'docs': {
-    title: 'Documentation | Larkspur Industries',
-    description: 'Documentation, drawings, warranty information, and product resources for Larkspur Industries hardware.',
-    keywords: 'Larkspur Industries documentation, Marigold-5 docs, FRC hardware docs, robotics hardware documentation, warranty',
-    ogType: 'website',
-    ogTitle: 'Documentation - Larkspur Industries',
-    ogDescription: 'Find documentation, drawings, warranty information, and product resources for Larkspur Industries hardware.',
-    ogImage: siteMeta.defaultImage,
-    canonicalUrl: `${baseUrl}/docs.html`,
-    breadcrumbs: breadcrumb([
-      { name: 'Home', path: '' },
-      { name: 'Documentation', path: 'docs.html' }
-    ]),
-  },
-
   'marigold-5': {
     title: 'Marigold-5 USB-C Power Module | Larkspur Industries',
     description: 'Marigold-5: 1-port USB-C power module for FRC robots. 12V input, 1x USB-C 3A+ output, $24.99',
@@ -252,53 +237,6 @@ const pages = {
     ]),
   },
 
-  'docs-marigold-5': {
-    title: 'Marigold-5 Documentation | Larkspur Industries',
-    description: 'Installation, wiring, safety, troubleshooting, and reference documentation for the Marigold-5 USB-C power module.',
-    keywords: 'Marigold-5 documentation, Marigold-5 wiring, FRC power module docs, USB-C power module manual',
-    ogType: 'article',
-    ogTitle: 'Marigold-5 Documentation',
-    ogDescription: 'Installation, wiring, safety, troubleshooting, and reference documentation for the Marigold-5 USB-C power module.',
-    ogImage: `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Corner.webp`,
-    canonicalUrl: `${baseUrl}/docs-marigold-5.html`,
-    breadcrumbs: breadcrumb([
-      { name: 'Home', path: '' },
-      { name: 'Documentation', path: 'docs.html' },
-      { name: 'Marigold-5 Documentation', path: 'docs-marigold-5.html' }
-    ]),
-  },
-
-  'docs-locking-cable': {
-    title: 'Marigold-5 Locking Cable Documentation | Larkspur Industries',
-    description: 'Documentation and product notes for the Marigold-5 screw-locking USB-C cable.',
-    keywords: 'Marigold-5 locking cable docs, locking USB-C cable documentation, FRC cable docs',
-    ogType: 'article',
-    ogTitle: 'Marigold-5 Locking Cable Documentation',
-    ogDescription: 'Documentation and product notes for the Marigold-5 screw-locking USB-C cable.',
-    ogImage: `${baseUrl}/docs/cables/img/locking-cable.png`,
-    canonicalUrl: `${baseUrl}/docs-locking-cable.html`,
-    breadcrumbs: breadcrumb([
-      { name: 'Home', path: '' },
-      { name: 'Documentation', path: 'docs.html' },
-      { name: 'Marigold-5 Locking Cable Documentation', path: 'docs-locking-cable.html' }
-    ]),
-  },
-
-  'docs-warranty': {
-    title: 'Hardware Warranty | Larkspur Industries',
-    description: 'Warranty terms, crash replacement details, right-to-repair policy, and support contacts for Larkspur Industries hardware.',
-    keywords: 'Larkspur Industries warranty, Marigold-5 warranty, robotics hardware warranty, crash replacement',
-    ogType: 'article',
-    ogTitle: 'Hardware Warranty - Larkspur Industries',
-    ogDescription: 'Warranty terms, crash replacement details, right-to-repair policy, and support contacts for Larkspur Industries hardware.',
-    ogImage: siteMeta.defaultImage,
-    canonicalUrl: `${baseUrl}/docs-warranty.html`,
-    breadcrumbs: breadcrumb([
-      { name: 'Home', path: '' },
-      { name: 'Documentation', path: 'docs.html' },
-      { name: 'Hardware Warranty', path: 'docs-warranty.html' }
-    ]),
-  }
 };
 
 // Function to generate full meta tags for a page
