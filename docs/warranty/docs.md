@@ -55,6 +55,6 @@ Follow the steps above and email a photo, a description of what happened, and yo
 
 **Engineering:** [engineering@larkspurindustries.com](mailto:engineering@larkspurindustries.com)
 
-**GitHub Issues:** [github.com/LarkSpur-Industries](https://github.com/LarkSpur-Industries)
+**GitHub Issues:** [github.com/Larkspur-Industries](https://github.com/Larkspur-Industries)
 
 **Last Updated:** January 29, 2026

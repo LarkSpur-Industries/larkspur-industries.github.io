@@ -4,12 +4,36 @@
 const baseUrl = 'https://larkspurindustries.com';
 
 const siteMeta = {
-  siteName: 'LarkSpur Industries',
+  baseUrl,
+  siteName: 'Larkspur Industries',
   author: 'Isaac Subudhi',
   location: 'Richmond, VA',
   themeColor: '#0a0a0a',
   defaultImage: `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Corner.png`,
+  supportEmail: 'support@larkspurindustries.com',
+  salesEmail: 'sales@larkspurindustries.com',
+  engineeringEmail: 'engineering@larkspurindustries.com',
 };
+
+function breadcrumb(items) {
+  return items.map((item) => ({
+    name: item.name,
+    url: item.path ? `${baseUrl}/${item.path}` : `${baseUrl}/`
+  }));
+}
+
+function generateBreadcrumbStructuredData(items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url
+    }))
+  };
+}
 
 // Shared meta tags that appear on every page
 const commonMeta = `
@@ -25,22 +49,22 @@ const commonMeta = `
 // Page-specific metadata
 const pages = {
   'index': {
-    title: 'LarkSpur Industries | FRC Robotics Hardware | Fair Prices. Open Values.',
-    description: 'LarkSpur Industries designs reliable, affordable hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module.',
+    title: 'Larkspur Industries | FRC Robotics Hardware | Fair Prices. Open Values.',
+    description: 'Larkspur Industries designs reliable, affordable hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module.',
     keywords: 'FIRST robotics, robot power module, USB-C power, Marigold-5, robotics hardware, PhotonVision, FRC, competition robotics, affordable robotics',
     ogType: 'website',
-    ogTitle: 'LarkSpur Industries | FRC Robotics Hardware | Fair Prices. Open Values.',
+    ogTitle: 'Larkspur Industries | FRC Robotics Hardware | Fair Prices. Open Values.',
     ogDescription: 'Hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 1x USB-C 3A+ output, $24.99.',
     ogImage: siteMeta.defaultImage,
     canonicalUrl: `${baseUrl}/`,
-    structuredData: {
+    structuredData: [{
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "LarkSpur Industries",
+  "name": "Larkspur Industries",
   "alternateName": "Larkspur Industries",
   "url": baseUrl,
   "logo": `${baseUrl}/content/logos/larkspur-logo-large-grey.webp`,
-  "description": "LarkSpur Industries is a small hardware design company based in Richmond, Virginia, founded by Isaac Subudhi. We design reliable, affordable electronics for FIRST Robotics Competition teams, including the Marigold-5 USB-C power module.",
+  "description": "Larkspur Industries is a small hardware design company based in Richmond, Virginia, founded by Isaac Subudhi. We design reliable, affordable electronics for FIRST Robotics Competition teams, including the Marigold-5 USB-C power module.",
   "slogan": "Reasonable Hardware. Fair Prices. Open Values.",
   "foundingDate": "2025",
   "foundingLocation": "Richmond, Virginia, USA",
@@ -56,9 +80,32 @@ const pages = {
     "@type": "Person",
     "name": "Isaac Subudhi"
   },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "email": siteMeta.supportEmail,
+      "contactType": "customer support",
+      "areaServed": "US",
+      "availableLanguage": "en"
+    },
+    {
+      "@type": "ContactPoint",
+      "email": siteMeta.salesEmail,
+      "contactType": "sales",
+      "areaServed": "US",
+      "availableLanguage": "en"
+    },
+    {
+      "@type": "ContactPoint",
+      "email": siteMeta.engineeringEmail,
+      "contactType": "technical support",
+      "areaServed": "US",
+      "availableLanguage": "en"
+    }
+  ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "LarkSpur Industries Products",
+    "name": "Larkspur Industries Products",
     "itemListElement": [
       {
         "@type": "Offer",
@@ -72,24 +119,53 @@ const pages = {
     ]
   },
   "sameAs": [
-    "https://github.com/LarkSpur-Industries"
+    "https://github.com/Larkspur-Industries"
   ]
-}
+},
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Larkspur Industries",
+  "url": baseUrl,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Larkspur Industries"
+  }
+}]
   },
 
   'shop': {
-    title: 'Shop | LarkSpur Industries',
-    description: 'Browse and buy LarkSpur Industries hardware for FIRST Robotics Competition. Reliable, affordable electronics including the Marigold-5 USB-C power module.',
-    keywords: 'LarkSpur Industries shop, buy Marigold-5, FRC hardware, FIRST Robotics electronics, USB-C power module',
+    title: 'Shop | Larkspur Industries',
+    description: 'Browse and buy Larkspur Industries hardware for FIRST Robotics Competition. Reliable, affordable electronics including the Marigold-5 USB-C power module.',
+    keywords: 'Larkspur Industries shop, buy Marigold-5, FRC hardware, FIRST Robotics electronics, USB-C power module',
     ogType: 'website',
-    ogTitle: 'Shop - LarkSpur Industries',
+    ogTitle: 'Shop - Larkspur Industries',
     ogDescription: 'Reliable, affordable electronics for FIRST Robotics teams. Buy the Marigold-5 USB-C power module.',
     ogImage: `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Corner.webp`,
     canonicalUrl: `${baseUrl}/shop.html`,
+    breadcrumbs: breadcrumb([
+      { name: 'Home', path: '' },
+      { name: 'Shop', path: 'shop.html' }
+    ]),
+  },
+
+  'docs': {
+    title: 'Documentation | Larkspur Industries',
+    description: 'Documentation, drawings, warranty information, and product resources for Larkspur Industries hardware.',
+    keywords: 'Larkspur Industries documentation, Marigold-5 docs, FRC hardware docs, robotics hardware documentation, warranty',
+    ogType: 'website',
+    ogTitle: 'Documentation - Larkspur Industries',
+    ogDescription: 'Find documentation, drawings, warranty information, and product resources for Larkspur Industries hardware.',
+    ogImage: siteMeta.defaultImage,
+    canonicalUrl: `${baseUrl}/docs.html`,
+    breadcrumbs: breadcrumb([
+      { name: 'Home', path: '' },
+      { name: 'Documentation', path: 'docs.html' }
+    ]),
   },
 
   'marigold-5': {
-    title: 'Marigold-5 USB-C Power Module | LarkSpur Industries',
+    title: 'Marigold-5 USB-C Power Module | Larkspur Industries',
     description: 'Marigold-5: 1-port USB-C power module for FRC robots. 12V input, 1x USB-C 3A+ output, $24.99',
     keywords: 'Marigold-5, FRC power module, USB-C robot power, FIRST Robotics power, 12V to 5V converter, robot USB-C, competition robotics, coprocessor power',
     ogType: 'product',
@@ -100,8 +176,13 @@ const pages = {
     productData: {
       price: '24.99',
       currency: 'USD',
-      availability: 'out of stock'
+      availability: 'in stock'
     },
+    breadcrumbs: breadcrumb([
+      { name: 'Home', path: '' },
+      { name: 'Shop', path: 'shop.html' },
+      { name: 'Marigold-5', path: 'marigold-5.html' }
+    ]),
     structuredData: {
       "@context": "https://schema.org/",
       "@type": "Product",
@@ -114,22 +195,109 @@ const pages = {
       "description": "Compact DC-DC power module engineered for FIRST Robotics Competition. Provides one high-current USB-C port to power co-processors, and peripherals from robot's 12V supply.",
       "sku": "MARIGOLD-5-V1.0",
       "mpn": "MARIGOLD-5",
+      "category": "Robotics power module",
       "brand": {
         "@type": "Brand",
-        "name": "LarkSpur Industries"
+        "name": "Larkspur Industries"
       },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Input Voltage",
+          "value": "6V - 18V"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Output Voltage",
+          "value": "Regulated 5.1V"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Max Current",
+          "value": "10A Total"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Mounting",
+          "value": "4-40 & 6-32"
+        }
+      ],
       "offers": {
         "@type": "Offer",
         "url": `${baseUrl}/marigold-5.html`,
         "priceCurrency": "USD",
         "price": "24.99",
-        "availability": "https://schema.org/OutOfStock",
+        "availability": "https://schema.org/InStock",
         "seller": {
           "@type": "Organization",
-          "name": "LarkSpur Industries"
+          "name": "Larkspur Industries"
         }
       }
     }
+  },
+
+  'locking-cable': {
+    title: 'Marigold-5 Locking Cable | Larkspur Industries',
+    description: 'A screw-locking USB-C cable for Marigold-5, built for reliable robot wiring in high-vibration FRC environments.',
+    keywords: 'Marigold-5 locking cable, locking USB-C cable, FRC USB-C cable, robot wiring, Larkspur Industries',
+    ogType: 'product',
+    ogTitle: 'Marigold-5 Locking Cable',
+    ogDescription: 'A screw-locking USB-C cable for Marigold-5, built for reliable robot wiring in high-vibration FRC environments.',
+    ogImage: `${baseUrl}/docs/cables/img/locking-cable.png`,
+    canonicalUrl: `${baseUrl}/locking-cable.html`,
+    breadcrumbs: breadcrumb([
+      { name: 'Home', path: '' },
+      { name: 'Shop', path: 'shop.html' },
+      { name: 'Marigold-5 Locking Cable', path: 'locking-cable.html' }
+    ]),
+  },
+
+  'docs-marigold-5': {
+    title: 'Marigold-5 Documentation | Larkspur Industries',
+    description: 'Installation, wiring, safety, troubleshooting, and reference documentation for the Marigold-5 USB-C power module.',
+    keywords: 'Marigold-5 documentation, Marigold-5 wiring, FRC power module docs, USB-C power module manual',
+    ogType: 'article',
+    ogTitle: 'Marigold-5 Documentation',
+    ogDescription: 'Installation, wiring, safety, troubleshooting, and reference documentation for the Marigold-5 USB-C power module.',
+    ogImage: `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Corner.webp`,
+    canonicalUrl: `${baseUrl}/docs-marigold-5.html`,
+    breadcrumbs: breadcrumb([
+      { name: 'Home', path: '' },
+      { name: 'Documentation', path: 'docs.html' },
+      { name: 'Marigold-5 Documentation', path: 'docs-marigold-5.html' }
+    ]),
+  },
+
+  'docs-locking-cable': {
+    title: 'Marigold-5 Locking Cable Documentation | Larkspur Industries',
+    description: 'Documentation and product notes for the Marigold-5 screw-locking USB-C cable.',
+    keywords: 'Marigold-5 locking cable docs, locking USB-C cable documentation, FRC cable docs',
+    ogType: 'article',
+    ogTitle: 'Marigold-5 Locking Cable Documentation',
+    ogDescription: 'Documentation and product notes for the Marigold-5 screw-locking USB-C cable.',
+    ogImage: `${baseUrl}/docs/cables/img/locking-cable.png`,
+    canonicalUrl: `${baseUrl}/docs-locking-cable.html`,
+    breadcrumbs: breadcrumb([
+      { name: 'Home', path: '' },
+      { name: 'Documentation', path: 'docs.html' },
+      { name: 'Marigold-5 Locking Cable Documentation', path: 'docs-locking-cable.html' }
+    ]),
+  },
+
+  'docs-warranty': {
+    title: 'Hardware Warranty | Larkspur Industries',
+    description: 'Warranty terms, crash replacement details, right-to-repair policy, and support contacts for Larkspur Industries hardware.',
+    keywords: 'Larkspur Industries warranty, Marigold-5 warranty, robotics hardware warranty, crash replacement',
+    ogType: 'article',
+    ogTitle: 'Hardware Warranty - Larkspur Industries',
+    ogDescription: 'Warranty terms, crash replacement details, right-to-repair policy, and support contacts for Larkspur Industries hardware.',
+    ogImage: siteMeta.defaultImage,
+    canonicalUrl: `${baseUrl}/docs-warranty.html`,
+    breadcrumbs: breadcrumb([
+      { name: 'Home', path: '' },
+      { name: 'Documentation', path: 'docs.html' },
+      { name: 'Hardware Warranty', path: 'docs-warranty.html' }
+    ]),
   }
 };
 
@@ -162,8 +330,6 @@ function generateMetaTags(pageKey) {
     <meta property="og:title" content="${page.ogTitle}">
     <meta property="og:description" content="${page.ogDescription}">
     <meta property="og:image" content="${page.ogImage}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="${siteMeta.siteName}">`;
   
   // Product-specific OG tags
@@ -191,12 +357,24 @@ function generateMetaTags(pageKey) {
     <link rel="canonical" href="${page.canonicalUrl}">`;
   
   // Structured Data
-  if (page.structuredData) {
+  const structuredData = [];
+  if (Array.isArray(page.structuredData)) {
+    structuredData.push(...page.structuredData);
+  } else if (page.structuredData) {
+    structuredData.push(page.structuredData);
+  }
+
+  if (page.breadcrumbs) {
+    structuredData.push(generateBreadcrumbStructuredData(page.breadcrumbs));
+  }
+
+  if (structuredData.length > 0) {
+    const structuredDataPayload = structuredData.length === 1 ? structuredData[0] : structuredData;
     metaTags += `
     
     <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
-    ${JSON.stringify(page.structuredData, null, 2)}
+    ${JSON.stringify(structuredDataPayload, null, 2)}
     <\/script>`;
   }
   

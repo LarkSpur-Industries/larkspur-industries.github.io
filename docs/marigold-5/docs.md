@@ -355,7 +355,7 @@ For technical support, sales inquiries, or feedback:
 
 ### Community Resources
 
-- **GitHub:** [github.com/LarkSpur-Industries](https://github.com/LarkSpur-Industries)
+- **GitHub:** [github.com/Larkspur-Industries](https://github.com/Larkspur-Industries)
 ---
 
 **Document Revision:** V1.2 
