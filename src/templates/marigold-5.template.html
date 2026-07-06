@@ -322,12 +322,20 @@
     /* ── MODAL ──────────────────────────────────────────── */
     var modal   = document.getElementById('imgModal');
     var modalImg = document.getElementById('modalImg');
+    var modalIndex = 0;
+
+    function showModalImage(idx) {
+        modalIndex = (idx + galleryImages.length) % galleryImages.length;
+        modalImg.src = galleryImages[modalIndex].src;
+        modalImg.alt = galleryImages[modalIndex].alt;
+        thumbs.forEach(function (t) {
+            t.classList.toggle('active', parseInt(t.dataset.index) === modalIndex);
+        });
+    }
 
     thumbs.forEach(function (thumb) {
         thumb.addEventListener('click', function () {
-            var idx = parseInt(thumb.dataset.index);
-            modalImg.src = galleryImages[idx].src;
-            modalImg.alt = galleryImages[idx].alt;
+            showModalImage(parseInt(thumb.dataset.index));
             modal.classList.add('open');
             modal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
@@ -336,7 +344,23 @@
 
     document.getElementById('modalClose').addEventListener('click', closeModal);
     modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+    document.addEventListener('keydown', function (e) {
+        if (!modal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') showModalImage(modalIndex - 1);
+        if (e.key === 'ArrowRight') showModalImage(modalIndex + 1);
+    });
+
+    /* Swipe between images inside the modal */
+    var modalTouchStartX = 0;
+    var modalContent = document.querySelector('.modal-content');
+    modalContent.addEventListener('touchstart', function (e) {
+        modalTouchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    modalContent.addEventListener('touchend', function (e) {
+        var diff = modalTouchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 30) { diff > 0 ? showModalImage(modalIndex + 1) : showModalImage(modalIndex - 1); }
+    }, { passive: true });
 
     function closeModal() {
         modal.classList.remove('open');
