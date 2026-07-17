@@ -11,12 +11,17 @@ description: Electrical, protection, USB-C, and mechanical specifications for Ma
 | Input surge voltage | - | - | 22 | V DC |
 | Output voltage | 5.00 | 5.10 | 5.20 | V DC |
 | Output voltage accuracy | - | ±2% | - | - |
-| Continuous output current | - | - | 10 | A |
-| Peak output current | - | - | 12 | A, brief |
+| Recommended continuous output current | 5 | - | 6 | A |
+| Validated continuous output current | - | - | 7 | A |
+| Brief output current | 8 | - | 10 | A (a few seconds only) |
 | Switching frequency | - | 500 | - | kHz |
 | Quiescent current | - | 45 | - | µA |
 | Shutdown current | - | 3 | - | µA |
 | Efficiency at 5A, 12V input | - | ~90% | - | % |
+
+The current ratings apply to the combined load across the USB-C and auxiliary outputs. Use **5–6A** for normal continuous operation. The **7A continuous rating** was validated at **12.3V input**, at standard ambient temperature in still air, with the enclosed module not mounted to aluminum. Actual thermal performance depends on placement, nearby heat sources, mounting, and moving airflow inside the robot.
+
+The USB-C receptacle hardware can carry the full device output current, while its CC resistors advertise 3A to standards-compliant USB-C sinks. Confirm the connected device and cable are suitable for the intended current. Loads of **8–10A are supported for only a few seconds** under standard passive conditions. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling. Active cooling hardware is not included.
 
 ## Protection features
 
@@ -44,8 +49,8 @@ description: Electrical, protection, USB-C, and mechanical specifications for Ma
 
 | Parameter | Specification |
 | --- | --- |
-| Dimensions | 2.52 × 0.87 × 0.67 inches (64 × 22 × 17mm) |
-| Weight | Approximately 45g |
+| Dimensions | 2.52 × 0.87 × 0.67 inches (64 × 22 × 17 mm) |
+| Weight | Approximately 45 g |
 | Case material | Black PETG |
 | Mounting pattern | Two #4-40 threaded inserts at 1.25-inch spacing |
 | Maximum mounting screw length | 0.5 inches |

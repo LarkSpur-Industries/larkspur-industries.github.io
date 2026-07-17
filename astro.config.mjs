@@ -15,7 +15,7 @@ export default defineConfig({
         alt: 'Larkspur Industries',
         replacesTitle: true,
       },
-      favicon: '/favicon.svg',
+      favicon: '/favicon-docs.png',
       customCss: ['./src/styles/docs.css'],
       components: {
         Head: './src/components/DocsHead.astro',

@@ -4,7 +4,7 @@
     --bg: #0a0a0a;
     --card-bg: #111111;
     --text-main: #e0e0e0;
-    --text-muted: #666666;
+    --text-muted: #8a8a8a;
     --accent: #9f7aea;
     --border: #222222;
     --gold: #d69e2e;
@@ -15,6 +15,21 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
+
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 2000;
+    padding: 0.65rem 0.9rem;
+    color: var(--bg);
+    background: var(--highlight);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transform: translateY(-160%);
+}
+
+.skip-link:focus { transform: translateY(0); }
 
 body {
     font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -31,14 +46,13 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url('../content/img/larkspur_flowers.png');
+    background-image: url('../content/img/larkspur_flowers.webp');
     background-size: cover;
     background-position: center;
     opacity: 0.15;
     filter: brightness(0.35) saturate(0.5);
     z-index: 0;
     pointer-events: none;
-    animation: gentleSway 22s ease-in-out infinite;
 }
 
 /* Layer 2: gradient vignette */
@@ -56,13 +70,14 @@ body::after {
     */
 }
 
-@keyframes gentleSway {
-    0%,100% { transform: scale(1.05); }
-    50%     { transform: scale(1.06) rotate(0.1deg); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-    body::before { animation: none; transform: scale(1.05); }
+    html { scroll-behavior: auto; }
+    body::before { transform: scale(1.05); }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 /* Grain overlay */
@@ -138,6 +153,12 @@ body::after {
 }
 
 .nav-links a:hover { color: var(--text-main); }
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
 
 .nav-links a svg { flex-shrink: 0; }
 
@@ -227,7 +248,7 @@ body::after {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.2px;
-    color: #555;
+    color: #8a8a8a;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.4rem;
     margin-bottom: 0.85rem;
@@ -287,7 +308,7 @@ body::after {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    color: #555;
+    color: #8a8a8a;
     margin-bottom: 0.2rem;
 }
 
@@ -365,7 +386,7 @@ a { color: var(--accent); }
 
 .box-list .note {
     font-size: 0.78rem;
-    color: #555;
+    color: #8a8a8a;
 }
 
 .highlight-bar {

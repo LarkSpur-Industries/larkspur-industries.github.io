@@ -3,6 +3,16 @@
 
 const baseUrl = 'https://larkspurindustries.com';
 
+const products = {
+  marigold5: {
+    price: '24.99',
+    currency: 'USD',
+    checkoutUrl: 'https://checkout.square.site/merchant/MLCT3G6R606D6/checkout/K4UYC22H5F7DH7DI7KRWP7BC',
+    availability: 'in stock',
+    currentLabel: '7A Continuous',
+  },
+};
+
 const siteMeta = {
   baseUrl,
   siteName: 'Larkspur Industries',
@@ -40,7 +50,8 @@ const commonMeta = `
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="${siteMeta.themeColor}">
-    <link rel="icon" type="image/webp" href="content/logos/favicon.webp">
+    <link rel="icon" type="image/webp" href="/content/logos/favicon.webp">
+    <script src="/js/site.js" defer><\/script>
     
     <!-- Resource Hints -->
     <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
@@ -49,12 +60,12 @@ const commonMeta = `
 // Page-specific metadata
 const pages = {
   'index': {
-    title: 'Larkspur Industries | FRC Robotics Hardware | Fair Prices. Open Values.',
+    title: 'Larkspur Industries | FRC Robotics Hardware',
     description: 'Larkspur Industries designs reliable, affordable hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module.',
     keywords: 'FIRST robotics, robot power module, USB-C power, Marigold-5, robotics hardware, PhotonVision, FRC, competition robotics, affordable robotics',
     ogType: 'website',
-    ogTitle: 'Larkspur Industries | FRC Robotics Hardware | Fair Prices. Open Values.',
-    ogDescription: 'Hardware for FIRST robotics at reasonable prices. Creator of the Marigold-5 USB-C power module - 12V in, 1x USB-C 3A+ output, $24.99.',
+    ogTitle: 'Larkspur Industries | FRC Robotics Hardware',
+    ogDescription: 'Reliable hardware for FIRST Robotics teams. Creator of the Marigold-5 USB-C power module.',
     ogImage: siteMeta.defaultImage,
     canonicalUrl: `${baseUrl}/`,
     structuredData: [{
@@ -112,7 +123,7 @@ const pages = {
         "itemOffered": {
           "@type": "Product",
           "name": "Marigold-5 USB-C Power Module",
-          "description": "DC-DC power module for FRC co-processors. 6-18V input, regulated 5.1V output, 10A total.",
+          "description": "DC-DC power module for FRC co-processors. 6-18V input, regulated 5.1V output, 7A continuous.",
           "url": `${baseUrl}/marigold-5.html`
         }
       }
@@ -151,17 +162,17 @@ const pages = {
 
   'marigold-5': {
     title: 'Marigold-5 USB-C Power Module | Larkspur Industries',
-    description: 'Marigold-5: 1-port USB-C power module for FRC robots. 12V input, 1x USB-C 3A+ output, $24.99',
+    description: 'Marigold-5 USB-C power module for FRC robots. 6–18V input, regulated 5.1V output, and 7A continuous combined output.',
     keywords: 'Marigold-5, FRC power module, USB-C robot power, FIRST Robotics power, 12V to 5V converter, robot USB-C, competition robotics, coprocessor power',
     ogType: 'product',
     ogTitle: 'Marigold-5 USB-C Power Module for FRC Robots',
-    ogDescription: 'Compact DC-DC power module with 1x high-current USB-C port. Powers co-processors, and peripherals from your robot\'s 12V supply. 10A total, $24.99',
+    ogDescription: `Compact DC-DC power module with 1x high-current USB-C port. Powers co-processors and peripherals from your robot's 12V supply. ${products.marigold5.currentLabel}, $${products.marigold5.price}`,
     ogImage: `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Corner.webp`,
     canonicalUrl: `${baseUrl}/marigold-5.html`,
     productData: {
-      price: '24.99',
+      price: products.marigold5.price,
       currency: 'USD',
-      availability: 'in stock'
+      availability: products.marigold5.availability
     },
     breadcrumbs: breadcrumb([
       { name: 'Home', path: '' },
@@ -177,7 +188,7 @@ const pages = {
         `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Top.webp`,
         `${baseUrl}/docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.webp`
       ],
-      "description": "Compact DC-DC power module engineered for FIRST Robotics Competition. Provides one high-current USB-C port to power co-processors, and peripherals from robot's 12V supply.",
+      "description": "Compact DC-DC power module engineered for FIRST Robotics Competition. Provides a high-current USB-C port and an auxiliary output for co-processors and peripherals.",
       "sku": "MARIGOLD-5-V1.0",
       "mpn": "MARIGOLD-5",
       "category": "Robotics power module",
@@ -198,8 +209,8 @@ const pages = {
         },
         {
           "@type": "PropertyValue",
-          "name": "Max Current",
-          "value": "10A Total"
+          "name": "Output Current",
+          "value": products.marigold5.currentLabel
         },
         {
           "@type": "PropertyValue",
@@ -211,8 +222,9 @@ const pages = {
         "@type": "Offer",
         "url": `${baseUrl}/marigold-5.html`,
         "priceCurrency": "USD",
-        "price": "24.99",
+        "price": products.marigold5.price,
         "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
         "seller": {
           "@type": "Organization",
           "name": "Larkspur Industries"
@@ -237,6 +249,18 @@ const pages = {
     ]),
   },
 
+  '404': {
+    title: 'Page Not Found | Larkspur Industries',
+    description: 'The requested page could not be found.',
+    keywords: '',
+    robots: 'noindex, follow',
+    ogType: 'website',
+    ogTitle: 'Page Not Found | Larkspur Industries',
+    ogDescription: 'The requested page could not be found.',
+    ogImage: siteMeta.defaultImage,
+    canonicalUrl: `${baseUrl}/404.html`,
+  },
+
 };
 
 // Function to generate full meta tags for a page
@@ -255,9 +279,8 @@ function generateMetaTags(pageKey) {
     <title>${page.title}</title>
     <meta name="title" content="${page.title}">
     <meta name="description" content="${page.description}">
-    <meta name="keywords" content="${page.keywords}">
     <meta name="author" content="${siteMeta.author}">
-    <meta name="robots" content="index, follow">`;
+    <meta name="robots" content="${page.robots ?? 'index, follow'}">`;
   
   // Open Graph / Facebook
   metaTags += `
@@ -268,6 +291,7 @@ function generateMetaTags(pageKey) {
     <meta property="og:title" content="${page.ogTitle}">
     <meta property="og:description" content="${page.ogDescription}">
     <meta property="og:image" content="${page.ogImage}">
+    <meta property="og:image:alt" content="${page.ogTitle}">
     <meta property="og:site_name" content="${siteMeta.siteName}">`;
   
   // Product-specific OG tags
@@ -282,11 +306,11 @@ function generateMetaTags(pageKey) {
   metaTags += `
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="${page.canonicalUrl}">
-    <meta property="twitter:title" content="${page.ogTitle}">
-    <meta property="twitter:description" content="${page.ogDescription}">
-    <meta property="twitter:image" content="${page.ogImage}">`;
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${page.ogTitle}">
+    <meta name="twitter:description" content="${page.ogDescription}">
+    <meta name="twitter:image" content="${page.ogImage}">
+    <meta name="twitter:image:alt" content="${page.ogTitle}">`;
   
   // Canonical URL
   metaTags += `
@@ -322,5 +346,6 @@ function generateMetaTags(pageKey) {
 module.exports = {
   generateMetaTags,
   pages,
-  siteMeta
+  products,
+  siteMeta,
 };

@@ -39,7 +39,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: url('/content/img/larkspur_flowers.png') center / cover no-repeat;
+  background: url('/content/img/larkspur_flowers.webp') center / cover no-repeat;
   opacity: 0.045;
   filter: brightness(0.45) saturate(0.55);
 }

@@ -6,7 +6,7 @@ description: Mount, wire, connect, and verify a Marigold-5 power module on an FR
 ## What you'll need
 
 - Marigold-5 module
-- 16–22 AWG red and black wire
+- 16–18 AWG red and black wire for a 15–20A FRC branch circuit
 - Wire strippers
 - 15–20A circuit breaker for the PDH
 - USB-C cable rated for at least 3A
@@ -38,8 +38,10 @@ The input connector is a TBLH10-350-04BK spring-cage terminal block.
 | Parameter | Value |
 | --- | --- |
 | Rated current | 10A (UL), 17.5A (IEC) per contact |
-| Wire gauge | 16–24 AWG (0.2–1.5mm²) |
-| Strip length | 7–8mm |
+| Wire gauge | 16–24 AWG (0.2–1.5 mm²) |
+| Strip length | 7–8 mm |
+
+The terminal block accepts **16–24 AWG** wire. For an FRC robot using the recommended 15–20A branch-circuit breaker, use **16–18 AWG** copper wire. Smaller wire may fit the connector but is not permitted on that breaker range under the current FRC wire-sizing rules.
 
 | Pin | Function | Wire color |
 | --- | --- | --- |
@@ -50,12 +52,12 @@ The input connector is a TBLH10-350-04BK spring-cage terminal block.
 
 ### Wiring procedure
 
-1. Strip exactly **7–8mm** of insulation. Too little insulation removal can prevent contact; too much exposes a fragile conductor.
+1. Remove exactly **7–8 mm** of insulation. A shorter strip length may prevent a secure connection, while a longer strip length leaves exposed conductor.
 2. Press the white push button on the terminal block.
-3. Fully insert red wire into **BATT+** and black wire into **GND**.
+3. Fully insert the red wire into **BATT+** and the black wire into **GND**.
 4. Release the button so the spring clamp secures the wire.
-5. Tug-test both wires.
-6. Install a **15–20A breaker** in the PDH port before connecting battery power.
+5. Gently tug each wire to verify that it is secure.
+6. Install a **15–20A breaker** in the PDH port before connecting battery power. Use 16–18 AWG wire with this breaker range.
 
 ## Connecting devices
 
@@ -84,18 +86,18 @@ Connect a cable rated for at least 3A. If using the locking cable, tighten its r
 
 ### Auxiliary output
 
-The auxiliary output uses a 2.54mm-pitch pin header.
+The auxiliary output uses a pin header with a 2.54 mm pitch.
 
 | Pin | Function |
 | --- | --- |
 | + | 5.1V output |
 | − | Ground |
 
-It can power cooling fans, indicator LEDs, microcontrollers, and compatible 5V network equipment. It shares the **10A total system limit** with the USB-C output.
+The auxiliary output can power cooling fans, indicator LEDs, microcontrollers, and compatible 5V network equipment. Its load counts toward the combined output current. The recommended combined load is **5–6A for continuous operation**, with a **7A continuous maximum**. Limit **8–10A loads to a few seconds** unless adequate user-supplied active heatsinking and cooling are installed.
 
 ## Power on and verify
 
-1. Turn on robot main power.
+1. Turn on the robot's main power.
 2. Confirm that the **STATUS LED is solid orange**.
 3. Confirm that the connected co-processor boots normally.
 4. Optionally measure **5.1V ± 0.1V** at the auxiliary output with a multimeter.

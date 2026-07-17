@@ -10,12 +10,12 @@
             border-bottom: 1px solid var(--border);
             margin-bottom: 1.75rem;
             font-size: 0.75rem;
-            color: #555;
+            color: #8a8a8a;
             display: flex;
             align-items: center;
             gap: 0.4rem;
         }
-        .breadcrumb a { color: #555; text-decoration: none; transition: color 0.15s; }
+        .breadcrumb a { color: #8a8a8a; text-decoration: none; transition: color 0.15s; }
         .breadcrumb a:hover { color: #aaa; }
         .breadcrumb .sep { color: #2a2a2a; }
         .breadcrumb .current { color: #999; }
@@ -28,7 +28,7 @@
             margin-bottom: 1.5rem;
         }
         .product-label {
-            font-size: 0.7rem; color: #555; text-transform: uppercase;
+            font-size: 0.7rem; color: #8a8a8a; text-transform: uppercase;
             letter-spacing: 1.2px; margin-bottom: 0.25rem; font-weight: 500;
         }
         .product-title {
@@ -37,7 +37,7 @@
         .coming-soon-badge {
             display: inline-block;
             font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 1.3px; color: #555;
+            letter-spacing: 1.3px; color: #8a8a8a;
             border: 1px solid #2a2a2a;
             padding: 0.2rem 0.6rem;
             border-radius: var(--radius);
@@ -56,39 +56,23 @@
             opacity: 0.55;
         }
         .product-img-wrap img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
             max-height: 180px;
             object-fit: contain;
         }
     </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div id="grain"></div>
 
 <!-- NAV -->
-<div class="site-nav-wrap">
-    <nav class="site-nav">
-        <a href="index.html">
-            <img src="content/logos/larkspur-logo-large-grey.webp" alt="Larkspur Industries" class="nav-logo">
-        </a>
-        <div class="nav-links">
-            <a href="/docs/" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Docs
-            </a>
-            <a href="https://github.com/Larkspur-Industries" target="_blank" rel="noopener" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub
-            </a>
-            <a href="mailto:larkspur.industries.official@gmail.com" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Contact
-            </a>
-        </div>
-        <a href="shop.html" class="nav-cta">Shop</a>
-    </nav>
-</div>
+{{SITE_NAV}}
 
 <div class="container">
+<main id="main-content">
 
     <div class="breadcrumb fade-in">
         <a href="index.html">Home</a>
@@ -104,7 +88,7 @@
         <div class="coming-soon-badge">Coming Soon</div>
 
         <div class="product-img-wrap">
-            <img src="docs/cables/img/locking-cable.png" alt="Marigold-5 Locking Cable" loading="eager">
+            <img src="docs/cables/img/locking-cable.webp" alt="Marigold-5 Locking Cable" width="1167" height="1169" loading="eager" decoding="async">
         </div>
 
         <p style="font-size:0.9rem;color:#bbb;line-height:1.7;margin-bottom:1.5rem;">
@@ -143,24 +127,11 @@
         <a href="shop.html" class="btn btn-block">← Back to Shop</a>
     </div>
 
-    <footer class="footer">
-        <a href="/docs/">Docs</a>
-        <a href="https://github.com/Larkspur-Industries" target="_blank" rel="noopener">GitHub</a>
-        <a href="/docs/warranty/">Warranty</a>
-        <a href="mailto:larkspur.industries.official@gmail.com">Contact</a>
-        <span class="footer-copy">© 2026 Larkspur Industries</span>
-    </footer>
+</main>
+
+    <!-- FOOTER -->
+{{SITE_FOOTER}}
 </div>
 
-<script>
-    var navWrap = document.querySelector('.site-nav-wrap');
-    var lastY = 0;
-    window.addEventListener('scroll', function () {
-        var y = window.scrollY;
-        navWrap.style.transform = (y > lastY && y > 80) ? 'translateY(-120%)' : 'translateY(0)';
-        navWrap.style.transition = 'transform 0.25s ease';
-        lastY = y;
-    }, { passive: true });
-</script>
 </body>
 </html>

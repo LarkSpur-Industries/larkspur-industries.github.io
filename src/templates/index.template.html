@@ -53,6 +53,7 @@
         }
         .hero-img img {
             width: 100%;
+            height: auto;
             max-width: 340px;
             object-fit: contain;
             cursor: pointer;
@@ -90,22 +91,42 @@
             display: block;
             border-radius: 4px;
         }
-        .carousel-dots {
+        .carousel-controls {
             padding: 0.5rem 0.75rem 0.75rem;
             display: flex;
             justify-content: center;
-            gap: 0.45rem;
             align-items: center;
+            gap: 0.2rem;
         }
+        .carousel-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.1rem;
+        }
+        .carousel-control,
         .carousel-dot {
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: 0;
+            color: #aaa;
+            background: transparent;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        .carousel-control:hover { color: #fff; background: #1c1c1c; }
+        .carousel-dot::before {
+            content: '';
+            width: 6px;
             height: 6px;
             border-radius: 3px;
-            cursor: pointer;
-            background: #333;
+            background: #777;
             transition: background 0.2s, width 0.2s;
-            width: 6px;
         }
-        .carousel-dot.active {
+        .carousel-dot[aria-current='true']::before {
             background: var(--accent);
             width: 18px;
         }
@@ -116,7 +137,7 @@
         }
         .featured-label {
             font-size: 0.72rem;
-            color: #666;
+            color: #8a8a8a;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 0.25rem;
@@ -137,7 +158,7 @@
         .featured-price .price-note {
             font-size: 0.8rem;
             font-weight: 400;
-            color: #666;
+            color: #8a8a8a;
             margin-left: 0.3rem;
         }
         .featured-desc {
@@ -168,7 +189,7 @@
         .section-header h2 {
             font-size: 0.72rem;
             font-weight: 700;
-            color: #555;
+            color: #8a8a8a;
             text-transform: uppercase;
             letter-spacing: 1.3px;
         }
@@ -213,7 +234,7 @@
         }
         .product-card-tagline {
             font-size: 0.78rem;
-            color: #555;
+            color: #8a8a8a;
             margin-bottom: 0.5rem;
             line-height: 1.4;
         }
@@ -222,7 +243,7 @@
             font-weight: 600;
             color: var(--text-main);
         }
-        .product-card-price.coming-soon { color: #3a3a3a; }
+        .product-card-price.coming-soon { color: #999; }
 
         /* ── ABOUT ─────────────────────────────────────────── */
         .about-strip {
@@ -272,33 +293,14 @@
     </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div id="grain"></div>
 
 <!-- NAV -->
-<div class="site-nav-wrap">
-    <nav class="site-nav">
-        <a href="index.html">
-            <img src="content/logos/larkspur-logo-large-grey.webp" alt="Larkspur Industries" class="nav-logo">
-        </a>
-        <div class="nav-links">
-            <a href="/docs/" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Docs
-            </a>
-            <a href="https://github.com/Larkspur-Industries" target="_blank" rel="noopener" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub
-            </a>
-            <a href="mailto:larkspur.industries.official@gmail.com" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Contact
-            </a>
-        </div>
-        <a href="shop.html" class="nav-cta">Shop</a>
-    </nav>
-</div>
+{{SITE_NAV}}
 
 <div class="container">
+<main id="main-content">
 
     <!-- HERO -->
     <div class="hero fade-in">
@@ -306,7 +308,7 @@
             <div>
                 <h1 class="hero-headline">
                     Hardware that keeps<br>
-                    your robot <span class="rotating-word" id="rotatingWord">running.</span>
+                    your robot <span class="rotating-word">running.</span>
                 </h1>
                 <p class="hero-sub">
                     Affordable, reliable electronics for FIRST Robotics teams. Designed to handle the pressure of competition and hardware swaps in minutes between matches.
@@ -318,7 +320,7 @@
             </div>
             <div class="hero-img">
                 <a href="marigold-5.html">
-                    <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp" alt="Marigold-5">
+                    <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp" alt="Marigold-5 power module" width="975" height="604">
                 </a>
             </div>
         </div>
@@ -329,19 +331,24 @@
         <div class="featured-inner">
             <div class="featured-image-col">
                 <a href="marigold-5.html" class="featured-carousel-wrap" id="featuredCarouselWrap">
-                    <img id="featuredImg" src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp" alt="Marigold-5">
+                    <img id="featuredImg" src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp" alt="Marigold-5 USB-C output side" width="804" height="636">
                 </a>
-                <div class="carousel-dots" id="carouselDots"></div>
+                <div class="carousel-controls" aria-label="Marigold-5 image carousel controls">
+                    <button class="carousel-control" id="carouselPrev" type="button" aria-label="Previous image" title="Previous image">&#8249;</button>
+                    <div class="carousel-dots" id="carouselDots" role="group" aria-label="Choose image"></div>
+                    <button class="carousel-control" id="carouselNext" type="button" aria-label="Next image" title="Next image">&#8250;</button>
+                    <button class="carousel-control" id="carouselToggle" type="button" aria-label="Pause image rotation" title="Pause image rotation">&#8545;</button>
+                </div>
             </div>
             <div class="featured-info-col">
                 <div class="featured-label">DC-DC USB-C Power Module</div>
                 <div class="featured-name">MARIGOLD-5</div>
-                <div class="featured-price">$24.99 <span class="price-note">USD</span></div>
+                <div class="featured-price">${{MARIGOLD_PRICE}} <span class="price-note">{{MARIGOLD_CURRENCY}}</span></div>
                 <p class="featured-desc">
-                    Keeps your co-processor alive during battery brownouts. Operates reliably down to 6V, with 10A of headroom for a vision system and peripherals simultaneously.
+                    Keeps your co-processor alive during battery brownouts. Operates reliably down to 6V, with 7A continuous output for a vision system and peripherals simultaneously.
                 </p>
                 <div class="featured-btns">
-                    <a href="https://checkout.square.site/merchant/MLCT3G6R606D6/checkout/K4UYC22H5F7DH7DI7KRWP7BC" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Buy Now - $24.99 USD</a>
+                    <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Buy Now - ${{MARIGOLD_PRICE}} {{MARIGOLD_CURRENCY}}</a>
                     <a href="marigold-5.html" class="btn btn-block">Product Page</a>
                 </div>
             </div>
@@ -357,17 +364,17 @@
         <div class="products-grid">
             <a href="marigold-5.html" class="product-card">
                 <div class="product-card-img">
-                    <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.png" alt="Marigold-5" loading="lazy">
+                    <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.webp" alt="Marigold-5 top view" width="3504" height="2478" loading="lazy" decoding="async">
                 </div>
                 <div class="product-card-info">
                     <div class="product-card-name">MARIGOLD-5</div>
                     <div class="product-card-tagline">USB-C power module for FRC co-processors</div>
-                    <div class="product-card-price">$24.99 USD</div>
+                    <div class="product-card-price">${{MARIGOLD_PRICE}} {{MARIGOLD_CURRENCY}}</div>
                 </div>
             </a>
             <div class="product-card unavailable">
                 <div class="product-card-img">
-                    <img src="docs/cables/img/locking-cable.png" alt="Locking Cable" loading="lazy">
+                    <img src="docs/cables/img/locking-cable.webp" alt="Marigold-5 locking USB-C cable" width="1167" height="1169" loading="lazy" decoding="async">
                 </div>
                 <div class="product-card-info">
                     <div class="product-card-name">LOCKING CABLE</div>
@@ -385,32 +392,14 @@
         <p>Our goal is to deliver quality electronics at fair prices for competitive robotics teams and anyone who needs reliable power solutions.</p>
     </div>
 
+</main>
+
     <!-- FOOTER -->
-    <footer class="footer">
-        <a href="/docs/">Docs</a>
-        <a href="https://github.com/Larkspur-Industries" target="_blank" rel="noopener">GitHub</a>
-        <a href="/docs/warranty/">Warranty</a>
-        <a href="mailto:larkspur.industries.official@gmail.com">Contact</a>
-        <span class="footer-copy">© 2026 Larkspur Industries</span>
-    </footer>
+{{SITE_FOOTER}}
 
 </div>
 
 <script>
-    /* ── ROTATING HEADLINE ─────────────────────────────── */
-    var words = ['running.', 'performing.', 'reliable.', 'powered.', 'protected.'];
-    var wordEl = document.getElementById('rotatingWord');
-    var wordIdx = 0;
-
-    setInterval(function () {
-        wordEl.classList.add('hidden');
-        setTimeout(function () {
-            wordIdx = (wordIdx + 1) % words.length;
-            wordEl.textContent = words[wordIdx];
-            wordEl.classList.remove('hidden');
-        }, 380);
-    }, 3500);
-
     /* ── FEATURED CAROUSEL ─────────────────────────────── */
     var featImages = [
         { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp',      alt: 'Marigold-5 USB-C output side' },
@@ -421,21 +410,29 @@
 
     var featImg   = document.getElementById('featuredImg');
     var dotsEl    = document.getElementById('carouselDots');
+    var prevBtn   = document.getElementById('carouselPrev');
+    var nextBtn   = document.getElementById('carouselNext');
+    var toggleBtn = document.getElementById('carouselToggle');
+    var carousel  = document.querySelector('.featured-image-col');
     var featIdx   = 0;
     var touchStartX = 0;
     var timer;
+    var isPlaying = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* Build dots */
     featImages.forEach(function (_, i) {
-        var d = document.createElement('div');
-        d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-        d.addEventListener('click', function () { goTo(i); resetTimer(); });
+        var d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'carousel-dot';
+        d.setAttribute('aria-label', 'Show image ' + (i + 1) + ' of ' + featImages.length);
+        d.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+        d.addEventListener('click', function () { stopRotation(); goTo(i); });
         dotsEl.appendChild(d);
     });
 
     function updateDots() {
         document.querySelectorAll('.carousel-dot').forEach(function (d, i) {
-            d.classList.toggle('active', i === featIdx);
+            d.setAttribute('aria-current', i === featIdx ? 'true' : 'false');
         });
     }
 
@@ -455,8 +452,32 @@
 
     featImg.style.transition = 'opacity 0.2s ease';
 
-    function resetTimer() { clearInterval(timer); timer = setInterval(next, 5000); }
-    resetTimer();
+    function updateToggle() {
+        toggleBtn.textContent = isPlaying ? '\u2161' : '\u25B6';
+        toggleBtn.setAttribute('aria-label', isPlaying ? 'Pause image rotation' : 'Start image rotation');
+        toggleBtn.title = toggleBtn.getAttribute('aria-label');
+    }
+
+    function startRotation() {
+        isPlaying = true;
+        clearInterval(timer);
+        timer = setInterval(next, 5000);
+        updateToggle();
+    }
+
+    function stopRotation() {
+        isPlaying = false;
+        clearInterval(timer);
+        updateToggle();
+    }
+
+    prevBtn.addEventListener('click', function () { stopRotation(); prev(); });
+    nextBtn.addEventListener('click', function () { stopRotation(); next(); });
+    toggleBtn.addEventListener('click', function () { isPlaying ? stopRotation() : startRotation(); });
+    carousel.addEventListener('mouseenter', function () { if (isPlaying) clearInterval(timer); });
+    carousel.addEventListener('mouseleave', function () { if (isPlaying) startRotation(); });
+    carousel.addEventListener('focusin', stopRotation);
+    if (isPlaying) startRotation(); else updateToggle();
 
     /* Touch swipe */
     featImg.parentElement.addEventListener('touchstart', function (e) {
@@ -464,23 +485,14 @@
     }, { passive: true });
     featImg.parentElement.addEventListener('touchend', function (e) {
         var diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 30) { diff > 0 ? next() : prev(); resetTimer(); }
+        if (Math.abs(diff) > 30) { stopRotation(); diff > 0 ? next() : prev(); }
     }, { passive: true });
 
     /* Pause on hidden */
     document.addEventListener('visibilitychange', function () {
-        if (document.hidden) clearInterval(timer); else resetTimer();
+        if (document.hidden) clearInterval(timer); else if (isPlaying) startRotation();
     });
 
-    /* ── STICKY NAV HIDE ON SCROLL ─────────────────────── */
-    var navWrap = document.querySelector('.site-nav-wrap');
-    var lastY = 0;
-    window.addEventListener('scroll', function () {
-        var y = window.scrollY;
-        navWrap.style.transform = (y > lastY && y > 80) ? 'translateY(-120%)' : 'translateY(0)';
-        navWrap.style.transition = 'transform 0.25s ease';
-        lastY = y;
-    }, { passive: true });
 </script>
 </body>
 </html>

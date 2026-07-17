@@ -14,9 +14,9 @@ Larkspur Industries provides a manufacturing warranty on Marigold-5. Review the 
 - **Engineering questions:** [engineering@larkspurindustries.com](mailto:engineering@larkspurindustries.com)
 - **GitHub:** [github.com/Larkspur-Industries](https://github.com/Larkspur-Industries)
 
-When requesting technical help, include your wiring configuration, connected devices, measured input/output voltages, and clear photos when possible.
+When requesting technical help, include your wiring configuration, a list of connected devices, measured input and output voltages, and clear photos when possible.
 
 ---
 
-**Document revision:** V1.2  
-**Last reviewed:** July 6, 2026
+**Document revision:** V1.3<br>
+**Last reviewed:** July 11, 2026

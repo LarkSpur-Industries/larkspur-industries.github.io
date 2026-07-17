@@ -41,6 +41,10 @@ We will provide a code for **15% off one replacement unit**. Email a photo, a de
 Students are encouraged to inspect the PCB and learn how their hardware works. The warranty is only affected if the device is damaged while being opened, inspected, or modified.
 :::
 
+:::danger[Disconnect power before opening]
+Never open a Larkspur Industries product while it is operating or connected to power. Energized components can cause short circuits, equipment damage, and burns. Disconnect all power and allow the product to cool before opening the enclosure or touching internal components.
+:::
+
 ## Support contacts
 
 - **Support:** [support@larkspurindustries.com](mailto:support@larkspurindustries.com)

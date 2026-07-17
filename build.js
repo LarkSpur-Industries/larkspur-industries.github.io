@@ -1,9 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const { generateMetaTags, pages, siteMeta } = require('./meta-config.js');
+const { generateMetaTags, pages, products, siteMeta } = require('./meta-config.js');
 
 const OUTPUT_DIR = path.resolve('dist');
-const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
 const PRODUCT_PAGES = {
   'marigold-5': {
@@ -44,7 +43,7 @@ const LEGACY_ANCHOR_REDIRECTS = {
   },
 };
 
-const STATIC_DIRECTORIES = ['css', 'content', 'docs'];
+const STATIC_DIRECTORIES = ['css', 'content', 'docs', 'js'];
 const STATIC_FILES = ['CNAME', 'robots.txt'];
 const generatedFiles = [];
 
@@ -90,6 +89,12 @@ function buildTemplatePage(templatePath, outputPath, metaKey, replacements = {})
   const template = readFile(templatePath);
   const html = renderTemplate(template, {
     META_TAGS: generateMetaTags(metaKey),
+    SITE_NAV: readFile('src/templates/partials/site-nav.html'),
+    SITE_FOOTER: readFile('src/templates/partials/site-footer.html'),
+    MARIGOLD_PRICE: products.marigold5.price,
+    MARIGOLD_CURRENCY: products.marigold5.currency,
+    MARIGOLD_CHECKOUT_URL: products.marigold5.checkoutUrl,
+    MARIGOLD_CURRENT: products.marigold5.currentLabel,
     ...replacements,
   });
   writeHtml(outputPath, html);
@@ -145,18 +150,15 @@ function routeForHtml(filePath) {
 }
 
 function generateSitemap() {
-  const excluded = new Set([...Object.keys(LEGACY_REDIRECTS), 'docs/404.html']);
+  const excluded = new Set([...Object.keys(LEGACY_REDIRECTS), '404.html', 'docs/404.html']);
   const pagesToIndex = collectHtmlFiles(OUTPUT_DIR)
     .filter((filePath) => !excluded.has(filePath))
     .sort((a, b) => routeForHtml(a).localeCompare(routeForHtml(b)));
 
   const entries = pagesToIndex.map((filePath) => {
     const route = routeForHtml(filePath);
-    const priority = route === '/' ? '1.0' : route.startsWith('/docs/') ? '0.7' : '0.8';
     return `  <url>
     <loc>${siteMeta.baseUrl}${route}</loc>
-    <lastmod>${BUILD_DATE}</lastmod>
-    <priority>${priority}</priority>
   </url>`;
   }).join('\n');
 
@@ -177,6 +179,7 @@ function build() {
 
   buildTemplatePage('src/templates/index.template.html', 'index.html', 'index');
   buildTemplatePage('src/templates/shop.template.html', 'shop.html', 'shop');
+  buildTemplatePage('src/templates/404.template.html', '404.html', '404');
 
   for (const [productKey, config] of Object.entries(PRODUCT_PAGES)) {
     buildTemplatePage(config.template, config.output, productKey, { PRODUCT_KEY: productKey });

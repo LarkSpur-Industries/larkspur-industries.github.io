@@ -16,7 +16,7 @@
         }
         .product-label {
             font-size: 0.7rem;
-            color: #555;
+            color: #8a8a8a;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             margin-bottom: 0.25rem;
@@ -49,7 +49,7 @@
             border-radius: 6px;
             overflow: hidden;
         }
-        .gallery-thumb:hover  { border-color: #555; }
+        .gallery-thumb:hover  { border-color: #8a8a8a; }
         .gallery-thumb.active { border-color: var(--accent); }
         .gallery-thumb img {
             width: 100%;
@@ -74,7 +74,7 @@
         .price-big .price-currency {
             font-size: 0.85rem;
             font-weight: 400;
-            color: #666;
+            color: #8a8a8a;
             margin-left: 0.25rem;
         }
 
@@ -102,7 +102,7 @@
             bottom: 10px;
             right: 10px;
             font-size: 0.7rem;
-            color: #555;
+            color: #8a8a8a;
             pointer-events: none;
         }
 
@@ -150,6 +150,21 @@
             transition: color 0.15s;
         }
         .modal-close:hover { color: var(--accent); }
+        .modal-nav {
+            position: fixed;
+            top: 50%;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(25,25,25,0.9);
+            font-size: 1.75rem;
+            cursor: pointer;
+        }
+        .modal-prev { left: 1rem; }
+        .modal-next { right: 1rem; }
+        .modal-nav:hover { color: var(--accent); }
 
         /* ── RESPONSIVE ─────────────────────────────────────── */
         @media (max-width: 768px) {
@@ -168,41 +183,24 @@
     </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div id="grain"></div>
 
 <!-- IMAGE MODAL -->
-<div id="imgModal" class="modal" aria-hidden="true">
+<div id="imgModal" class="modal" role="dialog" aria-modal="true" aria-label="Marigold-5 image gallery" hidden>
     <div class="modal-content">
         <button class="modal-close" id="modalClose" aria-label="Close">&#10005;</button>
         <img class="modal-img" id="modalImg" alt="">
     </div>
+    <button class="modal-nav modal-prev" id="modalPrev" type="button" aria-label="Previous image">&#8249;</button>
+    <button class="modal-nav modal-next" id="modalNext" type="button" aria-label="Next image">&#8250;</button>
 </div>
 
 <!-- NAV -->
-<div class="site-nav-wrap">
-    <nav class="site-nav">
-        <a href="index.html">
-            <img src="content/logos/larkspur-logo-large-grey.webp" alt="Larkspur Industries" class="nav-logo">
-        </a>
-        <div class="nav-links">
-            <a href="/docs/" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Docs
-            </a>
-            <a href="https://github.com/Larkspur-Industries" target="_blank" rel="noopener" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub
-            </a>
-            <a href="mailto:larkspur.industries.official@gmail.com" class="nav-label">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Contact
-            </a>
-        </div>
-        <a href="shop.html" class="nav-cta">Shop</a>
-    </nav>
-</div>
+{{SITE_NAV}}
 
 <div class="container">
+<main id="main-content">
 
     <!-- PRODUCT -->
     <div class="product-wrap fade-in">
@@ -217,18 +215,18 @@
 
         <!-- GALLERY -->
         <div class="gallery-grid" id="galleryGrid">
-            <div class="gallery-thumb active" data-index="0">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp" alt="Marigold-5 USB-C output side" loading="eager" decoding="async">
-            </div>
-            <div class="gallery-thumb" data-index="1">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerTerminal.webp" alt="Marigold-5 terminal input side" loading="lazy" decoding="async">
-            </div>
-            <div class="gallery-thumb" data-index="2">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp" alt="Marigold-5 disassembled, case and PCB" loading="lazy" decoding="async">
-            </div>
-            <div class="gallery-thumb" data-index="3">
-                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-PCBTop.webp" alt="Marigold-5 bare PCB top view" loading="lazy" decoding="async">
-            </div>
+            <button class="gallery-thumb active" type="button" data-index="0" aria-label="Open larger image: Marigold-5 USB-C output side" aria-pressed="true">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp" alt="" width="804" height="636" loading="eager" decoding="async">
+            </button>
+            <button class="gallery-thumb" type="button" data-index="1" aria-label="Open larger image: Marigold-5 terminal input side" aria-pressed="false">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerTerminal.webp" alt="" width="830" height="533" loading="lazy" decoding="async">
+            </button>
+            <button class="gallery-thumb" type="button" data-index="2" aria-label="Open larger image: Marigold-5 disassembled, case and PCB" aria-pressed="false">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp" alt="" width="975" height="604" loading="lazy" decoding="async">
+            </button>
+            <button class="gallery-thumb" type="button" data-index="3" aria-label="Open larger image: Marigold-5 bare PCB top view" aria-pressed="false">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-PCBTop.webp" alt="" width="962" height="276" loading="lazy" decoding="async">
+            </button>
         </div>
 
         <!-- DESCRIPTION -->
@@ -238,8 +236,8 @@
 
         <!-- PRICE + CTA -->
         <div class="price-row">
-            <span class="price-big">$24.99<span class="price-currency">USD</span></span>
-            <a href="https://checkout.square.site/merchant/MLCT3G6R606D6/checkout/K4UYC22H5F7DH7DI7KRWP7BC" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Buy Now</a>
+            <span class="price-big">${{MARIGOLD_PRICE}}<span class="price-currency">{{MARIGOLD_CURRENCY}}</span></span>
+            <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Buy Now</a>
         </div>
 
         <hr style="border:none;border-top:1px solid var(--border);margin:0 0 1.5rem;">
@@ -249,7 +247,7 @@
         <div class="spec-grid" style="margin-bottom:1.75rem;">
             <div class="spec-cell"><div class="spec-key">Input Voltage</div><div class="spec-val">6V – 18V</div></div>
             <div class="spec-cell"><div class="spec-key">Output Voltage</div><div class="spec-val">5.1V Regulated</div></div>
-            <div class="spec-cell"><div class="spec-key">Max Current</div><div class="spec-val">10A Total</div></div>
+            <div class="spec-cell"><div class="spec-key">Output Current</div><div class="spec-val">{{MARIGOLD_CURRENT}}</div></div>
             <div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">4-40 &amp; 6-32</div></div>
         </div>
 
@@ -259,14 +257,14 @@
             <div class="highlight-bar">
                 <div class="highlight-bar-line"></div>
                 <div>
-                    <div class="highlight-bar-title">Brownout-Proof Power</div>
-                    <div class="highlight-bar-body">FRC batteries sag to ~7V mid-match. Most adapters cut out at 10V. Marigold-5 stays stable all the way down to 6V, keeping your co-processor alive when it matters most.</div>
+                    <div class="highlight-bar-title">Brownout-Resilient Power</div>
+                    <div class="highlight-bar-body">Many 12V adapters are not designed for deep battery sag. Marigold-5 is validated down to 6V to keep your co-processor powered through demanding maneuvers.</div>
                 </div>
             </div>
             <div class="highlight-bar">
                 <div class="highlight-bar-line"></div>
                 <div>
-                    <div class="highlight-bar-title">10A of Headroom</div>
+                    <div class="highlight-bar-title">7A Continuous Output</div>
                     <div class="highlight-bar-body">Power a vision co-processor and additional peripherals simultaneously. No compromise between devices.</div>
                 </div>
             </div>
@@ -291,14 +289,10 @@
         <a href="/docs/marigold-5/" class="btn btn-block">Read the Docs</a>
     </div>
 
+</main>
+
     <!-- FOOTER -->
-    <footer class="footer">
-        <a href="/docs/">Docs</a>
-        <a href="https://github.com/Larkspur-Industries" target="_blank" rel="noopener">GitHub</a>
-        <a href="/docs/warranty/">Warranty</a>
-        <a href="mailto:larkspur.industries.official@gmail.com">Contact</a>
-        <span class="footer-copy">© 2026 Larkspur Industries</span>
-    </footer>
+{{SITE_FOOTER}}
 
 </div>
 
@@ -312,43 +306,54 @@
     ];
     var thumbs = document.querySelectorAll('.gallery-thumb');
 
-    thumbs.forEach(function (thumb) {
-        thumb.addEventListener('click', function () {
-            thumbs.forEach(function (t) { t.classList.remove('active'); });
-            thumb.classList.add('active');
-        });
-    });
-
     /* ── MODAL ──────────────────────────────────────────── */
     var modal   = document.getElementById('imgModal');
     var modalImg = document.getElementById('modalImg');
+    var modalPrev = document.getElementById('modalPrev');
+    var modalNext = document.getElementById('modalNext');
     var modalIndex = 0;
+    var previousFocus = null;
 
     function showModalImage(idx) {
         modalIndex = (idx + galleryImages.length) % galleryImages.length;
         modalImg.src = galleryImages[modalIndex].src;
         modalImg.alt = galleryImages[modalIndex].alt;
         thumbs.forEach(function (t) {
-            t.classList.toggle('active', parseInt(t.dataset.index) === modalIndex);
+            var selected = parseInt(t.dataset.index) === modalIndex;
+            t.classList.toggle('active', selected);
+            t.setAttribute('aria-pressed', selected ? 'true' : 'false');
         });
     }
 
     thumbs.forEach(function (thumb) {
         thumb.addEventListener('click', function () {
             showModalImage(parseInt(thumb.dataset.index));
+            previousFocus = thumb;
+            modal.hidden = false;
             modal.classList.add('open');
-            modal.setAttribute('aria-hidden', 'false');
+            Array.from(document.body.children).forEach(function (element) {
+                if (element !== modal) element.inert = true;
+            });
             document.body.style.overflow = 'hidden';
+            document.getElementById('modalClose').focus();
         });
     });
 
     document.getElementById('modalClose').addEventListener('click', closeModal);
+    modalPrev.addEventListener('click', function () { showModalImage(modalIndex - 1); });
+    modalNext.addEventListener('click', function () { showModalImage(modalIndex + 1); });
     modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', function (e) {
         if (!modal.classList.contains('open')) return;
         if (e.key === 'Escape') closeModal();
         if (e.key === 'ArrowLeft') showModalImage(modalIndex - 1);
         if (e.key === 'ArrowRight') showModalImage(modalIndex + 1);
+        if (e.key === 'Tab') {
+            var controls = [document.getElementById('modalClose'), modalPrev, modalNext];
+            var index = controls.indexOf(document.activeElement);
+            e.preventDefault();
+            controls[(index + (e.shiftKey ? -1 : 1) + controls.length) % controls.length].focus();
+        }
     });
 
     /* Swipe between images inside the modal */
@@ -364,8 +369,12 @@
 
     function closeModal() {
         modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
+        modal.hidden = true;
+        Array.from(document.body.children).forEach(function (element) {
+            if (element !== modal) element.inert = false;
+        });
         document.body.style.overflow = '';
+        if (previousFocus) previousFocus.focus();
     }
 
     /* ── 3D MODEL ───────────────────────────────────────── */
@@ -403,15 +412,6 @@
         }
     });
 
-    /* ── STICKY NAV ─────────────────────────────────────── */
-    var navWrap = document.querySelector('.site-nav-wrap');
-    var lastY = 0;
-    window.addEventListener('scroll', function () {
-        var y = window.scrollY;
-        navWrap.style.transform = (y > lastY && y > 80) ? 'translateY(-120%)' : 'translateY(0)';
-        navWrap.style.transition = 'transform 0.25s ease';
-        lastY = y;
-    }, { passive: true });
 </script>
 </body>
 </html>
