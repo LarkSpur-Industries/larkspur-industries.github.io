@@ -6,8 +6,8 @@ description: Mount, wire, connect, and verify a Marigold-5 power module on an FR
 ## What you'll need
 
 - Marigold-5 module
-- 16–18 AWG red and black wire for a 15–20A FRC branch circuit
-- Wire strippers
+- Wire strippers & cutters
+- 16–18 AWG red and black wire
 - 15–20A circuit breaker for the PDH
 - USB-C cable rated for at least 3A
 - #4-40 mounting hardware or zip ties
@@ -19,13 +19,11 @@ description: Mount, wire, connect, and verify a Marigold-5 power module on an FR
 
 ### Screw mounting
 
-- Use the two #4-40 threaded inserts with 1.25-inch spacing.
-- The pattern is compatible with standard 1×2-inch FRC aluminum extrusion.
-- Use #4-40 screws no longer than 0.5 inches.
+- Recommended for optimal heaksinking.
+- Use the two #4-40 threaded inserts with 1.25-inch  center spacing.
 
 ### Zip-tie mounting
-
-- Route zip ties through the four integrated points around the case perimeter.
+- Route zip ties on the four points around the case perimeter.
 - Inspect the ties regularly because they can loosen over time.
 
 ## Wiring input power
@@ -33,15 +31,12 @@ description: Mount, wire, connect, and verify a Marigold-5 power module on an FR
 ![Marigold-5 wiring diagram](/docs/marigold-5/img/Marigold-5_V1.0-Wiring.webp)
 *Marigold-5 wiring diagram*
 
-The input connector is a TBLH10-350-04BK spring-cage terminal block.
-
 | Parameter | Value |
 | --- | --- |
-| Rated current | 10A (UL), 17.5A (IEC) per contact |
-| Wire gauge | 16–24 AWG (0.2–1.5 mm²) |
-| Strip length | 7–8 mm |
+| Wire gauge | 16–24 AWG|
+| Strip length | 7-8 mm |
 
-The terminal block accepts **16–24 AWG** wire. For an FRC robot using the recommended 15–20A branch-circuit breaker, use **16–18 AWG** copper wire. Smaller wire may fit the connector but is not permitted on that breaker range under the current FRC wire-sizing rules.
+The input terminal block accepts 16–24 AWG wire. When using the recommended 15–20A branch-circuit breaker, use 16–18 AWG copper wire. Smaller wire may fit the connector but is not recommended.
 
 | Pin | Function | Wire color |
 | --- | --- | --- |
@@ -52,12 +47,12 @@ The terminal block accepts **16–24 AWG** wire. For an FRC robot using the reco
 
 ### Wiring procedure
 
-1. Remove exactly **7–8 mm** of insulation. A shorter strip length may prevent a secure connection, while a longer strip length leaves exposed conductor.
-2. Press the white push button on the terminal block.
+1. Remove exactly **7–8 mm** of insulation. A shorter length may prevent a secure connection, while a longer length leaves exposed conductor.
+2. Press the white push button on the terminal block. You may have to use a small screwdriver.
 3. Fully insert the red wire into **BATT+** and the black wire into **GND**.
 4. Release the button so the spring clamp secures the wire.
 5. Gently tug each wire to verify that it is secure.
-6. Install a **15–20A breaker** in the PDH port before connecting battery power. Use 16–18 AWG wire with this breaker range.
+6. Install your 15–20A breaker in the PDH port before connecting battery power.
 
 ## Connecting devices
 
@@ -67,14 +62,14 @@ The terminal block accepts **16–24 AWG** wire. For an FRC robot using the reco
 - **Advertised current:** 3A through 10 kΩ CC pull-ups
 - **USB Power Delivery:** Not supported
 
-Connect a cable rated for at least 3A. If using the locking cable, tighten its retention screw. Thin or low-quality cables can cause excessive voltage drop.
+While the USB-C port is advertising 3A many devices, such as co-processors, consume more. Make sure to connect a cable rated for at least 3A. If using the locking cable, tighten its retention screw. Thin or low-quality cables can cause excessive voltage drop.
 
 | Device | Typical current draw |
 | --- | --- |
 | Raspberry Pi 4/5 | 2–4A |
 | Orange Pi 5 | 2–5A |
 | Arduino/ESP32 | 0.2–0.5A |
-| LED strips | Varies; check the device specifications |
+| LED strips | Varies; often 2-5A |
 
 ### Co-processor wiring diagrams
 
@@ -93,7 +88,7 @@ The auxiliary output uses a pin header with a 2.54 mm pitch.
 | + | 5.1V output |
 | − | Ground |
 
-The auxiliary output can power cooling fans, indicator LEDs, microcontrollers, and compatible 5V network equipment. Its load counts toward the combined output current. The recommended combined load is **5–6A for continuous operation**, with a **7A continuous maximum**. Limit **8–10A loads to a few seconds** unless adequate user-supplied active heatsinking and cooling are installed.
+The auxiliary output can power cooling fans, indicator LEDs, microcontrollers, and compatible 5V network equipment. Its load counts toward the combined output current. The recommended combined load is 5–6A for continuous operation, with a **7A continuous maximum**. Limit 8–10A loads to a few seconds unless adequate user-supplied active heatsinking and cooling are installed.
 
 ## Power on and verify
 

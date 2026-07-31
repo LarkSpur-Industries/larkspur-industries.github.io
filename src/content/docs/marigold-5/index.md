@@ -6,26 +6,25 @@ description: Product overview, key features, and safety limits for the Marigold-
 ![Marigold-5 corner view](/docs/marigold-5/img/Marigold-5_V1.0-Corner-USB.webp)
 *Marigold-5 corner view*
 
-The **Marigold-5** is a synchronous step-down (buck) DC-DC converter module that provides a regulated 5.1V rail for FIRST Robotics Competition applications. It accepts a 6V–18V input compatible with FRC lead-acid battery systems and provides power through a high-current USB-C receptacle and an auxiliary output.
+The Marigold-5 is a synchronous step-down, buck, DC-DC converter module that provides a regulated 5.1V rail for FIRST Robotics Competition applications. It accepts a 6V to 18V input compatible with FRC robots and other power systems and provides power through a high-current USB-C connector and an auxiliary output.
 
-Built around the **Texas Instruments TPS56A37**, the Marigold-5 provides stable 5.1V power to co-processors such as Raspberry Pi and Orange Pi boards, even when the robot battery voltage sags.
+Built around the Texas Instruments TPS56A37, the Marigold-5 provides reliable 5.1V power to co-processors, such as Raspberry Pi and Orange Pi boards, even when input voltage sags.  
 
 ## Key features
 
-- **High-current output:** 5–6A recommended combined load for continuous operation, with a validated continuous output of 7A under the documented test conditions
-- **Type-C current advertisement:** Standard 10 kΩ CC pull-up resistors advertise 3A capability to non-PD sink devices
-- **Brownout protection:** Maintains stable 5.1V output down to 6V input
+- **High-current output:** 5-6A recommended combined load for continuous operation
+- **Brownout protection:** Maintains stable 5.1V output all the way down to 6V input
 - **Secure mounting:** Attaches to 1×2-inch aluminum extrusion with #4-40 hardware or through integrated zip-tie points
 - **Built-in protection:** Reverse polarity, input voltage spikes, thermal shutdown, and overcurrent limiting
 
 :::danger[Safety limits]
-- Do not exceed **18V DC input**.
+- Do not exceed the max 18V DC input.
 - For continuous operation, keep the combined load across the USB-C and auxiliary outputs within the recommended **5–6A** range.
 - The 7A continuous rating was validated at 12.3V input, at standard ambient temperature in still air, with the enclosed module not mounted to aluminum. Thermal performance varies with placement, nearby heat sources, and airflow inside the robot.
-- Limit **8–10A loads to a few seconds**. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling. Cooling hardware is not included.
-- Connect red wire to **BATT+** and black wire to **GND**.
+- Limit 8–10A loads to a few seconds. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling.
+- Always connect red wire to BATT+ and black wire to GND.
 - Keep the module away from conductive debris, metal shavings, water, and loose tools.
-- Do not open the enclosure while the device is operating or connected to power. Internal components can become hot enough to cause burns. Disconnect power and allow the device to cool before opening the enclosure or touching internal components.
+- Do not open the enclosure while the device is operating or connected to power. Internal components can become hot enough to cause burns.
 - Monitor temperature and provide adequate airflow under high-current loads.
 :::
 
