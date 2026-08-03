@@ -1,4 +1,6 @@
-@import url('/css/fonts.css');
+/* The Ubuntu webfont and --font-main come from the document head; see the
+   `head` array in astro.config.mjs. Importing css/fonts.css here would add a
+   render-blocking round trip. */
 
 :root,
 :root[data-theme='light'],

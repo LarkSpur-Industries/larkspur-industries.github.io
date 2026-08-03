@@ -1,14 +1,8 @@
 # Node
 node_modules/
 .astro/
-dist/
 
-# Generated files (built by GitHub Actions)
-index.html
-marigold-5.html
-docs.html
-shop.html
-docs-marigold-5.html
-docs-warranty.html
-docs-locking-cable.html
-locking-cable.html
+# Build output. Generated pages used to be written into the repo root, which is
+# why this file once listed index.html, shop.html and friends; everything now
+# lands in dist/ instead.
+dist/

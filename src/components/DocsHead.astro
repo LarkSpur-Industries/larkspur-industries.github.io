@@ -26,9 +26,10 @@ if (parts.length > 1 || (parts.length === 1 && !(parts[0] in sectionNames))) {
   breadcrumbItems.push({ name: entry.data.title, url: Astro.url.href });
 }
 
+// 1200x630 PNG, matching the marketing pages. See meta-config.js.
 const image = parts[0] === 'locking-cable'
-  ? new URL('/docs/cables/img/locking-cable.png', site).href
-  : new URL('/docs/marigold-5/img/Marigold-5_V1.0-Corner.webp', site).href;
+  ? new URL('/content/img/og-locking-cable.png', site).href
+  : new URL('/content/img/og-default.png', site).href;
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -44,5 +45,8 @@ const structuredData = {
 
 <DefaultHead />
 <meta property="og:image" content={image} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta name="twitter:image" content={image} />
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

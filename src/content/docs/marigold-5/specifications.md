@@ -33,7 +33,11 @@ The USB-C receptacle hardware can carry the full device output current, while it
 | Output overvoltage | >125% of target | Shutdown after 32µs deglitch |
 | Output undervoltage | <65% of target | Hiccup restart after 256µs |
 | Thermal shutdown | >165°C junction | Automatic shutdown; restart at 135°C |
-| Input UVLO | <4.2V rising | Regulator disabled until input recovers |
+| Regulator input UVLO | 4.2V rising | Regulator disabled until input recovers |
+
+The regulator input UVLO is the TPS56A37's own internal threshold, well below the
+module's 6.0V rated minimum input. Marigold-5 is specified and validated from 6.0V
+up; the UVLO figure is listed for reference and is not an operating range.
 
 ## USB-C configuration
 

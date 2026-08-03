@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{META_TAGS}}
+    <link rel="stylesheet" href="css/fonts.css?v=2">
+    <link rel="stylesheet" href="css/style.css?v=2">
+    <style>
+        /* ── PRODUCT CARD ───────────────────────────────────── */
+        .product-wrap {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin-top: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .product-label {
+            font-size: 0.7rem;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── GALLERY ────────────────────────────────────────── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .gallery-thumb {
+            border: 1px solid var(--border);
+            background: #0d0d0d;
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: border-color 0.15s;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .gallery-thumb:hover  { border-color: #8a8a8a; }
+        .gallery-thumb.active { border-color: var(--accent); }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        /* ── PRICE + CTA ────────────────────────────────────── */
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .price-big {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .price-big .price-currency {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #8a8a8a;
+            margin-left: 0.25rem;
+        }
+
+        /* ── 3D MODEL ───────────────────────────────────────── */
+        .model-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            background: #0d0d0d;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: #0d0d0d;
+        }
+        .model-label {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.7rem;
+            color: #8a8a8a;
+            pointer-events: none;
+        }
+        .model-progress {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.75rem;
+            font-variant-numeric: tabular-nums;
+            color: #8a8a8a;
+            pointer-events: none;
+        }
+
+        /* ── MODAL ──────────────────────────────────────────── */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal.open { display: flex; }
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Room for the nav buttons so they never sit on the photo. */
+            padding: 0 60px;
+        }
+        .modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        /* Pinned to the viewport, not to the image: anchoring it above
+           .modal-content pushed it off-screen whenever the image was tall
+           enough to centre near the top edge (any landscape phone). */
+        .modal-close {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.25rem;
+            color: #ddd;
+            cursor: pointer;
+            background: rgba(25,25,25,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s;
+        }
+        .modal-close:hover { color: var(--accent); }
+        .modal-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(25,25,25,0.9);
+            font-size: 1.75rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-prev { left: 0.75rem; }
+        .modal-next { right: 0.75rem; }
+        .modal-nav:hover { color: var(--accent); }
+
+        /* Short viewports (landscape phones): keep the image clear of the
+           fixed close button and give the nav buttons their own gutter. */
+        @media (max-height: 500px) {
+            .modal-img { max-height: 70vh; }
+            .modal-close { width: 36px; height: 36px; top: 0.5rem; right: 0.5rem; }
+            .modal-nav { width: 36px; height: 36px; }
+        }
+
+        /* ── RESPONSIVE ─────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .product-wrap {
+                padding: 1rem;
+                margin-top: 1.1rem;
+            }
+            .product-title {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            .model-container { height: 200px; }
+            .price-big { font-size: 1.35rem; }
+            .price-row { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="grain"></div>
+
+<!-- IMAGE MODAL -->
+<div id="imgModal" class="modal" role="dialog" aria-modal="true" aria-label="Marigold-5 image gallery" hidden>
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose" aria-label="Close">&#10005;</button>
+        <img class="modal-img" id="modalImg" alt="">
+    </div>
+    <button class="modal-nav modal-prev" id="modalPrev" type="button" aria-label="Previous image">&#8249;</button>
+    <button class="modal-nav modal-next" id="modalNext" type="button" aria-label="Next image">&#8250;</button>
+</div>
+
+<!-- NAV -->
+{{SITE_NAV}}
+
+<div class="container">
+<main id="main-content">
+
+    <!-- PRODUCT -->
+    <div class="product-wrap fade-in">
+        <div class="product-label">Power Module</div>
+        <h1 class="product-title">MARIGOLD-5</h1>
+
+        <!-- 3D MODEL -->
+        <div class="model-container" id="modelContainer">
+            <button class="btn btn-primary" id="loadModelBtn" type="button" data-size="{{MODEL_SIZE}}">Load 3D Model ({{MODEL_SIZE}})</button>
+            <div class="model-progress" id="modelProgress" role="status" aria-live="polite"></div>
+            <div class="model-label" id="modelLabel" style="display:none;">3D PREVIEW</div>
+        </div>
+
+        <!-- GALLERY -->
+        <div class="gallery-grid" id="galleryGrid">
+            <button class="gallery-thumb active" type="button" data-index="0" aria-label="Open larger image: Marigold-5 USB-C output side" aria-pressed="true">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp" alt="" width="804" height="636" loading="eager" decoding="async">
+            </button>
+            <button class="gallery-thumb" type="button" data-index="1" aria-label="Open larger image: Marigold-5 terminal input side" aria-pressed="false">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerTerminal.webp" alt="" width="830" height="533" loading="lazy" decoding="async">
+            </button>
+            <button class="gallery-thumb" type="button" data-index="2" aria-label="Open larger image: Marigold-5 disassembled, case and PCB" aria-pressed="false">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp" alt="" width="975" height="604" loading="lazy" decoding="async">
+            </button>
+            <button class="gallery-thumb" type="button" data-index="3" aria-label="Open larger image: Marigold-5 bare PCB top view" aria-pressed="false">
+                <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-PCBTop.webp" alt="" width="962" height="276" loading="lazy" decoding="async">
+            </button>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <p style="font-size:0.9rem;color:#bbb;line-height:1.7;margin-bottom:1.5rem;">
+            The Marigold-5 is a compact DC-DC power module for the FIRST Robotics Competition. It delivers a high-current 5.1V USB-C output for co-processors plus an auxiliary port for peripherals, staying stable all the way down to 6V.
+        </p>
+
+        <!-- PRICE + CTA -->
+        <div class="price-row">
+            <span class="price-big">${{MARIGOLD_PRICE}}<span class="price-currency">{{MARIGOLD_CURRENCY}}</span></span>
+            <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Buy Now</a>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:0 0 1.5rem;">
+
+        <!-- SPECS -->
+        <div class="section-label">Technical Specifications</div>
+        <div class="spec-grid" style="margin-bottom:1.75rem;">
+            <div class="spec-cell"><div class="spec-key">Input Voltage</div><div class="spec-val">6V – 18V</div></div>
+            <div class="spec-cell"><div class="spec-key">Output Voltage</div><div class="spec-val">5.1V Regulated</div></div>
+            <div class="spec-cell"><div class="spec-key">Output Current</div><div class="spec-val">{{MARIGOLD_CURRENT_DETAIL}}</div></div>
+            <div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">4-40 &amp; 6-32</div></div>
+        </div>
+
+        <!-- WHY -->
+        <div class="section-label">Why Marigold-5?</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:1.75rem;">
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">Brownout-Resilient Power</div>
+                    <div class="highlight-bar-body">Many 12V adapters are not designed for deep battery sag. Marigold-5 is validated down to 6V to keep your co-processor powered through demanding maneuvers.</div>
+                </div>
+            </div>
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">5–6A Continuous Output</div>
+                    <div class="highlight-bar-body">Power a vision co-processor and additional peripherals simultaneously. Validated to 7A continuous at 12.3V in still air, with 8–10A available for brief spikes. See the <a href="/docs/marigold-5/specifications/">specifications</a> for the full thermal conditions.</div>
+                </div>
+            </div>
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">Quick Swap</div>
+                    <div class="highlight-bar-body">Push-button wiring connector and locking USB-C. Replace a failed unit between qualification matches, no soldering required.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IN THE BOX -->
+        <div class="section-label">What's in the Box</div>
+        <ul class="box-list" style="margin-bottom:1.75rem;">
+            <li><span>1× Marigold-5</span><span class="note">Fully Assembled</span></li>
+            <li><span>1× Larkspur Sticker</span><span class="note">Vinyl</span></li>
+            <li><span>1× Quick Mount Jig</span><span class="note">Paper</span></li>
+            <li><span>1× Wiring Guide</span><span class="note">Pamphlet</span></li>
+        </ul>
+
+        <a href="/docs/marigold-5/" class="btn btn-block">Read the Docs</a>
+    </div>
+
+</main>
+
+    <!-- FOOTER -->
+{{SITE_FOOTER}}
+
+</div>
+
+<script>
+    /* ── GALLERY ────────────────────────────────────────── */
+    var galleryImages = [
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp',      alt: 'Marigold-5 USB-C output side' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerTerminal.webp', alt: 'Marigold-5 terminal input side' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp',   alt: 'Marigold-5 disassembled, case and PCB' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-PCBTop.webp',         alt: 'Marigold-5 bare PCB top view' },
+    ];
+    var thumbs = document.querySelectorAll('.gallery-thumb');
+
+    /* ── MODAL ──────────────────────────────────────────── */
+    var modal   = document.getElementById('imgModal');
+    var modalImg = document.getElementById('modalImg');
+    var modalPrev = document.getElementById('modalPrev');
+    var modalNext = document.getElementById('modalNext');
+    var modalIndex = 0;
+    var previousFocus = null;
+
+    function showModalImage(idx) {
+        modalIndex = (idx + galleryImages.length) % galleryImages.length;
+        modalImg.src = galleryImages[modalIndex].src;
+        modalImg.alt = galleryImages[modalIndex].alt;
+        thumbs.forEach(function (t) {
+            var selected = parseInt(t.dataset.index) === modalIndex;
+            t.classList.toggle('active', selected);
+            t.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        });
+    }
+
+    thumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+            showModalImage(parseInt(thumb.dataset.index));
+            previousFocus = thumb;
+            modal.hidden = false;
+            modal.classList.add('open');
+            Array.from(document.body.children).forEach(function (element) {
+                if (element !== modal) element.inert = true;
+            });
+            document.body.style.overflow = 'hidden';
+            document.getElementById('modalClose').focus();
+        });
+    });
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modalPrev.addEventListener('click', function () { showModalImage(modalIndex - 1); });
+    modalNext.addEventListener('click', function () { showModalImage(modalIndex + 1); });
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function (e) {
+        if (!modal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') showModalImage(modalIndex - 1);
+        if (e.key === 'ArrowRight') showModalImage(modalIndex + 1);
+        if (e.key === 'Tab') {
+            var controls = [document.getElementById('modalClose'), modalPrev, modalNext];
+            var index = controls.indexOf(document.activeElement);
+            e.preventDefault();
+            controls[(index + (e.shiftKey ? -1 : 1) + controls.length) % controls.length].focus();
+        }
+    });
+
+    /* Swipe between images inside the modal */
+    var modalTouchStartX = 0;
+    var modalContent = document.querySelector('.modal-content');
+    modalContent.addEventListener('touchstart', function (e) {
+        modalTouchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    modalContent.addEventListener('touchend', function (e) {
+        var diff = modalTouchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 30) { diff > 0 ? showModalImage(modalIndex + 1) : showModalImage(modalIndex - 1); }
+    }, { passive: true });
+
+    function closeModal() {
+        modal.classList.remove('open');
+        modal.hidden = true;
+        Array.from(document.body.children).forEach(function (element) {
+            if (element !== modal) element.inert = false;
+        });
+        document.body.style.overflow = '';
+        if (previousFocus) previousFocus.focus();
+    }
+
+    /* ── 3D MODEL ───────────────────────────────────────── */
+    var modelBtn = document.getElementById('loadModelBtn');
+    var modelContainer = document.getElementById('modelContainer');
+    var modelLabel = document.getElementById('modelLabel');
+    var modelProgress = document.getElementById('modelProgress');
+    var MODEL_SIZE_LABEL = modelBtn.dataset.size;
+    var modelLoaded = false;
+
+    function resetModelButton(message) {
+        modelBtn.style.display = '';
+        modelBtn.disabled = false;
+        modelBtn.textContent = message;
+        modelProgress.textContent = '';
+        setTimeout(function () { modelBtn.textContent = 'Load 3D Model (' + MODEL_SIZE_LABEL + ')'; }, 4000);
+    }
+
+    modelBtn.addEventListener('click', async function () {
+        if (modelLoaded) return;
+        modelBtn.disabled = true;
+        modelBtn.textContent = 'Loading viewer...';
+        modelProgress.textContent = '';
+
+        try {
+            await import('https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js');
+        } catch (e) {
+            resetModelButton('Could not load the 3D viewer');
+            return;
+        }
+
+        var mv = document.createElement('model-viewer');
+        mv.setAttribute('src', 'docs/marigold-5/3d/Marigold-5_V1.0B.glb');
+        mv.setAttribute('alt', 'Interactive 3D model of the Marigold-5 power module');
+        mv.setAttribute('environment-image', 'neutral');
+        mv.setAttribute('exposure', '0.25');
+        mv.setAttribute('tone-mapping', 'aces');
+        mv.setAttribute('shadow-intensity', '1.5');
+        mv.setAttribute('auto-rotate', '');
+        mv.setAttribute('camera-controls', '');
+        mv.setAttribute('orientation', '90deg -90deg 180deg');
+        mv.setAttribute('camera-orbit', '45deg 75deg 105%');
+        mv.style.setProperty('--poster-color', '#0d0d0d');
+        mv.style.visibility = 'hidden';
+
+        /* The model itself is a separate, much larger fetch than the viewer
+           library. Keep the button in place reporting progress until the model
+           is actually on screen, and surface a real failure if it never is. */
+        modelBtn.textContent = 'Loading model...';
+        modelProgress.textContent = '0%';
+
+        mv.addEventListener('progress', function (event) {
+            /* model-viewer can emit a final progress event after `load`; without
+               this guard it would repaint "100%" over the cleared readout. */
+            if (modelLoaded) return;
+            var pct = Math.round((event.detail.totalProgress || 0) * 100);
+            modelProgress.textContent = pct + '%';
+        });
+
+        mv.addEventListener('load', function () {
+            mv.style.visibility = '';
+            modelBtn.style.display = 'none';
+            modelProgress.textContent = '';
+            modelLabel.style.display = 'block';
+            modelLoaded = true;
+        });
+
+        mv.addEventListener('error', function () {
+            mv.remove();
+            resetModelButton('Could not load the model');
+        });
+
+        modelContainer.appendChild(mv);
+    });
+
+</script>
+</body>
+</html>

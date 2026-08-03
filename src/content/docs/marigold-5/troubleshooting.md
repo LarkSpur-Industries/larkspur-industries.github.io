@@ -4,7 +4,8 @@ description: Diagnose Marigold-5 power, USB-C, overheating, wiring, and brownout
 ---
 
 ## Status LED is off
-Occurs when the module detects a dangerous fault or is damaged. 
+
+Occurs when the module detects a dangerous fault or is damaged.
 
 ### Verify polarity
 
@@ -27,7 +28,7 @@ Occurs when the module detects a dangerous fault or is damaged.
 
 ### Power cycle
 
-1. Disconnect input power for 30-100 seconds.
+1. Disconnect input power for 30–100 seconds.
 2. Reconnect power and observe the STATUS LED.
 
 ## USB device does not boot or charge
@@ -36,12 +37,12 @@ For when the module's status LED is on but connected devices are non-functional.
 ### Check the cable
 
 - Try another USB-C cable rated for at least 3A.
-- Measure voltage at the device end, with USB current tester, it should remain above 4.75V under load.
+- Measure voltage at the device end with a USB current tester. It should remain above 4.75V under load.
 - Long or thin cables can create excessive voltage drop.
 
 ### Check the load
 
-- Make sure the combined USB-C and auxiliary load are within 5–6A for normal continuous operation.
+- Make sure the combined USB-C and auxiliary load is within 5–6A for normal continuous operation.
 - Make sure the load did not exceed 7A continuously without adequate active cooling.
 - Limit 8–10A load spikes to a few seconds unless adequate user-supplied active heatsinking and cooling are installed.
 - Some devices have a brief inrush-current spike during startup.
@@ -51,9 +52,10 @@ For when the module's status LED is on but connected devices are non-functional.
 - Confirm that the device accepts a fixed 5V input. Almost all standard SBCs and co-processors do.
 - Devices *requiring* 9V, 12V, or 20V USB Power Delivery negotiation are not compatible.
 
-### Check Co-processor SD Card
-- When running a co-processor on the Marigold-5's output most of these devices have a SD card for the operating system. Sometimes when impacts happen during a match the SD card can physically crack or become damaged. 
-- Make sure the co-processor SD card has been flashed with an viable image for the hardware. If using photon vision refer to their docs.
+### Check the co-processor SD card
+
+- Most co-processors boot from an SD card, and match impacts can physically crack or corrupt one.
+- Make sure the SD card is flashed with a viable image for that hardware. If you are using PhotonVision, refer to [their documentation](https://docs.photonvision.org/).
 
 ## Module feels hot
 
@@ -65,8 +67,8 @@ Do not open the enclosure while Marigold-5 is operating or connected to power. I
 
 Take corrective action when:
 
-- The status led turns off, indicating a possible thermal shutdown.
-- When the module appears to flicker on and off while hot.
+- The STATUS LED turns off, indicating a possible thermal shutdown.
+- The module flickers on and off while hot.
 
 To reduce temperature:
 
@@ -82,4 +84,4 @@ To reduce temperature:
 4. Inspect the PDH connection, breaker, terminal block, and wire gauge for excessive resistance.
 5. Confirm that the combined output load remains within the 5–6A recommended continuous range.
 
-If the problem continues, please email [engineering@larkspurindustries.com](mailto:engineering@larkspurindustries.com) with the, connected load, and a photo of the wiring. More info might be requested.
+If the problem continues, please email [engineering@larkspurindustries.com](mailto:engineering@larkspurindustries.com) with the STATUS LED behavior, the connected load, and a photo of the wiring. We may ask for more detail.

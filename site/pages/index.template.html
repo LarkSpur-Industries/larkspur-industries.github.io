@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{META_TAGS}}
+    <link rel="stylesheet" href="css/fonts.css?v=2">
+    <link rel="stylesheet" href="css/style.css?v=2">
+    <style>
+        /* ── HERO ──────────────────────────────────────────── */
+        .hero {
+            padding: 3rem 0 2.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .hero-headline {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+        .hero-headline .rotating-word {
+            color: var(--accent);
+            display: inline-block;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            white-space: nowrap;
+        }
+        .hero-headline .rotating-word.hidden {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        .hero-sub {
+            font-size: 0.92rem;
+            color: #777;
+            line-height: 1.7;
+            margin-bottom: 1.75rem;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+        .hero-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-img img {
+            width: 100%;
+            height: auto;
+            max-width: 340px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        /* ── FEATURED PRODUCT ──────────────────────────────── */
+        .featured-product {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .featured-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .featured-image-col {
+            border-right: 1px solid var(--border);
+            background: var(--card-bg);
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+        }
+        .featured-carousel-wrap {
+            flex: 1;
+            padding: 2rem;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .featured-carousel-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 4px;
+        }
+        .carousel-controls {
+            padding: 0.5rem 0.75rem 0.75rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+        }
+        .carousel-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.1rem;
+        }
+        .carousel-control,
+        .carousel-dot {
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: 0;
+            color: #aaa;
+            background: transparent;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        .carousel-control:hover { color: #fff; background: #1c1c1c; }
+        .carousel-dot::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 3px;
+            background: #777;
+            transition: background 0.2s, width 0.2s;
+        }
+        .carousel-dot[aria-current='true']::before {
+            background: var(--accent);
+            width: 18px;
+        }
+        .featured-info-col {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .featured-label {
+            font-size: 0.72rem;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        .featured-name {
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.55rem;
+        }
+        .featured-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.25rem;
+        }
+        .featured-price .price-note {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #8a8a8a;
+            margin-left: 0.3rem;
+        }
+        .featured-desc {
+            font-size: 0.875rem;
+            color: #888;
+            line-height: 1.68;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+        .featured-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* ── PRODUCTS GRID ─────────────────────────────────── */
+        .products-section {
+            margin-bottom: 2.5rem;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .section-header h2 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 1.3px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+        }
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-decoration: none;
+            display: block;
+            transition: border-color 0.18s;
+            overflow: hidden;
+        }
+        .product-card:hover { border-color: var(--accent); }
+        .product-card.unavailable:hover { border-color: var(--border); cursor: default; }
+        .product-card-img {
+            background: var(--card-bg);
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border);
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .product-card.unavailable .product-card-img { opacity: 0.4; }
+        .product-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .product-card-info { padding: 0.85rem 1rem; }
+        .product-card-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+        .product-card-tagline {
+            font-size: 0.78rem;
+            color: #8a8a8a;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .product-card-price {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .product-card-price.coming-soon { color: #999; }
+
+        /* ── ABOUT ─────────────────────────────────────────── */
+        .about-strip {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 1.75rem 1.75rem 1.75rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .about-strip-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+        .about-strip p {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.65;
+            margin-bottom: 0.5rem;
+        }
+        .about-strip p:first-of-type {
+            font-size: 1rem;
+            color: #bbb;
+            margin-bottom: 0.75rem;
+        }
+        .about-strip p:last-child { margin-bottom: 0; }
+
+        /* ── RESPONSIVE ────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .hero { padding: 1.25rem 0 1rem; margin-bottom: 1.25rem; }
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-img  { display: none; }
+            .hero-headline { font-size: 1.7rem; }
+            .featured-inner { grid-template-columns: 1fr; }
+            .featured-image-col {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                min-height: 0;
+                max-height: 260px;
+            }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="grain"></div>
+
+<!-- NAV -->
+{{SITE_NAV}}
+
+<div class="container">
+<main id="main-content">
+
+    <!-- HERO -->
+    <div class="hero fade-in">
+        <div class="hero-grid">
+            <div>
+                <h1 class="hero-headline">
+                    Hardware that keeps<br>
+                    your robot <span class="sr-only">running.</span><span class="rotating-word" id="rotatingWord" aria-hidden="true">running.</span>
+                </h1>
+                <p class="hero-sub">
+                    Affordable, reliable electronics for FIRST Robotics teams. Designed to handle the pressure of competition and hardware swaps in minutes between matches.
+                </p>
+                <div class="hero-actions">
+                    <a href="shop.html" class="btn btn-primary">Shop Products</a>
+                    <a href="/docs/marigold-5/" class="btn">View Marigold Docs</a>
+                </div>
+            </div>
+            <div class="hero-img">
+                <a href="marigold-5.html">
+                    <!-- .hero-img is display:none at <=768px, but the browser still
+                         fetches a plain <img>. The 1x1 source keeps phones from
+                         downloading a hero they will never see. -->
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+                        <img src="docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp" alt="Marigold-5 power module" width="975" height="604" fetchpriority="high" decoding="async">
+                    </picture>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FEATURED PRODUCT -->
+    <div class="featured-product fade-in delay-1">
+        <div class="featured-inner">
+            <div class="featured-image-col">
+                <a href="marigold-5.html" class="featured-carousel-wrap" id="featuredCarouselWrap">
+                    <img id="featuredImg" src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp" alt="Marigold-5 USB-C output side" width="804" height="636">
+                </a>
+                <div class="carousel-controls" aria-label="Marigold-5 image carousel controls">
+                    <button class="carousel-control" id="carouselPrev" type="button" aria-label="Previous image" title="Previous image">&#8249;</button>
+                    <div class="carousel-dots" id="carouselDots" role="group" aria-label="Choose image"></div>
+                    <button class="carousel-control" id="carouselNext" type="button" aria-label="Next image" title="Next image">&#8250;</button>
+                    <button class="carousel-control" id="carouselToggle" type="button" aria-label="Pause image rotation" title="Pause image rotation">&#9208;</button>
+                </div>
+            </div>
+            <div class="featured-info-col">
+                <div class="featured-label">DC-DC USB-C Power Module</div>
+                <div class="featured-name">MARIGOLD-5</div>
+                <div class="featured-price">${{MARIGOLD_PRICE}} <span class="price-note">{{MARIGOLD_CURRENCY}}</span></div>
+                <p class="featured-desc">
+                    Keeps your co-processor alive during battery brownouts. Operates reliably down to 6V, with 5–6A continuous output for a vision system and peripherals simultaneously.
+                </p>
+                <div class="featured-btns">
+                    <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Buy Now - ${{MARIGOLD_PRICE}} {{MARIGOLD_CURRENCY}}</a>
+                    <a href="marigold-5.html" class="btn btn-block">Product Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALL PRODUCTS -->
+    <div class="products-section fade-in delay-2">
+        <div class="section-header">
+            <h2>All Products</h2>
+            <a href="shop.html" class="btn btn-sm btn-accent">Shop all</a>
+        </div>
+        <div class="products-grid">
+            <a href="marigold-5.html" class="product-card">
+                <div class="product-card-img">
+                    <img src="docs/marigold-5/img/Marigold-5_V1.0-Top.webp" alt="Marigold-5 top view" width="3504" height="2478" loading="lazy" decoding="async">
+                </div>
+                <div class="product-card-info">
+                    <div class="product-card-name">MARIGOLD-5</div>
+                    <div class="product-card-tagline">USB-C power module for FRC co-processors</div>
+                    <div class="product-card-price">${{MARIGOLD_PRICE}} {{MARIGOLD_CURRENCY}}</div>
+                </div>
+            </a>
+            <div class="product-card unavailable">
+                <div class="product-card-img">
+                    <img src="docs/cables/img/locking-cable.webp" alt="Marigold-5 locking USB-C cable" width="1167" height="1169" loading="lazy" decoding="async">
+                </div>
+                <div class="product-card-info">
+                    <div class="product-card-name">LOCKING CABLE</div>
+                    <div class="product-card-tagline">Vibration-resistant USB-C cable for Marigold-5</div>
+                    <div class="product-card-price coming-soon">Coming Soon</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about-strip fade-in delay-3">
+        <div class="about-strip-title">About Larkspur Industries</div>
+        <p>We're a small hardware design startup based in Richmond, Virginia, founded by Isaac Subudhi.</p>
+        <p>Our goal is to deliver quality electronics at fair prices for competitive robotics teams and anyone who needs reliable power solutions.</p>
+    </div>
+
+</main>
+
+    <!-- FOOTER -->
+{{SITE_FOOTER}}
+
+</div>
+
+<script>
+    /* ── FEATURED CAROUSEL ─────────────────────────────── */
+    var featImages = [
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp',      alt: 'Marigold-5 USB-C output side' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerTerminal.webp', alt: 'Marigold-5 terminal input side' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-Disassembled.webp',   alt: 'Marigold-5 disassembled, case and PCB' },
+        { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-PCBTop.webp',         alt: 'Marigold-5 bare PCB top view' },
+    ];
+
+    var featImg   = document.getElementById('featuredImg');
+    var dotsEl    = document.getElementById('carouselDots');
+    var prevBtn   = document.getElementById('carouselPrev');
+    var nextBtn   = document.getElementById('carouselNext');
+    var toggleBtn = document.getElementById('carouselToggle');
+    var carousel  = document.querySelector('.featured-image-col');
+    var featIdx   = 0;
+    var touchStartX = 0;
+    var timer;
+    var isPlaying = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Build dots */
+    featImages.forEach(function (_, i) {
+        var d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'carousel-dot';
+        d.setAttribute('aria-label', 'Show image ' + (i + 1) + ' of ' + featImages.length);
+        d.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+        d.addEventListener('click', function () { stopRotation(); goTo(i); });
+        dotsEl.appendChild(d);
+    });
+
+    function updateDots() {
+        document.querySelectorAll('.carousel-dot').forEach(function (d, i) {
+            d.setAttribute('aria-current', i === featIdx ? 'true' : 'false');
+        });
+    }
+
+    function goTo(idx) {
+        featIdx = idx;
+        featImg.style.opacity = '0';
+        setTimeout(function () {
+            featImg.src = featImages[featIdx].src;
+            featImg.alt = featImages[featIdx].alt;
+            featImg.style.opacity = '1';
+        }, 200);
+        updateDots();
+    }
+
+    function next() { goTo((featIdx + 1) % featImages.length); }
+    function prev() { goTo((featIdx - 1 + featImages.length) % featImages.length); }
+
+    featImg.style.transition = 'opacity 0.2s ease';
+
+    function updateToggle() {
+        /* U+23F8 PAUSE / U+25B6 PLAY. The old pause glyph was U+2161 ROMAN
+           NUMERAL TWO, which Ubuntu does not carry and which fell back to a
+           mismatched face. */
+        toggleBtn.textContent = isPlaying ? '\u23F8' : '\u25B6';
+        toggleBtn.setAttribute('aria-label', isPlaying ? 'Pause image rotation' : 'Start image rotation');
+        toggleBtn.title = toggleBtn.getAttribute('aria-label');
+    }
+
+    function startRotation() {
+        isPlaying = true;
+        clearInterval(timer);
+        timer = setInterval(next, 5000);
+        updateToggle();
+    }
+
+    function stopRotation() {
+        isPlaying = false;
+        clearInterval(timer);
+        updateToggle();
+    }
+
+    prevBtn.addEventListener('click', function () { stopRotation(); prev(); });
+    nextBtn.addEventListener('click', function () { stopRotation(); next(); });
+    toggleBtn.addEventListener('click', function () { isPlaying ? stopRotation() : startRotation(); });
+    carousel.addEventListener('mouseenter', function () { if (isPlaying) clearInterval(timer); });
+    carousel.addEventListener('mouseleave', function () { if (isPlaying) startRotation(); });
+    carousel.addEventListener('focusin', stopRotation);
+    if (isPlaying) startRotation(); else updateToggle();
+
+    /* Touch swipe.
+       The carousel lives inside a link to the product page, so a swipe would
+       otherwise be followed by a click and navigate away mid-gesture. Track
+       whether the gesture was a swipe and suppress the click it generates.
+       touchmove is NOT passive here: it has to be able to cancel the scroll
+       once the drag reads as horizontal. */
+    var swipeWrap = featImg.parentElement;
+    var touchStartY = 0;
+    var didSwipe = false;
+    var horizontal = null;
+
+    swipeWrap.addEventListener('touchstart', function (e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        didSwipe = false;
+        horizontal = null;
+    }, { passive: true });
+
+    swipeWrap.addEventListener('touchmove', function (e) {
+        var dx = e.touches[0].clientX - touchStartX;
+        var dy = e.touches[0].clientY - touchStartY;
+        if (horizontal === null && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+            horizontal = Math.abs(dx) > Math.abs(dy);
+        }
+        /* Horizontal drag belongs to the carousel; keep the page from scrolling. */
+        if (horizontal && e.cancelable) e.preventDefault();
+    }, { passive: false });
+
+    swipeWrap.addEventListener('touchend', function (e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (horizontal && Math.abs(diff) > 30) {
+            didSwipe = true;
+            stopRotation();
+            diff > 0 ? next() : prev();
+        }
+    }, { passive: true });
+
+    /* Capture phase, so the anchor never sees the click that ends a swipe. */
+    swipeWrap.addEventListener('click', function (e) {
+        if (didSwipe) {
+            e.preventDefault();
+            e.stopPropagation();
+            didSwipe = false;
+        }
+    }, true);
+
+    /* Pause on hidden */
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) clearInterval(timer); else if (isPlaying) startRotation();
+    });
+
+    /* ── ROTATING HEADLINE WORD ─────────────────────────── */
+    (function () {
+        var wordEl = document.getElementById('rotatingWord');
+        if (!wordEl) return;
+
+        /* The visible word is aria-hidden and shadowed by an .sr-only copy, so
+           the h1's accessible name stays "…your robot running." no matter where
+           the animation happens to be. */
+        var words = ['running.', 'scoring.', 'competing.', 'powered.'];
+        var wordIdx = 0;
+        var wordTimer;
+
+        function cycle() {
+            wordEl.classList.add('hidden');
+            setTimeout(function () {
+                wordIdx = (wordIdx + 1) % words.length;
+                wordEl.textContent = words[wordIdx];
+                wordEl.classList.remove('hidden');
+            }, 350);
+        }
+
+        function startWords() {
+            clearInterval(wordTimer);
+            wordTimer = setInterval(cycle, 2600);
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            startWords();
+            document.addEventListener('visibilitychange', function () {
+                if (document.hidden) clearInterval(wordTimer); else startWords();
+            });
+        }
+    })();
+
+</script>
+</body>
+</html>

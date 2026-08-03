@@ -11,7 +11,7 @@ export default defineConfig({
       title: 'Larkspur Industries Documentation',
       description: 'Installation, wiring, troubleshooting, and reference documentation for Larkspur Industries hardware.',
       logo: {
-        src: './content/logos/larkspur-logo-large-grey.webp',
+        src: './site/assets/brand/logos/larkspur-logo-large-grey.webp',
         alt: 'Larkspur Industries',
         replacesTitle: true,
       },
@@ -61,6 +61,17 @@ export default defineConfig({
         { tag: 'meta', attrs: { name: 'theme-color', content: '#0a0a0a' } },
         { tag: 'meta', attrs: { name: 'author', content: 'Larkspur Industries' } },
         { tag: 'link', attrs: { rel: 'sitemap', href: '/sitemap.xml' } },
+        // Requested from the document rather than @import-ed inside docs.css,
+        // which would serialise an extra round trip before first paint.
+        { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
+        { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'stylesheet',
+            href: 'https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap',
+          },
+        },
       ],
     }),
   ],

@@ -5,7 +5,7 @@ description: Understand Marigold-5 output voltage, status LED behavior, and FRC 
 
 ## Why the output is 5.1V
 
-The 5.1V output is intentional. USB cables introduce resistance, commonly 0.1-0.5 Ω per meter. Under load, this resistance causes a voltage drop:
+The 5.1V output is intentional. USB cables introduce resistance, commonly 0.1–0.5 Ω per meter. Under load, this resistance causes a voltage drop:
 
 - **Voltage drop = Current × Resistance**
 - At 3A through 0.1 Ω of total cable resistance, the drop is **0.3V**.
@@ -14,7 +14,7 @@ Starting at 5.1V helps the connected device remain above the 4.75V USB minimum u
 
 ## Status LED
 
-The status led on top of the enclosure is driven by the TPS56A37 power-good output.
+The STATUS LED on top of the enclosure is driven by the TPS56A37 power-good output.
 
 | LED state | Meaning | Action |
 | --- | --- | --- |

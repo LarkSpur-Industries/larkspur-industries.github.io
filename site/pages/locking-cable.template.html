@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{META_TAGS}}
+    <link rel="stylesheet" href="css/fonts.css?v=2">
+    <link rel="stylesheet" href="css/style.css?v=2">
+    <style>
+        .breadcrumb {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.75rem;
+            font-size: 0.75rem;
+            color: #8a8a8a;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .breadcrumb a {
+            color: #8a8a8a;
+            text-decoration: none;
+            transition: color 0.15s;
+            /* 24px hit area without shifting the label; see .nav-links a. */
+            display: inline-flex;
+            align-items: center;
+            padding-block: 0.5rem;
+            margin-block: -0.5rem;
+        }
+        .breadcrumb a:hover { color: #aaa; }
+        .breadcrumb .sep { color: #6a6a6a; }
+        .breadcrumb .current { color: #999; }
+
+        .product-wrap {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .product-label {
+            font-size: 0.7rem; color: #8a8a8a; text-transform: uppercase;
+            letter-spacing: 1.2px; margin-bottom: 0.25rem; font-weight: 500;
+        }
+        .product-title {
+            font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;
+        }
+        .coming-soon-badge {
+            display: inline-block;
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.3px; color: #8a8a8a;
+            border: 1px solid #2a2a2a;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+        }
+        .product-img-wrap {
+            background: #0d0d0d;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 2/1;
+            opacity: 0.55;
+        }
+        .product-img-wrap img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="grain"></div>
+
+<!-- NAV -->
+{{SITE_NAV}}
+
+<div class="container">
+<main id="main-content">
+
+    <div class="breadcrumb fade-in">
+        <a href="index.html">Home</a>
+        <span class="sep">/</span>
+        <a href="shop.html">Shop</a>
+        <span class="sep">/</span>
+        <span class="current">Locking Cable</span>
+    </div>
+
+    <div class="product-wrap fade-in delay-1">
+        <div class="product-label">Cable</div>
+        <h1 class="product-title">LOCKING CABLE</h1>
+        <div class="coming-soon-badge">Coming Soon</div>
+
+        <div class="product-img-wrap">
+            <img src="docs/cables/img/locking-cable.webp" alt="Marigold-5 Locking Cable" width="1167" height="1169" loading="eager" decoding="async">
+        </div>
+
+        <p style="font-size:0.9rem;color:#bbb;line-height:1.7;margin-bottom:1.5rem;">
+            A screw-locking USB-C cable built for Marigold-5. Physically secures to the port so vibrations and collisions can't pull it loose, rated for 240W and 20Gbps with braided + foil shielding.
+        </p>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:0 0 1.5rem;">
+
+        <div class="section-label">Specifications</div>
+        <div class="spec-grid" style="margin-bottom:1.75rem;">
+            <div class="spec-cell"><div class="spec-key">Connector</div><div class="spec-val">Screw-Lock USB-C</div></div>
+            <div class="spec-cell"><div class="spec-key">Power Rating</div><div class="spec-val">240W</div></div>
+            <div class="spec-cell"><div class="spec-key">Data Speed</div><div class="spec-val">20Gbps</div></div>
+            <div class="spec-cell"><div class="spec-key">Shielding</div><div class="spec-val">Braided + Foil</div></div>
+        </div>
+
+        <div class="section-label">Why Locking Cable?</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:1.75rem;">
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">Stays Connected</div>
+                    <div class="highlight-bar-body">Standard USB-C cables disconnect under vibration and impact. The screw-lock mechanism keeps the cable physically secured to Marigold-5's port throughout the match.</div>
+                </div>
+            </div>
+            <div class="highlight-bar">
+                <div class="highlight-bar-line"></div>
+                <div>
+                    <div class="highlight-bar-title">High Performance</div>
+                    <div class="highlight-bar-body">Rated for 240W and 20Gbps, more than enough headroom for any co-processor load.</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="/docs/locking-cable/" class="btn btn-block" style="margin-bottom: 0.75rem;">Read the Docs</a>
+        <a href="shop.html" class="btn btn-block">← Back to Shop</a>
+    </div>
+
+</main>
+
+    <!-- FOOTER -->
+{{SITE_FOOTER}}
+</div>
+
+</body>
+</html>

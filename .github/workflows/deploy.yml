@@ -20,7 +20,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+        with:
+          # Starlight's `lastUpdated` reads each file's git history. The default
+          # shallow clone has only one commit, which would stamp every docs page
+          # with the same date.
+          fetch-depth: 0
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -30,8 +35,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Build website
-        run: npm run build
+      # `npm test` runs the same build plus the output, link, fragment and
+      # JSON-LD checks, so a broken reference fails the deploy instead of
+      # shipping.
+      - name: Build and verify website
+        run: npm test
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

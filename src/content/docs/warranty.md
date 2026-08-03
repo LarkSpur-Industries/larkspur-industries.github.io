@@ -7,7 +7,7 @@ We build hardware for robotics, and we know that robotics is chaotic. Our warran
 
 ## Manufacturing warranty
 
-If your Marigold-5 has a factory defect, Larkspur Industries will replace it.
+If any of our products has a factory defect, Larkspur Industries will replace it.
 
 Covered defects include:
 
@@ -25,7 +25,7 @@ The manufacturing warranty does not cover damage caused by installation errors o
 
 - **Short circuits** caused by stray wire strands, metal debris, or bridged terminals
 - **Physical damage** such as crushed cases, drilled PCBs, or collision damage
-- **Modifications** including soldering directly to the PCB outside the provided terminals or removing components
+- **Modifications** including soldering directly to the PCBs outside the provided terminals or removing components
 
 ## Crash replacement program
 
@@ -52,4 +52,4 @@ Never open a Larkspur Industries product while it is operating or connected to p
 - **Engineering:** [engineering@larkspurindustries.com](mailto:engineering@larkspurindustries.com)
 - **GitHub:** [github.com/Larkspur-Industries](https://github.com/Larkspur-Industries)
 
-**Last reviewed:** July 6, 2026
+**Last reviewed:** July 31, 2026

@@ -19,8 +19,8 @@ description: Mount, wire, connect, and verify a Marigold-5 power module on an FR
 
 ### Screw mounting
 
-- Recommended for optimal heaksinking.
-- Use the two #4-40 threaded inserts with 1.25-inch  center spacing.
+- Recommended for optimal heatsinking.
+- Use the two #4-40 threaded inserts with 1.25-inch center spacing.
 
 ### Zip-tie mounting
 - Route zip ties on the four points around the case perimeter.
@@ -33,17 +33,20 @@ description: Mount, wire, connect, and verify a Marigold-5 power module on an FR
 
 | Parameter | Value |
 | --- | --- |
-| Wire gauge | 16–24 AWG|
-| Strip length | 7-8 mm |
+| Wire gauge | 16–24 AWG |
+| Strip length | 7–8 mm |
 
 The input terminal block accepts 16–24 AWG wire. When using the recommended 15–20A branch-circuit breaker, use 16–18 AWG copper wire. Smaller wire may fit the connector but is not recommended.
 
+The terminal block has four positions: two tied to BATT+ and two tied to GND.
+The pins in each pair are internally connected, so a single input pair is enough
+for normal use. The spare pair is there for daisy-chaining or for splitting the
+input across two conductors.
+
 | Pin | Function | Wire color |
 | --- | --- | --- |
-| BATT+ | +12V input | Red |
-| BATT+ | +12V input | Red |
-| GND | Ground | Black |
-| GND | Ground | Black |
+| BATT+ (×2) | +12V input | Red |
+| GND (×2) | Ground | Black |
 
 ### Wiring procedure
 
@@ -62,14 +65,14 @@ The input terminal block accepts 16–24 AWG wire. When using the recommended 15
 - **Advertised current:** 3A through 10 kΩ CC pull-ups
 - **USB Power Delivery:** Not supported
 
-While the USB-C port is advertising 3A many devices, such as co-processors, consume more. Make sure to connect a cable rated for at least 3A. If using the locking cable, tighten its retention screw. Thin or low-quality cables can cause excessive voltage drop.
+While the USB-C port advertises 3A, many devices, such as co-processors, consume more. Make sure to connect a cable rated for at least 3A. If using the locking cable, tighten its retention screw. Thin or low-quality cables can cause excessive voltage drop.
 
 | Device | Typical current draw |
 | --- | --- |
 | Raspberry Pi 4/5 | 2–4A |
 | Orange Pi 5 | 2–5A |
 | Arduino/ESP32 | 0.2–0.5A |
-| LED strips | Varies; often 2-5A |
+| LED strips | Varies; often 2–5A |
 
 ### Co-processor wiring diagrams
 
