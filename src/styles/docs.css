@@ -65,11 +65,11 @@ header.header {
   color: #bda5f4;
 }
 
+/* Colour only. Headings keep Ubuntu's own metrics — no tracking adjustments. */
 .sl-markdown-content h1,
 .sl-markdown-content h2,
 .sl-markdown-content h3 {
   color: #fff;
-  letter-spacing: -0.015em;
 }
 
 .sl-markdown-content a:not([class]) {
@@ -118,31 +118,62 @@ starlight-theme-select,
   display: none;
 }
 
+/* ── DOCUMENTATION LANDING PAGE ─────────────────────────────────────────
+   /docs/ uses Starlight's splash template, which drops the sidebar. The
+   markup carries `not-content`, so Starlight's markdown spacing and link
+   colours do not apply inside it and every rule the page needs is here.
+   ---------------------------------------------------------------------- */
+
+/* Splash renders the <h1> in its own content panel, which the default rule
+   separates from the body with a hairline. The title and the directory below
+   it are one block, so the divider only made the page read as two unrelated
+   halves. These rules are unlayered and Starlight's are in
+   @layer starlight.core, so they win without a specificity fight. */
+.content-panel:has(.docs-index) {
+  border-top: 0;
+}
+
+/* The enclosing .sl-container already caps width at --sl-content-width and
+   centres it, so this only adds the page's own bottom breathing room. */
 .docs-index {
-  width: min(100%, 54rem);
-  margin-inline: auto;
-  padding: clamp(2rem, 6vw, 4.5rem) 1rem 4rem;
+  padding: 0 1rem 4rem;
 }
 
-.docs-index-header {
-  max-width: 42rem;
-  margin-bottom: 2rem;
+/* Back to the marketing site. The splash template offers no other route, so
+   this sits above the fold rather than at the end of the card list, where it
+   used to be a fourth card that looked like another documentation section.
+   The links are Starlight <LinkButton>s, the same control the Downloads page
+   uses, so gap handles the spacing and their markdown margins come off. */
+.docs-index-siteback {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
-.docs-index-header .docs-index-kicker {
-  margin: 0 0 0.55rem;
-  color: #a98bea;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
-
-.docs-index-header > p:last-child {
+.docs-index-siteback .sl-link-button {
   margin: 0;
+}
+
+.docs-index-lead {
+  max-width: 42rem;
+  margin: 0 0 2.25rem;
   color: #999;
   font-size: 1rem;
   line-height: 1.65;
+}
+
+.docs-index-section + .docs-index-section {
+  margin-top: 2rem;
+}
+
+/* A plain Ubuntu heading: no tracking, no small caps, no case change. */
+.docs-index .docs-index-heading {
+  margin: 0 0 0.85rem;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .docs-index-list {
@@ -151,10 +182,7 @@ starlight-theme-select,
 }
 
 .docs-index-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+  display: block;
   padding: 1.25rem 1.4rem;
   color: inherit;
   text-decoration: none;
@@ -189,39 +217,8 @@ starlight-theme-select,
   line-height: 1.5;
 }
 
-.docs-index-arrow {
-  flex: 0 0 auto;
-  color: #a98bea;
-  font-size: 1.25rem;
-  transition: transform 160ms ease;
-}
-
-.docs-index-card:hover .docs-index-arrow {
-  transform: translateX(3px);
-}
-
-.docs-index-support {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 0.8rem;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  color: #888;
-  font-size: 0.9rem;
-  border-top: 1px solid #222;
-}
-
-.docs-index-support strong {
-  color: #ddd;
-}
-
-.docs-index-support a {
-  color: #b69aef;
-}
-
 @media (max-width: 30rem) {
   .docs-index-card {
-    align-items: flex-start;
     padding: 1.1rem;
   }
 }
@@ -229,8 +226,7 @@ starlight-theme-select,
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
-  .docs-index-card,
-  .docs-index-arrow {
+  .docs-index-card {
     transition: none;
   }
 }

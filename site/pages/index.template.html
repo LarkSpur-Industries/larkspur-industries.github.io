@@ -336,14 +336,13 @@
     <div class="featured-product fade-in delay-1">
         <div class="featured-inner">
             <div class="featured-image-col">
-                <a href="marigold-5.html" class="featured-carousel-wrap" id="featuredCarouselWrap">
+                <a href="marigold-5.html" class="featured-carousel-wrap">
                     <img id="featuredImg" src="docs/marigold-5/img/Marigold-5_V1.0-Photo-CornerUSB.webp" alt="Marigold-5 USB-C output side" width="804" height="636">
                 </a>
-                <div class="carousel-controls" aria-label="Marigold-5 image carousel controls">
+                <div class="carousel-controls" role="group" aria-label="Marigold-5 image carousel controls">
                     <button class="carousel-control" id="carouselPrev" type="button" aria-label="Previous image" title="Previous image">&#8249;</button>
                     <div class="carousel-dots" id="carouselDots" role="group" aria-label="Choose image"></div>
                     <button class="carousel-control" id="carouselNext" type="button" aria-label="Next image" title="Next image">&#8250;</button>
-                    <button class="carousel-control" id="carouselToggle" type="button" aria-label="Pause image rotation" title="Pause image rotation">&#9208;</button>
                 </div>
             </div>
             <div class="featured-info-col">
@@ -394,8 +393,8 @@
     <!-- ABOUT -->
     <div class="about-strip fade-in delay-3">
         <div class="about-strip-title">About Larkspur Industries</div>
-        <p>We're a small hardware design startup based in Richmond, Virginia, founded by Isaac Subudhi.</p>
-        <p>Our goal is to deliver quality electronics at fair prices for competitive robotics teams and anyone who needs reliable power solutions.</p>
+        <p>We are a small hardware design company based in Richmond, Virginia, founded by Isaac Subudhi.</p>
+        <p>Our goal is to deliver quality electronics at fair prices for robotics teams.</p>
     </div>
 
 </main>
@@ -414,15 +413,17 @@
         { src: 'docs/marigold-5/img/Marigold-5_V1.0-Photo-PCBTop.webp',         alt: 'Marigold-5 bare PCB top view' },
     ];
 
-    var featImg   = document.getElementById('featuredImg');
-    var dotsEl    = document.getElementById('carouselDots');
-    var prevBtn   = document.getElementById('carouselPrev');
-    var nextBtn   = document.getElementById('carouselNext');
-    var toggleBtn = document.getElementById('carouselToggle');
-    var carousel  = document.querySelector('.featured-image-col');
-    var featIdx   = 0;
-    var touchStartX = 0;
+    var featImg  = document.getElementById('featuredImg');
+    var dotsEl   = document.getElementById('carouselDots');
+    var prevBtn  = document.getElementById('carouselPrev');
+    var nextBtn  = document.getElementById('carouselNext');
+    var carousel = document.querySelector('.featured-image-col');
+    var featIdx  = 0;
     var timer;
+
+    /* Rotation runs on its own until the visitor takes over. Any deliberate
+       interaction — arrow, dot, swipe, or keyboard focus — stops it for good,
+       and prefers-reduced-motion means it never starts. */
     var isPlaying = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* Build dots */
@@ -458,35 +459,23 @@
 
     featImg.style.transition = 'opacity 0.2s ease';
 
-    function updateToggle() {
-        /* U+23F8 PAUSE / U+25B6 PLAY. The old pause glyph was U+2161 ROMAN
-           NUMERAL TWO, which Ubuntu does not carry and which fell back to a
-           mismatched face. */
-        toggleBtn.textContent = isPlaying ? '\u23F8' : '\u25B6';
-        toggleBtn.setAttribute('aria-label', isPlaying ? 'Pause image rotation' : 'Start image rotation');
-        toggleBtn.title = toggleBtn.getAttribute('aria-label');
-    }
-
     function startRotation() {
         isPlaying = true;
         clearInterval(timer);
         timer = setInterval(next, 5000);
-        updateToggle();
     }
 
     function stopRotation() {
         isPlaying = false;
         clearInterval(timer);
-        updateToggle();
     }
 
     prevBtn.addEventListener('click', function () { stopRotation(); prev(); });
     nextBtn.addEventListener('click', function () { stopRotation(); next(); });
-    toggleBtn.addEventListener('click', function () { isPlaying ? stopRotation() : startRotation(); });
     carousel.addEventListener('mouseenter', function () { if (isPlaying) clearInterval(timer); });
     carousel.addEventListener('mouseleave', function () { if (isPlaying) startRotation(); });
     carousel.addEventListener('focusin', stopRotation);
-    if (isPlaying) startRotation(); else updateToggle();
+    if (isPlaying) startRotation();
 
     /* Touch swipe.
        The carousel lives inside a link to the product page, so a swipe would
@@ -495,6 +484,7 @@
        touchmove is NOT passive here: it has to be able to cancel the scroll
        once the drag reads as horizontal. */
     var swipeWrap = featImg.parentElement;
+    var touchStartX = 0;
     var touchStartY = 0;
     var didSwipe = false;
     var horizontal = null;

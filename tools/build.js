@@ -72,16 +72,8 @@ const REDUNDANT_BUILD_OUTPUT = [
 
 const generatedFiles = [];
 
-const MODEL_3D_PATH = 'site/assets/products/marigold-5/3d/Marigold-5_V1.0B.glb';
-
 function readFile(filePath) {
   return fs.readFileSync(filePath, 'utf8');
-}
-
-// The 3D model is a large, deliberate download. Label the button with its real
-// size, read from disk, so the number cannot drift away from the asset.
-function fileSizeLabel(filePath) {
-  return `${(fs.statSync(filePath).size / 1024 / 1024).toFixed(1)} MB`;
 }
 
 function escapeHtml(value) {
@@ -129,7 +121,6 @@ function buildTemplatePage(templatePath, outputPath, metaKey, replacements = {})
     MARIGOLD_CHECKOUT_URL: products.marigold5.checkoutUrl,
     MARIGOLD_CURRENT: products.marigold5.currentLabel,
     MARIGOLD_CURRENT_DETAIL: products.marigold5.currentDetailLabel,
-    MODEL_SIZE: fileSizeLabel(MODEL_3D_PATH),
     ...replacements,
   });
   writeHtml(outputPath, html);

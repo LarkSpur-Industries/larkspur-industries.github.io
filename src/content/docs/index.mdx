@@ -4,39 +4,55 @@ description: Installation, wiring, troubleshooting, downloads, and technical ref
 template: splash
 ---
 
-<div className="docs-index">
-  <div className="docs-index-list">
-    <a className="docs-index-card" href="/docs/marigold-5/">
-      <span>
+import { LinkButton } from '@astrojs/starlight/components';
+
+{/*
+  The splash template drops the sidebar, so this page carries its own way back
+  to the main site. `not-content` opts the whole block out of Starlight's
+  markdown spacing and link styling; every rule it needs lives in
+  src/styles/docs.css under "DOCUMENTATION LANDING PAGE".
+
+  Keep the text of each element on one line. Text on its own line inside a JSX
+  tag is parsed as a markdown block and comes out wrapped in its own <p>.
+*/}
+
+<div className="docs-index not-content">
+  <nav className="docs-index-siteback" aria-label="Larkspur Industries site">
+    <LinkButton href="https://larkspurindustries.com/" variant="secondary">Back to larkspurindustries.com</LinkButton>
+    <LinkButton href="https://larkspurindustries.com/shop.html" variant="secondary">Shop</LinkButton>
+  </nav>
+
+  <p className="docs-index-lead">Installation, wiring, troubleshooting, downloads, and technical reference documentation for Larkspur Industries hardware.</p>
+
+  <section className="docs-index-section">
+    <h2 className="docs-index-heading">Products</h2>
+    <div className="docs-index-list">
+      <a className="docs-index-card" href="/docs/marigold-5/">
         <strong>Marigold-5</strong>
         <small>Installation, wiring, operation, troubleshooting, specifications, and design files for the DC-DC USB-C power module.</small>
-      </span>
-    </a>
+      </a>
 
-    <a className="docs-index-card" href="/docs/locking-cable/">
-      <span>
+      <a className="docs-index-card" href="/docs/locking-cable/">
         <strong>Marigold-5 Locking Cable</strong>
         <small>Compatibility and product information for the screw-locking USB-C cable.</small>
-      </span>
-    </a>
+      </a>
+    </div>
+  </section>
 
-    <a className="docs-index-card" href="/docs/warranty/">
-      <span>
+  <section className="docs-index-section">
+    <h2 className="docs-index-heading">Policies</h2>
+    <div className="docs-index-list">
+      <a className="docs-index-card" href="/docs/warranty/">
         <strong>Hardware Warranty</strong>
         <small>Manufacturing coverage, crash replacement, right-to-repair policy, and support contacts.</small>
-      </span>
-    </a>
+      </a>
+    </div>
+  </section>
 
-    <a className="docs-index-card" href="https://larkspurindustries.com/">
-      <span>
-        <strong>Back to Main Site</strong>
-        <small>Return to larkspurindustries.com for the shop, product pages, and more.</small>
-      </span>
-    </a>
-  </div>
-
-  <aside className="docs-index-support">
-    <strong>Need help?</strong>
-    <span>Email <a href="mailto:support@larkspurindustries.com">support&#64;larkspurindustries.com</a> for product support.</span>
-  </aside>
+  <section className="docs-index-section">
+    <h2 className="docs-index-heading">Need help?</h2>
+    {/* Expression, not literal text: GFM autolinks a bare email address, which
+        would nest a second <a> inside the button's own anchor. */}
+    <LinkButton href="mailto:support@larkspurindustries.com" variant="secondary">{'Email support@larkspurindustries.com'}</LinkButton>
+  </section>
 </div>

@@ -12,7 +12,7 @@
         "clean": "node tools/clean.js",
         "dev": "astro dev",
         "build": "npm run clean && astro build && node tools/build.js",
-        "preview": "astro preview --root .",
+        "preview": "./tools/preview.sh",
         "test": "npm run build && node tools/verify-build.js"
     },
     "devDependencies": {

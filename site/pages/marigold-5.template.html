@@ -92,7 +92,13 @@
             justify-content: center;
             overflow: hidden;
         }
+        /* Absolute, not a flex child: the viewer is appended while the load
+           button is still visible and is only revealed on `load`. As a flex
+           child it would claim its share of the row immediately and shove the
+           button off centre for the whole download. */
         model-viewer {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             --poster-color: #0d0d0d;
@@ -238,7 +244,7 @@
 
         <!-- 3D MODEL -->
         <div class="model-container" id="modelContainer">
-            <button class="btn btn-primary" id="loadModelBtn" type="button" data-size="{{MODEL_SIZE}}">Load 3D Model ({{MODEL_SIZE}})</button>
+            <button class="btn btn-primary" id="loadModelBtn" type="button">Load 3D Model</button>
             <div class="model-progress" id="modelProgress" role="status" aria-live="polite"></div>
             <div class="model-label" id="modelLabel" style="display:none;">3D PREVIEW</div>
         </div>
@@ -276,7 +282,7 @@
         <div class="section-label">Technical Specifications</div>
         <div class="spec-grid" style="margin-bottom:1.75rem;">
             <div class="spec-cell"><div class="spec-key">Input Voltage</div><div class="spec-val">6V – 18V</div></div>
-            <div class="spec-cell"><div class="spec-key">Output Voltage</div><div class="spec-val">5.1V Regulated</div></div>
+            <div class="spec-cell"><div class="spec-key">Output Voltage</div><div class="spec-val">5.1V</div></div>
             <div class="spec-cell"><div class="spec-key">Output Current</div><div class="spec-val">{{MARIGOLD_CURRENT_DETAIL}}</div></div>
             <div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">4-40 &amp; 6-32</div></div>
         </div>
@@ -288,21 +294,21 @@
                 <div class="highlight-bar-line"></div>
                 <div>
                     <div class="highlight-bar-title">Brownout-Resilient Power</div>
-                    <div class="highlight-bar-body">Many 12V adapters are not designed for deep battery sag. Marigold-5 is validated down to 6V to keep your co-processor powered through demanding maneuvers.</div>
+                    <div class="highlight-bar-body">Many 12V adapters are not designed for deep battery sag. Marigold-5 is rated down to 6V to keep your co-processor powered through demanding matches.</div>
                 </div>
             </div>
             <div class="highlight-bar">
                 <div class="highlight-bar-line"></div>
                 <div>
                     <div class="highlight-bar-title">5–6A Continuous Output</div>
-                    <div class="highlight-bar-body">Power a vision co-processor and additional peripherals simultaneously. Validated to 7A continuous at 12.3V in still air, with 8–10A available for brief spikes. See the <a href="/docs/marigold-5/specifications/">specifications</a> for the full thermal conditions.</div>
+                    <div class="highlight-bar-body">Power a vision co-processor and additional peripherals simultaneously. High continuous current with headroom available for spikes.</div>
                 </div>
             </div>
             <div class="highlight-bar">
                 <div class="highlight-bar-line"></div>
                 <div>
                     <div class="highlight-bar-title">Quick Swap</div>
-                    <div class="highlight-bar-body">Push-button wiring connector and locking USB-C. Replace a failed unit between qualification matches, no soldering required.</div>
+                    <div class="highlight-bar-body">Push-button wiring connector and locking USB-C. Replace a unit between matches, no soldering required.</div>
                 </div>
             </div>
         </div>
@@ -412,19 +418,24 @@
     var modelContainer = document.getElementById('modelContainer');
     var modelLabel = document.getElementById('modelLabel');
     var modelProgress = document.getElementById('modelProgress');
-    var MODEL_SIZE_LABEL = modelBtn.dataset.size;
     var modelLoaded = false;
+    var resetTimer;
 
     function resetModelButton(message) {
         modelBtn.style.display = '';
         modelBtn.disabled = false;
         modelBtn.textContent = message;
         modelProgress.textContent = '';
-        setTimeout(function () { modelBtn.textContent = 'Load 3D Model (' + MODEL_SIZE_LABEL + ')'; }, 4000);
+        /* Show the failure for a few seconds, then offer the load again. */
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function () { modelBtn.textContent = 'Load 3D Model'; }, 4000);
     }
 
     modelBtn.addEventListener('click', async function () {
         if (modelLoaded) return;
+        /* A retry during the failure message would otherwise be overwritten by
+           the pending restore. */
+        clearTimeout(resetTimer);
         modelBtn.disabled = true;
         modelBtn.textContent = 'Loading viewer...';
         modelProgress.textContent = '';

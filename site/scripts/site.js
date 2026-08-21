@@ -13,6 +13,11 @@ if (navWrap && !reduceMotion.matches) {
     let hidden = false;
     let ticking = false;
 
+    const setHidden = (value) => {
+        hidden = value;
+        navWrap.style.transform = hidden ? 'translateY(-120%)' : 'translateY(0)';
+    };
+
     const update = () => {
         ticking = false;
         const y = Math.max(0, window.scrollY);
@@ -24,8 +29,7 @@ if (navWrap && !reduceMotion.matches) {
         const shouldHide = delta > 0 && y > HIDE_AFTER;
         if (shouldHide === hidden) return;
 
-        hidden = shouldHide;
-        navWrap.style.transform = hidden ? 'translateY(-120%)' : 'translateY(0)';
+        setHidden(shouldHide);
     };
 
     window.addEventListener('scroll', () => {
@@ -33,4 +37,10 @@ if (navWrap && !reduceMotion.matches) {
         ticking = true;
         window.requestAnimationFrame(update);
     }, { passive: true });
+
+    /* Tabbing forward from page content reaches the nav links even while the
+       bar is hidden. Without this the focus ring sits off-screen. */
+    navWrap.addEventListener('focusin', () => {
+        if (hidden) setHidden(false);
+    });
 }

@@ -25,6 +25,14 @@ const REQUIRED = [
   'js/site.js',
 ];
 
+// Mirrors LEGACY_REDIRECTS in tools/build.js. These pages are meta-refresh
+// stubs, so the landmark and heading rules below do not apply to them.
+const LEGACY_REDIRECT_PAGES = new Set([
+  'docs-marigold-5.html',
+  'docs-locking-cable.html',
+  'docs-warranty.html',
+]);
+
 const failures = [];
 
 for (const file of REQUIRED) {
@@ -98,12 +106,7 @@ for (const file of allFiles(ROOT).filter((file) => file.endsWith('.html'))) {
     if (ids.filter((candidate) => candidate === id).length > 1) failures.push(`Duplicate id in ${relative}: ${id}`);
   }
 
-  const isRedirect = Object.prototype.hasOwnProperty.call({
-    'docs-marigold-5.html': true,
-    'docs-locking-cable.html': true,
-    'docs-warranty.html': true,
-  }, relative);
-  if (!isRedirect && relative !== path.join('docs', '404.html')) {
+  if (!LEGACY_REDIRECT_PAGES.has(relative) && relative !== path.join('docs', '404.html')) {
     const h1Count = (html.match(/<h1\b/g) || []).length;
     const mainCount = (html.match(/<main\b/g) || []).length;
     if (h1Count !== 1) failures.push(`Expected one H1 in ${relative}; found ${h1Count}`);

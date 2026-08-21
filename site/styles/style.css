@@ -265,15 +265,6 @@ button:focus-visible {
     color: #fff;
 }
 
-/* ── CARDS ───────────────────────────────────────────────────────────── */
-
-.card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-}
-
 /* ── SECTION LABEL ───────────────────────────────────────────────────── */
 
 .section-label {
@@ -459,18 +450,3 @@ a { color: var(--accent); }
     color: #888;
     line-height: 1.65;
 }
-
-/* docs compat */
-.docs-section {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-}
-
-.link {
-    color: var(--text-muted);
-    text-decoration: none;
-}
-
-.link:hover { color: var(--text-main); }

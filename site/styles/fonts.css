@@ -3,7 +3,7 @@
 /* The Ubuntu webfont is requested from a <link> in the document head, not with
    @import. An @import here would serialise HTML -> fonts.css -> Google CSS ->
    woff2, delaying first paint by an extra round trip. See commonMeta in
-   meta-config.js and the `head` array in astro.config.mjs. */
+   site/page-meta.js and the `head` array in astro.config.mjs. */
 
 :root {
     --font-main: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;

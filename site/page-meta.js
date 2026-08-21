@@ -1,5 +1,5 @@
-// meta-config.js
-// Central configuration for all page metadata
+// Central configuration for the marketing pages' metadata: titles,
+// descriptions, Open Graph tags, and schema.org structured data.
 
 const baseUrl = 'https://larkspurindustries.com';
 

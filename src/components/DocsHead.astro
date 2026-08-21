@@ -26,7 +26,7 @@ if (parts.length > 1 || (parts.length === 1 && !(parts[0] in sectionNames))) {
   breadcrumbItems.push({ name: entry.data.title, url: Astro.url.href });
 }
 
-// 1200x630 PNG, matching the marketing pages. See meta-config.js.
+// 1200x630 PNG, matching the marketing pages. See site/page-meta.js.
 const image = parts[0] === 'locking-cable'
   ? new URL('/content/img/og-locking-cable.png', site).href
   : new URL('/content/img/og-default.png', site).href;
