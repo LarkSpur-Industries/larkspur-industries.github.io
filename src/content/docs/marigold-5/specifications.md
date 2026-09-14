@@ -56,10 +56,9 @@ up; the UVLO figure is listed for reference and is not an operating range.
 | Dimensions | 2.52 × 0.87 × 0.67 inches (64 × 22 × 17 mm) |
 | Weight | Approximately 45 g |
 | Case material | Black PETG |
-| Mounting pattern | Two #4-40 threaded inserts at 1.25-inch spacing |
+| Mounting pattern | Two 6-32 holes at 1.25-inch spacing |
 | Maximum mounting screw length | 0.5 inches |
 | Operating temperature | −40°C to +60°C ambient, derated above 50°C |
 | Storage temperature | −40°C to +85°C |
 
-![Marigold-5 mechanical drawing](/docs/marigold-5/pdf/Marigold-5_V1.0B_Drawing.png)
-*Mechanical drawing with dimensions*
+![Marigold-5 mechanical drawing](/docs/marigold-5/pdf/Marigold-5_V1.0_Drawing.png)

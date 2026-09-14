@@ -10,17 +10,17 @@ description: Mount, wire, connect, and verify a Marigold-5 power module on an FR
 - 16–18 AWG red and black wire
 - 15–20A circuit breaker for the PDH
 - USB-C cable rated for at least 3A
-- #4-40 mounting hardware or zip ties
+- #6-32 mounting hardware or zip ties
 
 ## Mounting
 
 ![Marigold-5 top view showing mounting points](/docs/marigold-5/img/Marigold-5_V1.0-Top.webp)
 *Top view showing mounting points*
 
-### Screw mounting
+### Bolt mounting
 
 - Recommended for optimal heatsinking.
-- Use the two #4-40 threaded inserts with 1.25-inch center spacing.
+- Use the two #6-32 holes with 1.25-inch center spacing.
 
 ### Zip-tie mounting
 - Route zip ties on the four points around the case perimeter.

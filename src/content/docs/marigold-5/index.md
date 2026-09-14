@@ -14,7 +14,7 @@ Built around the Texas Instruments TPS56A37, the Marigold-5 provides reliable 5.
 
 - **High-current output:** 5-6A recommended combined load for continuous operation
 - **Brownout protection:** Maintains stable 5.1V output all the way down to 6V input
-- **Secure mounting:** Attaches to 1×2-inch aluminum extrusion with #4-40 hardware or through integrated zip-tie points
+- **Secure mounting:** Attaches to 1×2-inch aluminum extrusion with #6-32 hardware or through integrated zip-tie points
 - **Built-in protection:** Reverse polarity, input voltage spikes, thermal shutdown, and overcurrent limiting
 
 :::danger[Safety limits]

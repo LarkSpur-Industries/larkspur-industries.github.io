@@ -226,7 +226,7 @@ const pages = {
         {
           "@type": "PropertyValue",
           "name": "Mounting",
-          "value": "4-40 & 6-32"
+          "value": "6-32"
         }
       ],
       "offers": {
