@@ -53,6 +53,7 @@ images are linked externally and image-indexed. `PUBLISHED_DIRECTORIES` in
 | `site/assets/brand/img/` | `/content/img/` |
 | `site/assets/products/marigold-5/` | `/docs/marigold-5/` |
 | `site/assets/products/locking-cable/img/` | `/docs/cables/img/` |
+| `site/assets/products/locking-cable/pdf/` | `/docs/cables/pdf/` |
 
 Change the map, not the asset paths, if a URL ever has to move — and add a
 redirect when it does.

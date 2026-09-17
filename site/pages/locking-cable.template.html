@@ -43,33 +43,52 @@
         .product-title {
             font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;
         }
-        .coming-soon-badge {
-            display: inline-block;
-            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-            color: #8a8a8a;
-            border: 1px solid #2a2a2a;
-            padding: 0.2rem 0.6rem;
-            border-radius: var(--radius);
-            margin-bottom: 1.5rem;
-        }
         .product-img-wrap {
             background: #0d0d0d;
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 1.25rem;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             aspect-ratio: 2/1;
-            opacity: 0.55;
         }
         .product-img-wrap img {
             width: auto;
             height: auto;
             max-width: 100%;
-            max-height: 180px;
+            max-height: 230px;
             object-fit: contain;
+        }
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.55rem;
+        }
+        .price-big {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .price-currency {
+            margin-left: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #8a8a8a;
+        }
+        .purchase-note {
+            margin-bottom: 1.5rem;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            color: #999;
+        }
+        @media (max-width: 580px) {
+            .product-wrap { padding: 1rem; }
+            .product-title { font-size: 1.5rem; }
+            .price-row .btn { width: 100%; }
         }
     </style>
 </head>
@@ -94,24 +113,33 @@
     <div class="product-wrap fade-in delay-1">
         <div class="product-label">Cable</div>
         <h1 class="product-title">LOCKING CABLE</h1>
-        <div class="coming-soon-badge">Coming Soon</div>
 
         <div class="product-img-wrap">
             <img src="docs/cables/img/locking-cable.webp" alt="Marigold-5 Locking Cable" width="1167" height="1169" loading="eager" decoding="async">
         </div>
 
         <p style="font-size:0.9rem;color:#bbb;line-height:1.7;margin-bottom:1.5rem;">
-            A flexible, high-power-rated USB-C cable with locking connectors on both ends and a durable TPE jacket. Built to keep Marigold-5 connections secure through vibration and field collisions.
+            A specialized 12-inch USB-C power cable built for Marigold-5. Locking connectors on both ends keep it secure, while extra-thick 20 AWG power conductors reduce voltage drop under high loads.
         </p>
+
+        <div class="price-row">
+            <span class="price-big">${{LOCKING_CABLE_PRICE}}<span class="price-currency">{{LOCKING_CABLE_CURRENCY}}</span></span>
+            <a href="marigold-5.html" class="btn btn-primary">Pre-Order with Marigold-5</a>
+        </div>
+        <p class="purchase-note">Available only with the purchase of a Marigold-5 for now.</p>
 
         <hr style="border:none;border-top:1px solid var(--border);margin:0 0 1.5rem;">
 
         <div class="section-label">Specifications</div>
         <div class="spec-grid" style="margin-bottom:1.75rem;">
-            <div class="spec-cell"><div class="spec-key">Connector</div><div class="spec-val">Dual-Sided Locking USB-C</div></div>
-            <div class="spec-cell"><div class="spec-key">Power</div><div class="spec-val">High-Power Rated</div></div>
-            <div class="spec-cell"><div class="spec-key">Cable</div><div class="spec-val">Flexible</div></div>
-            <div class="spec-cell"><div class="spec-key">Jacket</div><div class="spec-val">TPE</div></div>
+            <div class="spec-cell"><div class="spec-key">Connectors</div><div class="spec-val">Locking USB-C Male, Both Ends</div></div>
+            <div class="spec-cell"><div class="spec-key">Length</div><div class="spec-val">12 in (300 mm)</div></div>
+            <div class="spec-cell"><div class="spec-key">Outside Diameter</div><div class="spec-val">5.0 mm</div></div>
+            <div class="spec-cell"><div class="spec-key">Power Conductors</div><div class="spec-val">20 AWG</div></div>
+            <div class="spec-cell"><div class="spec-key">Data</div><div class="spec-val">Not Supported</div></div>
+            <div class="spec-cell"><div class="spec-key">Jacket</div><div class="spec-val">Black TPE 90A</div></div>
+            <div class="spec-cell"><div class="spec-key">Shielding</div><div class="spec-val">Internal Copper Foil</div></div>
+            <div class="spec-cell"><div class="spec-key">Construction</div><div class="spec-val">Specialized Custom Design</div></div>
         </div>
 
         <div class="section-label">Why Locking Cable?</div>
@@ -127,13 +155,12 @@
                 <div class="highlight-bar-line"></div>
                 <div>
                     <div class="highlight-bar-title">High Performance</div>
-                    <div class="highlight-bar-body">High-power-rated conductors and a flexible TPE jacket make installation and routing easier inside a robot.</div>
+                    <div class="highlight-bar-body">Extra-thick 20 AWG power conductors reduce voltage drop, while the flexible, tear-resistant TPE jacket makes routing easier inside a robot.</div>
                 </div>
             </div>
         </div>
 
-        <a href="/docs/locking-cable/" class="btn btn-block" style="margin-bottom: 0.75rem;">Read the Docs</a>
-        <a href="shop.html" class="btn btn-block">← Back to Shop</a>
+        <a href="/docs/locking-cable/" class="btn btn-block">Read the Docs</a>
     </div>
 
 </main>

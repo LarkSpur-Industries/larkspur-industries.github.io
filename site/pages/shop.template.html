@@ -38,7 +38,7 @@
         .pcard-img {
             background: var(--card-bg);
             border-right: 1px solid var(--border);
-            padding: 1.25rem;
+            padding: 0.7rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -91,6 +91,7 @@
         /* ── RESPONSIVE ─────────────────────────────────────── */
         @media (max-width: 480px) {
             .pcard-top { grid-template-columns: 90px 1fr; }
+            .pcard-img { padding: 0.4rem; }
             .pcard-name { font-size: 1rem; }
             .pcard-actions { flex-direction: column; }
             .pcard-actions .btn { width: 100%; }
@@ -143,7 +144,7 @@
     </div>
 
     <!-- LOCKING CABLE -->
-    <div class="product-card-full unavailable fade-in delay-2">
+    <div class="product-card-full fade-in delay-2">
         <div class="pcard-top">
             <div class="pcard-img">
                 <img src="docs/cables/img/locking-cable.webp"
@@ -152,15 +153,16 @@
             <div class="pcard-headline">
                 <div class="pcard-label">Cable</div>
                 <div class="pcard-name">LOCKING CABLE</div>
-                <div class="pcard-price unavailable">Coming Soon</div>
+                <div class="pcard-price">${{LOCKING_CABLE_PRICE}} {{LOCKING_CABLE_CURRENCY}}</div>
             </div>
         </div>
         <div class="pcard-body">
             <p class="pcard-desc">
-                A flexible, high-power-rated USB-C cable with locking connectors on both ends and a durable TPE jacket. Built to keep Marigold-5 connections secure through vibration and field collisions.
+                A custom 12-inch USB-C power cable with locking connectors on both ends, extra-thick 20 AWG power conductors, copper foil shielding, and a flexible TPE jacket. Available only with a Marigold-5 purchase for now.
             </p>
             <div class="pcard-actions">
-                <a href="/docs/locking-cable/" class="btn btn-sm">View Docs</a>
+                <a href="locking-cable.html" class="btn btn-primary btn-sm">View Product</a>
+                <a href="/docs/locking-cable/" class="btn btn-sm">Docs</a>
             </div>
         </div>
     </div>

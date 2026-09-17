@@ -16,6 +16,11 @@ const products = {
     currentLabel: '5-6A Continuous',
     currentDetailLabel: '5-6A Continuous',
   },
+  lockingCable: {
+    price: '7.99',
+    currency: 'USD',
+    availability: 'preorder',
+  },
 };
 
 // Social preview images are 1200x630 PNG. Keep both: 1.91:1 is what
@@ -139,6 +144,17 @@ const pages = {
           "description": "DC-DC power module for FRC co-processors. 6-18V input, regulated 5.1V output, 5-6A continuous.",
           "url": `${baseUrl}/marigold-5.html`
         }
+      },
+      {
+        "@type": "Offer",
+        "price": products.lockingCable.price,
+        "priceCurrency": products.lockingCable.currency,
+        "itemOffered": {
+          "@type": "Product",
+          "name": "Marigold-5 Locking Cable",
+          "description": "Custom 12-inch locking USB-C power cable with 20 AWG conductors.",
+          "url": `${baseUrl}/locking-cable.html`
+        }
       }
     ]
   },
@@ -160,10 +176,10 @@ const pages = {
 
   'shop': {
     title: 'Shop | Larkspur Industries',
-    description: 'Browse and buy Larkspur Industries hardware for FIRST Robotics Competition. Reliable, affordable electronics including the Marigold-5 USB-C power module.',
+    description: 'Browse Larkspur Industries hardware for FIRST Robotics Competition, including the Marigold-5 power module and locking USB-C cable.',
     ogType: 'website',
     ogTitle: 'Shop - Larkspur Industries',
-    ogDescription: 'Reliable, affordable electronics for FIRST Robotics teams. Buy the Marigold-5 USB-C power module.',
+    ogDescription: 'Reliable, affordable electronics for FIRST Robotics teams, including Marigold-5 and its locking USB-C power cable.',
     ogImage: siteMeta.defaultImage,
     canonicalUrl: `${baseUrl}/shop.html`,
     breadcrumbs: breadcrumb([
@@ -247,17 +263,56 @@ const pages = {
 
   'locking-cable': {
     title: 'Marigold-5 Locking Cable | Larkspur Industries',
-    description: 'A flexible, high-power-rated USB-C cable with locking connectors on both ends and a durable TPE jacket.',
+    description: 'A 12-inch locking USB-C power cable for Marigold-5 with 20 AWG conductors, copper foil shielding, and a flexible TPE jacket.',
     ogType: 'product',
     ogTitle: 'Marigold-5 Locking Cable',
-    ogDescription: 'A flexible, high-power-rated USB-C cable with locking connectors on both ends and a durable TPE jacket.',
+    ogDescription: `A custom 20 AWG locking USB-C power cable for Marigold-5. Available with a Marigold-5 purchase for $${products.lockingCable.price}.`,
     ogImage: `${baseUrl}/content/img/og-locking-cable.png`,
     canonicalUrl: `${baseUrl}/locking-cable.html`,
+    productData: {
+      price: products.lockingCable.price,
+      currency: products.lockingCable.currency,
+      availability: products.lockingCable.availability,
+    },
     breadcrumbs: breadcrumb([
       { name: 'Home', path: '' },
       { name: 'Shop', path: 'shop.html' },
       { name: 'Marigold-5 Locking Cable', path: 'locking-cable.html' }
     ]),
+    structuredData: {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Marigold-5 Locking Cable",
+      "image": `${baseUrl}/docs/cables/img/locking-cable.webp`,
+      "description": "Custom 12-inch locking USB-C power cable with 20 AWG conductors, copper foil shielding, and a flexible TPE jacket.",
+      "sku": "LOCKING-CABLE-V1.0",
+      "mpn": "LOCKING-CABLE-V1.0",
+      "category": "USB-C power cable",
+      "brand": {
+        "@type": "Brand",
+        "name": "Larkspur Industries"
+      },
+      "additionalProperty": [
+        { "@type": "PropertyValue", "name": "Length", "value": "12 inches (300 mm)" },
+        { "@type": "PropertyValue", "name": "Power Conductor Size", "value": "20 AWG" },
+        { "@type": "PropertyValue", "name": "Outside Diameter", "value": "5.0 mm" },
+        { "@type": "PropertyValue", "name": "Data Support", "value": "No" }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "url": `${baseUrl}/locking-cable.html`,
+        "priceCurrency": products.lockingCable.currency,
+        "price": products.lockingCable.price,
+        "availability": "https://schema.org/PreOrder",
+        "availabilityStarts": "2026-09-26",
+        "itemCondition": "https://schema.org/NewCondition",
+        "description": "Available only with a Marigold-5 purchase for now.",
+        "seller": {
+          "@type": "Organization",
+          "name": "Larkspur Industries"
+        }
+      }
+    },
   },
 
   '404': {

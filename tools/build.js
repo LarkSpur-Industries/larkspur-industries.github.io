@@ -64,6 +64,7 @@ const PUBLISHED_DIRECTORIES = {
   'site/assets/brand/img': 'content/img',
   'site/assets/products/marigold-5': 'docs/marigold-5',
   'site/assets/products/locking-cable/img': 'docs/cables/img',
+  'site/assets/products/locking-cable/pdf': 'docs/cables/pdf',
 };
 
 const STATIC_FILES = ['CNAME', 'robots.txt'];
@@ -129,6 +130,8 @@ function buildTemplatePage(templatePath, outputPath, metaKey, replacements = {})
     MARIGOLD_CHECKOUT_URL: products.marigold5.checkoutUrl,
     MARIGOLD_CURRENT: products.marigold5.currentLabel,
     MARIGOLD_CURRENT_DETAIL: products.marigold5.currentDetailLabel,
+    LOCKING_CABLE_PRICE: products.lockingCable.price,
+    LOCKING_CABLE_CURRENCY: products.lockingCable.currency,
     ...replacements,
   });
   writeHtml(outputPath, html);

@@ -17,6 +17,8 @@ const REQUIRED = [
   'docs/marigold-5/support/index.html',
   'docs/marigold-5/troubleshooting/index.html',
   'docs/locking-cable/index.html',
+  'docs/cables/img/Locking_Cable_V1.0_Drawing.png',
+  'docs/cables/pdf/Locking_Cable_V1.0_Drawing.pdf',
   'docs/faq/index.html',
   'docs/revision-history/index.html',
   'docs/reference/warranty/index.html',
