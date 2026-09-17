@@ -113,6 +113,10 @@ header.header {
   border-radius: 8px;
 }
 
+.starlight-aside--danger {
+  background-color: #6f253a;
+}
+
 starlight-theme-select,
 .mobile-preferences {
   display: none;
