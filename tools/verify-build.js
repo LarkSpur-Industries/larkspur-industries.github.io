@@ -17,7 +17,9 @@ const REQUIRED = [
   'docs/marigold-5/support/index.html',
   'docs/marigold-5/troubleshooting/index.html',
   'docs/locking-cable/index.html',
-  'docs/warranty/index.html',
+  'docs/faq/index.html',
+  'docs/revision-history/index.html',
+  'docs/reference/warranty/index.html',
   'docs/pagefind/pagefind.js',
   'sitemap.xml',
   'CNAME',
@@ -31,6 +33,7 @@ const LEGACY_REDIRECT_PAGES = new Set([
   'docs-marigold-5.html',
   'docs-locking-cable.html',
   'docs-warranty.html',
+  path.join('docs', 'warranty', 'index.html'),
 ]);
 
 const failures = [];

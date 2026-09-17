@@ -55,7 +55,14 @@ export default defineConfig({
           label: 'Accessories',
           items: [{ slug: 'locking-cable', label: 'Marigold-5 Locking Cable' }],
         },
-        { slug: 'warranty', label: 'Hardware Warranty' },
+        {
+          label: 'Reference',
+          items: [
+            { slug: 'faq', label: 'FAQ' },
+            { slug: 'revision-history', label: 'Revision History' },
+            { slug: 'reference/warranty', label: 'Hardware Warranty' },
+          ],
+        },
       ],
       head: [
         { tag: 'meta', attrs: { name: 'theme-color', content: '#0a0a0a' } },

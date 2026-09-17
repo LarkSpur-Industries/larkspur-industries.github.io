@@ -12,9 +12,9 @@ const products = {
     price: '24.99',
     currency: 'USD',
     checkoutUrl: 'https://checkout.square.site/merchant/MLCT3G6R606D6/checkout/K4UYC22H5F7DH7DI7KRWP7BC',
-    availability: 'in stock',
-    currentLabel: '5–6A Continuous',
-    currentDetailLabel: '5–6A continuous, 7A validated',
+    availability: 'preorder',
+    currentLabel: '5-6A Continuous',
+    currentDetailLabel: '5-6A Continuous',
   },
 };
 
@@ -174,7 +174,7 @@ const pages = {
 
   'marigold-5': {
     title: 'Marigold-5 USB-C Power Module | Larkspur Industries',
-    description: 'Marigold-5 USB-C power module for FRC robots. 6–18V input, regulated 5.1V output, and 5–6A continuous combined output.',
+    description: 'Marigold-5 USB-C power module for FRC robots. 6-18V input, regulated 5.1V output, and 5-6A continuous combined output.',
     ogType: 'product',
     ogTitle: 'Marigold-5 USB-C Power Module for FRC Robots',
     ogDescription: `Compact DC-DC power module with 1x high-current USB-C port. Powers co-processors and peripherals from your robot's 12V supply. ${products.marigold5.currentLabel}, $${products.marigold5.price}`,
@@ -234,7 +234,8 @@ const pages = {
         "url": `${baseUrl}/marigold-5.html`,
         "priceCurrency": "USD",
         "price": products.marigold5.price,
-        "availability": "https://schema.org/InStock",
+        "availability": "https://schema.org/PreOrder",
+        "availabilityStarts": "2026-09-26",
         "itemCondition": "https://schema.org/NewCondition",
         "seller": {
           "@type": "Organization",
@@ -246,10 +247,10 @@ const pages = {
 
   'locking-cable': {
     title: 'Marigold-5 Locking Cable | Larkspur Industries',
-    description: 'A screw-locking USB-C cable for Marigold-5, built for reliable robot wiring in high-vibration FRC environments.',
+    description: 'A flexible, high-power-rated USB-C cable with locking connectors on both ends and a durable TPE jacket.',
     ogType: 'product',
     ogTitle: 'Marigold-5 Locking Cable',
-    ogDescription: 'A screw-locking USB-C cable for Marigold-5, built for reliable robot wiring in high-vibration FRC environments.',
+    ogDescription: 'A flexible, high-power-rated USB-C cable with locking connectors on both ends and a durable TPE jacket.',
     ogImage: `${baseUrl}/content/img/og-locking-cable.png`,
     canonicalUrl: `${baseUrl}/locking-cable.html`,
     breadcrumbs: breadcrumb([

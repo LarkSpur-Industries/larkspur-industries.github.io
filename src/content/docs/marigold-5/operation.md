@@ -5,7 +5,7 @@ description: Understand Marigold-5 output voltage, status LED behavior, and FRC 
 
 ## Why the output is 5.1V
 
-The 5.1V output is intentional. USB cables introduce resistance, commonly 0.1–0.5 Ω per meter. Under load, this resistance causes a voltage drop:
+The 5.1V output is intentional. USB cables introduce resistance, commonly 0.1-0.5 Ω per meter. Under load, this resistance causes a voltage drop:
 
 - **Voltage drop = Current × Resistance**
 - At 3A through 0.1 Ω of total cable resistance, the drop is **0.3V**.
@@ -33,6 +33,6 @@ The Power Good circuit includes deglitch timing to avoid false fault indications
 
 ## FRC brownouts
 
-During high-current maneuvers, a robot battery can sag from 12V to 6–7V for several seconds. Many inexpensive automotive and general-purpose 12V to 5V converters specify minimum input voltages around 8–9V and are not designed to remain regulated through a deep FRC battery sag. A loss of stable regulated output can reboot a co-processor or cause undervoltage damage.
+During high-current maneuvers, a robot battery can sag from 12V to 6-7V for several seconds. Many inexpensive automotive and general-purpose 12V to 5V converters specify minimum input voltages around 8-9V and are not designed to remain regulated through a deep FRC battery sag. A loss of stable regulated output can reboot a co-processor or cause undervoltage damage.
 
 The TPS56A37 buck converter operates with input voltages as low as 6V. Marigold-5 can therefore maintain its regulated output during the battery voltage sags.

@@ -18,7 +18,6 @@
             font-size: 0.7rem;
             color: #8a8a8a;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
             margin-bottom: 0.25rem;
             font-weight: 500;
         }
@@ -63,7 +62,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.75rem;
             flex-wrap: wrap;
         }
         .price-big {
@@ -77,6 +76,20 @@
             color: #8a8a8a;
             margin-left: 0.25rem;
         }
+        .preorder-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.65rem 0.75rem;
+            margin-bottom: 1.5rem;
+            background: #0d0d0d;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+        .preorder-info p { font-size: 0.76rem; line-height: 1.45; color: #999; }
+        .preorder-info strong { color: #ccc; }
+        .preorder-info .btn { flex-shrink: 0; }
 
         /* ── 3D MODEL ───────────────────────────────────────── */
         .model-container {
@@ -214,6 +227,8 @@
             .model-container { height: 200px; }
             .price-big { font-size: 1.35rem; }
             .price-row { margin-bottom: 1rem; }
+            .preorder-info { align-items: flex-start; flex-direction: column; }
+            .preorder-info .btn { width: 100%; }
         }
     </style>
 </head>
@@ -273,15 +288,20 @@
         <!-- PRICE + CTA -->
         <div class="price-row">
             <span class="price-big">${{MARIGOLD_PRICE}}<span class="price-currency">{{MARIGOLD_CURRENCY}}</span></span>
-            <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Buy Now</a>
+            <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Pre-Order</a>
         </div>
+
+        <aside class="preorder-info" aria-label="Marigold-5 preorder information">
+            <p><strong>Preorders open Sat, Sept 26.</strong> This 120-unit batch ships mid to late October.</p>
+            <a href="/docs/faq/" class="btn btn-sm">FAQ</a>
+        </aside>
 
         <hr style="border:none;border-top:1px solid var(--border);margin:0 0 1.5rem;">
 
         <!-- SPECS -->
         <div class="section-label">Technical Specifications</div>
         <div class="spec-grid" style="margin-bottom:1.75rem;">
-            <div class="spec-cell"><div class="spec-key">Input Voltage</div><div class="spec-val">6V – 18V</div></div>
+            <div class="spec-cell"><div class="spec-key">Input Voltage</div><div class="spec-val">6V - 18V</div></div>
             <div class="spec-cell"><div class="spec-key">Output Voltage</div><div class="spec-val">5.1V</div></div>
             <div class="spec-cell"><div class="spec-key">Output Current</div><div class="spec-val">{{MARIGOLD_CURRENT_DETAIL}}</div></div>
             <div class="spec-cell"><div class="spec-key">Mounting</div><div class="spec-val">6-32 &amp; 6-32</div></div>
@@ -300,7 +320,7 @@
             <div class="highlight-bar">
                 <div class="highlight-bar-line"></div>
                 <div>
-                    <div class="highlight-bar-title">5–6A Continuous Output</div>
+                    <div class="highlight-bar-title">5-6A Continuous Output</div>
                     <div class="highlight-bar-body">Power a vision co-processor and additional peripherals simultaneously. High continuous current with headroom available for spikes.</div>
                 </div>
             </div>
@@ -317,9 +337,8 @@
         <div class="section-label">What's in the Box</div>
         <ul class="box-list" style="margin-bottom:1.75rem;">
             <li><span>1× Marigold-5</span><span class="note">Fully Assembled</span></li>
-            <li><span>1× Larkspur Sticker</span><span class="note">Vinyl</span></li>
-            <li><span>1× Quick Mount Jig</span><span class="note">Paper</span></li>
             <li><span>1× Wiring Guide</span><span class="note">Pamphlet</span></li>
+            <li><span>1× Reference Manual</span><span class="note">Paper</span></li>
         </ul>
 
         <a href="/docs/marigold-5/" class="btn btn-block">Read the Docs</a>

@@ -19,9 +19,9 @@ description: Electrical, protection, USB-C, and mechanical specifications for Ma
 | Shutdown current | - | 3 | - | µA |
 | Efficiency at 5A, 12V input | - | ~90% | - | % |
 
-The current ratings apply to the combined load across the USB-C and auxiliary outputs. Use **5–6A** for normal continuous operation. The **7A continuous rating** was validated at **12.3V input**, at standard ambient temperature in still air, with the enclosed module not mounted to aluminum. Actual thermal performance depends on placement, nearby heat sources, mounting, and moving airflow inside the robot.
+The current ratings apply to the combined load across the USB-C and auxiliary outputs. Use **5-6A** for normal continuous operation. The **7A continuous rating** was validated at **12.3V input**, at standard ambient temperature in still air, with the enclosed module not mounted to aluminum. Actual thermal performance depends on placement, nearby heat sources, mounting, and moving airflow inside the robot.
 
-The USB-C receptacle hardware can carry the full device output current, while its CC resistors advertise 3A to standards-compliant USB-C sinks. Confirm the connected device and cable are suitable for the intended current. Loads of **8–10A are supported for only a few seconds** under standard passive conditions. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling. Active cooling hardware is not included.
+The USB-C receptacle hardware can carry the full device output current, while its CC resistors advertise 3A to standards-compliant USB-C sinks. Confirm the connected device and cable are suitable for the intended current. Loads of **8-10A are supported for only a few seconds** under standard passive conditions. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling. Active cooling hardware is not included.
 
 ## Protection features
 

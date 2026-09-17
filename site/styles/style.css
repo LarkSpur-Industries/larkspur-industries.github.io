@@ -265,13 +265,44 @@ button:focus-visible {
     color: #fff;
 }
 
+/* ── PREORDER BANNER ────────────────────────────────────────────────── */
+
+.preorder-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+    margin: 1.25rem 0 0;
+}
+
+.preorder-banner p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #bbb;
+}
+
+.preorder-banner strong { color: #fff; }
+.preorder-banner .btn { flex-shrink: 0; }
+
+@media (max-width: 560px) {
+    .preorder-banner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .preorder-banner .btn { width: 100%; }
+}
+
 /* ── SECTION LABEL ───────────────────────────────────────────────────── */
 
 .section-label {
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
     color: #8a8a8a;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.4rem;
@@ -336,7 +367,6 @@ button:focus-visible {
     font-size: 0.68rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
     color: #8a8a8a;
     margin-bottom: 0.2rem;
 }

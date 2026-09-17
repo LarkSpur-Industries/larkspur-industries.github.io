@@ -139,7 +139,6 @@
             font-size: 0.72rem;
             color: #8a8a8a;
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 0.25rem;
             font-weight: 500;
         }
@@ -191,7 +190,6 @@
             font-weight: 700;
             color: #8a8a8a;
             text-transform: uppercase;
-            letter-spacing: 1.3px;
         }
         .products-grid {
             display: grid;
@@ -258,7 +256,6 @@
             font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
             color: var(--accent);
             margin-bottom: 0.6rem;
         }
@@ -302,8 +299,14 @@
 <div class="container">
 <main id="main-content">
 
+    <!-- PREORDER AVAILABILITY -->
+    <aside class="preorder-banner fade-in" aria-label="Marigold-5 preorder availability">
+        <p><strong>Offseason preorders open Sat, Sept 26.</strong> This 120-unit batch ships mid to late October.</p>
+        <a href="/docs/faq/" class="btn btn-sm">More Information</a>
+    </aside>
+
     <!-- HERO -->
-    <div class="hero fade-in">
+    <div class="hero fade-in delay-1">
         <div class="hero-grid">
             <div>
                 <h1 class="hero-headline">
@@ -350,11 +353,10 @@
                 <div class="featured-name">MARIGOLD-5</div>
                 <div class="featured-price">${{MARIGOLD_PRICE}} <span class="price-note">{{MARIGOLD_CURRENCY}}</span></div>
                 <p class="featured-desc">
-                    Keeps your co-processor alive during battery brownouts. Operates reliably down to 6V, with 5–6A continuous output for a vision system and peripherals simultaneously.
+                    Keeps your co-processor alive during battery brownouts. Operates reliably down to 6V, with 5-6A continuous output for a vision system and peripherals simultaneously.
                 </p>
                 <div class="featured-btns">
-                    <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Buy Now - ${{MARIGOLD_PRICE}} {{MARIGOLD_CURRENCY}}</a>
-                    <a href="marigold-5.html" class="btn btn-block">Product Page</a>
+                    <a href="marigold-5.html" class="btn btn-primary btn-block">View Product</a>
                 </div>
             </div>
         </div>

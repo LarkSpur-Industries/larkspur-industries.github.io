@@ -5,7 +5,7 @@ description: Warranty, technical support, sales, and engineering contact informa
 
 ## Warranty
 
-Larkspur Industries provides a manufacturing warranty on Marigold-5. Please review the [complete hardware warranty](/docs/warranty/) for coverage, exclusions, the crash replacement program, and the RMA process.
+Larkspur Industries provides a manufacturing warranty on Marigold-5. Please review the [complete hardware warranty](/docs/reference/warranty/) for coverage, exclusions, the crash replacement program, and the RMA process.
 
 ## Contact
 

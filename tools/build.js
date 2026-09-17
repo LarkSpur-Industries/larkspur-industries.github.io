@@ -19,7 +19,8 @@ const PRODUCT_PAGES = {
 const LEGACY_REDIRECTS = {
   'docs-marigold-5.html': '/docs/marigold-5/',
   'docs-locking-cable.html': '/docs/locking-cable/',
-  'docs-warranty.html': '/docs/warranty/',
+  'docs-warranty.html': '/docs/reference/warranty/',
+  'docs/warranty/index.html': '/docs/reference/warranty/',
 };
 
 const LEGACY_ANCHOR_REDIRECTS = {
@@ -36,11 +37,18 @@ const LEGACY_ANCHOR_REDIRECTS = {
     '#support': '/docs/marigold-5/support/',
   },
   'docs-warranty.html': {
-    '#manufacturing': '/docs/warranty/#manufacturing-warranty',
-    '#exclusions': '/docs/warranty/#frc-reality-exclusions',
-    '#crash-replacement': '/docs/warranty/#crash-replacement-program',
-    '#right-to-repair': '/docs/warranty/#right-to-repair',
-    '#support': '/docs/warranty/#support-contacts',
+    '#manufacturing': '/docs/reference/warranty/#manufacturing-warranty',
+    '#exclusions': '/docs/reference/warranty/#frc-reality-exclusions',
+    '#crash-replacement': '/docs/reference/warranty/#crash-replacement-program',
+    '#right-to-repair': '/docs/reference/warranty/#right-to-repair',
+    '#support': '/docs/reference/warranty/#support-contacts',
+  },
+  'docs/warranty/index.html': {
+    '#manufacturing': '/docs/reference/warranty/#manufacturing-warranty',
+    '#exclusions': '/docs/reference/warranty/#frc-reality-exclusions',
+    '#crash-replacement': '/docs/reference/warranty/#crash-replacement-program',
+    '#right-to-repair': '/docs/reference/warranty/#right-to-repair',
+    '#support': '/docs/reference/warranty/#support-contacts',
   },
 };
 

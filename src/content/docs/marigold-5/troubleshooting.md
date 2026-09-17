@@ -28,7 +28,7 @@ Occurs when the module detects a dangerous fault or is damaged.
 
 ### Power cycle
 
-1. Disconnect input power for 30–100 seconds.
+1. Disconnect input power for 30-100 seconds.
 2. Reconnect power and observe the STATUS LED.
 
 ## USB device does not boot or charge
@@ -42,9 +42,9 @@ For when the module's status LED is on but connected devices are non-functional.
 
 ### Check the load
 
-- Make sure the combined USB-C and auxiliary load is within 5–6A for normal continuous operation.
+- Make sure the combined USB-C and auxiliary load is within 5-6A for normal continuous operation.
 - Make sure the load did not exceed 7A continuously without adequate active cooling.
-- Limit 8–10A load spikes to a few seconds unless adequate user-supplied active heatsinking and cooling are installed.
+- Limit 8-10A load spikes to a few seconds unless adequate user-supplied active heatsinking and cooling are installed.
 - Some devices have a brief inrush-current spike during startup.
 
 ### Check compatibility
@@ -72,7 +72,7 @@ Take corrective action when:
 
 To reduce temperature:
 
-- Reduce the total output current to 5–6A or less.
+- Reduce the total output current to 5-6A or less.
 - Move the module to a location with better airflow.
 - Avoid mounting the module inside an unventilated enclosure.
 
@@ -82,6 +82,6 @@ To reduce temperature:
 2. Replace long, thin, or damaged cables.
 3. Verify that the input voltage at Marigold-5 does not fall below 6V.
 4. Inspect the PDH connection, breaker, terminal block, and wire gauge for excessive resistance.
-5. Confirm that the combined output load remains within the 5–6A recommended continuous range.
+5. Confirm that the combined output load remains within the 5-6A recommended continuous range.
 
 If the problem continues, please email [engineering@larkspurindustries.com](mailto:engineering@larkspurindustries.com) with the STATUS LED behavior, the connected load, and a photo of the wiring. We may ask for more detail.

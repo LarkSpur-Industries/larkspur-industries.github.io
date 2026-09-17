@@ -19,9 +19,9 @@ Built around the Texas Instruments TPS56A37, the Marigold-5 provides reliable 5.
 
 :::danger[Safety limits]
 - Do not exceed the max 18V DC input.
-- For continuous operation, keep the combined load across the USB-C and auxiliary outputs within the recommended **5–6A** range.
+- For continuous operation, keep the combined load across the USB-C and auxiliary outputs within the recommended **5-6A** range.
 - The 7A continuous rating was validated at 12.3V input, at standard ambient temperature in still air, with the enclosed module not mounted to aluminum. Thermal performance varies with placement, nearby heat sources, and airflow inside the robot.
-- Limit 8–10A loads to a few seconds. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling.
+- Limit 8-10A loads to a few seconds. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling.
 - Always connect red wire to BATT+ and black wire to GND.
 - Keep the module away from conductive debris, metal shavings, water, and loose tools.
 - Do not open the enclosure while the device is operating or connected to power. Internal components can become hot enough to cause burns.
