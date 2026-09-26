@@ -5,7 +5,7 @@ description: Answers about Marigold-5 preorders, production batches, restocks, a
 
 ## When do preorders open?
 
-Offseason preorders open Saturday, September 26, 2026. The first production batch is limited to 120 units and is expected to ship in mid to late October.
+Offseason preorders are now open! The first production batch is limited to 120 units and is expected to ship in mid to late October.
 
 ## Why is Marigold-5 sold in batches?
 
@@ -26,4 +26,3 @@ Preorders will close when all 120 units are reserved. We will then announce the 
 ## Who can I contact if I have questions or issues?
 
 Please review all documentation before sending an email. Support and contact information is provided in this documentation, specifically at [Support](/docs/marigold-5/support).
-
