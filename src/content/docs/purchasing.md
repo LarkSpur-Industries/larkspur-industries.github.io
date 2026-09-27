@@ -1,6 +1,6 @@
 ---
 title: Purchasing Information
-description: Card checkout, purchase orders with a $50 minimum, quotes, tax exemptions, and vendor forms for Larkspur Industries.
+description: Card checkout, purchase orders with a $60 minimum, quotes, tax exemptions, and vendor forms for Larkspur Industries.
 ---
 
 ## Credit and debit cards
@@ -29,7 +29,9 @@ Need a formal quote for your business office? Email [support@larkspurindustries.
 
 ## Tax exemption
 
-Tax-exempt organizations should email their exemption certificate to [support@larkspurindustries.com](mailto:support@larkspurindustries.com) **before ordering**.
+**Tax-exempt orders must be arranged through a purchase order or quote before payment.** Email your exemption certificate along with your purchase order or quote request to [support@larkspurindustries.com](mailto:support@larkspurindustries.com). Include the items and quantities you need.
+
+We will review the certificate and send an invoice with the applicable tax exemption. Please wait for that invoice instead of paying through the online store checkout. The purchase-order minimum listed above still applies.
 
 ## Vendor forms and W-9
 
