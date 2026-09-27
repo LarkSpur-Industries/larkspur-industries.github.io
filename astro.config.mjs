@@ -58,6 +58,7 @@ export default defineConfig({
         {
           label: 'Reference',
           items: [
+            { slug: 'purchasing', label: 'Purchasing Information' },
             { slug: 'faq', label: 'FAQ' },
             { slug: 'revision-history', label: 'Revision History' },
             { slug: 'reference/warranty', label: 'Hardware Warranty' },
