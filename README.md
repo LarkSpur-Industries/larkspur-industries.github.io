@@ -49,6 +49,7 @@ images are linked externally and image-indexed. `PUBLISHED_DIRECTORIES` in
 | --- | --- |
 | `site/styles/` | `/css/` |
 | `site/scripts/` | `/js/` |
+| `site/assets/forms/` | `/forms/` |
 | `site/assets/brand/logos/` | `/content/logos/` |
 | `site/assets/brand/img/` | `/content/img/` |
 | `site/assets/products/marigold-5/` | `/docs/marigold-5/` |
