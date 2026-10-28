@@ -1,11 +1,16 @@
 ---
 title: Frequently Asked Questions
-description: Answers about Marigold-5 preorders, production batches, restocks, and design differences.
+description: Answers about Marigold-5 orders, production batches, restocks, and design differences.
+lastUpdated: 2026-10-28
 ---
 
-## When do preorders open?
+## Is Marigold-5 in stock?
 
-Offseason preorders are now open! The first production batch is limited to 120 units and is expected to ship in mid to late October.
+Pre-orders for the first batch are closed and those orders are now shipping. Marigold-5 is now in stock for regular orders.
+
+## When will my order ship?
+
+Orders ship at the end of each week in batches.
 
 ## Why is Marigold-5 sold in batches?
 
@@ -19,9 +24,9 @@ There is no fixed restock schedule yet. Future batches will be planned around de
 
 Many automotive and general-purpose converters require an 8-9V minimum input. An FRC battery can sag to 6-7V during a demanding match, which may cause those converters to lose regulation and reboot a co-processor. Marigold-5 is designed to maintain its regulated 5.1V output down to a 6V input and provides mounting and wiring intended for competition robots.
 
-## What happens if the first batch sells out?
+## What happens if stock sells out?
 
-Preorders will close when all 120 units are reserved. We will then announce the next batch when its production and shipping schedule is confirmed.
+When stock sells out, we will post restock timelines on the website and the Chief Delphi thread.
 
 ## Who can I contact if I have questions or issues?
 

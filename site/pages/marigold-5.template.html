@@ -76,7 +76,7 @@
             color: #8a8a8a;
             margin-left: 0.25rem;
         }
-        .preorder-info {
+        .stock-info {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -87,9 +87,9 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
         }
-        .preorder-info p { font-size: 0.76rem; line-height: 1.45; color: #999; }
-        .preorder-info strong { color: #ccc; }
-        .preorder-info .btn { flex-shrink: 0; }
+        .stock-info p { font-size: 0.76rem; line-height: 1.45; color: #999; }
+        .stock-info strong { color: #ccc; }
+        .stock-info .btn { flex-shrink: 0; }
 
         /* ── 3D MODEL ───────────────────────────────────────── */
         .model-container {
@@ -227,8 +227,8 @@
             .model-container { height: 200px; }
             .price-big { font-size: 1.35rem; }
             .price-row { margin-bottom: 1rem; }
-            .preorder-info { align-items: flex-start; flex-direction: column; }
-            .preorder-info .btn { width: 100%; }
+            .stock-info { align-items: flex-start; flex-direction: column; }
+            .stock-info .btn { width: 100%; }
         }
     </style>
 </head>
@@ -288,11 +288,11 @@
         <!-- PRICE + CTA -->
         <div class="price-row">
             <span class="price-big">${{MARIGOLD_PRICE}}<span class="price-currency">{{MARIGOLD_CURRENCY}}</span></span>
-            <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Pre-Order</a>
+            <a href="{{MARIGOLD_CHECKOUT_URL}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Buy Now</a>
         </div>
 
-        <aside class="preorder-info" aria-label="Marigold-5 preorder information">
-            <p><strong>Preorders are now open!</strong> This 120-unit batch ships mid to late October.</p>
+        <aside class="stock-info" aria-label="Marigold-5 availability information">
+            <p><strong>In stock.</strong> Orders ship at the end of each week.</p>
             <a href="/docs/faq/" class="btn btn-sm">FAQ</a>
         </aside>
 

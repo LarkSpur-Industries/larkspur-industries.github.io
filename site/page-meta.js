@@ -12,14 +12,14 @@ const products = {
     price: '24.99',
     currency: 'USD',
     checkoutUrl: 'https://checkout.square.site/merchant/MLCT3G6R606D6/checkout/K4UYC22H5F7DH7DI7KRWP7BC',
-    availability: 'preorder',
+    availability: 'instock',
     currentLabel: '5-6A Continuous',
     currentDetailLabel: '5-6A Continuous',
   },
   lockingCable: {
     price: '7.99',
     currency: 'USD',
-    availability: 'preorder',
+    availability: 'instock',
   },
 };
 
@@ -250,7 +250,7 @@ const pages = {
         "url": `${baseUrl}/marigold-5.html`,
         "priceCurrency": "USD",
         "price": products.marigold5.price,
-        "availability": "https://schema.org/PreOrder",
+        "availability": "https://schema.org/InStock",
         "availabilityStarts": "2026-09-26",
         "itemCondition": "https://schema.org/NewCondition",
         "seller": {
@@ -303,7 +303,7 @@ const pages = {
         "url": `${baseUrl}/locking-cable.html`,
         "priceCurrency": products.lockingCable.currency,
         "price": products.lockingCable.price,
-        "availability": "https://schema.org/PreOrder",
+        "availability": "https://schema.org/InStock",
         "availabilityStarts": "2026-09-26",
         "itemCondition": "https://schema.org/NewCondition",
         "description": "Available only with a Marigold-5 purchase for now.",

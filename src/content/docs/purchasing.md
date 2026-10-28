@@ -5,7 +5,7 @@ description: Card checkout, purchase orders with a $60 minimum, quotes, tax exem
 
 ## Credit and debit cards
 
-The fastest way to order is through our [online store](/shop.html). Choose your product and complete your purchase through Square checkout. Orders ship as soon as they are ready.
+The fastest way to order is through our [online store](/shop.html). Choose your product and complete your purchase through Square checkout. Orders ship at the end of each week in batches.
 
 ## Purchase orders
 
@@ -21,7 +21,7 @@ Email your purchase order to [support@larkspurindustries.com](mailto:support@lar
 
 We will send an invoice that can be paid by card, bank transfer, or check. **Payment terms are Net 30: payment is due within 30 days of the invoice date.**
 
-Orders ship once we receive your purchase order and the items are ready. For preorders, the estimated shipping schedule on the product page applies.
+Once we receive your purchase order, orders for in-stock items ship at the end of each week in batches.
 
 ## Quotes
 

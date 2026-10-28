@@ -265,9 +265,9 @@ button:focus-visible {
     color: #fff;
 }
 
-/* ── PREORDER BANNER ────────────────────────────────────────────────── */
+/* ── STOCK BANNER ────────────────────────────────────────────────── */
 
-.preorder-banner {
+.stock-banner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -280,21 +280,21 @@ button:focus-visible {
     margin: 1.25rem 0 0;
 }
 
-.preorder-banner p {
+.stock-banner p {
     font-size: 0.85rem;
     line-height: 1.5;
     color: #bbb;
 }
 
-.preorder-banner strong { color: #fff; }
-.preorder-banner .btn { flex-shrink: 0; }
+.stock-banner strong { color: #fff; }
+.stock-banner .btn { flex-shrink: 0; }
 
 @media (max-width: 560px) {
-    .preorder-banner {
+    .stock-banner {
         align-items: flex-start;
         flex-direction: column;
     }
-    .preorder-banner .btn { width: 100%; }
+    .stock-banner .btn { width: 100%; }
 }
 
 /* ── SECTION LABEL ───────────────────────────────────────────────────── */
