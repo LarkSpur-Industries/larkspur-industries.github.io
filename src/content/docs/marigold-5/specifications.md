@@ -19,7 +19,9 @@ description: Electrical, protection, USB-C, and mechanical specifications for Ma
 | Shutdown current | - | 3 | - | µA |
 | Efficiency at 5A, 12V input | - | ~90% | - | % |
 
-The current ratings apply to the combined load across the USB-C and auxiliary outputs. Use **5-6A** for normal continuous operation. The **7A continuous rating** was validated at **12V input** in still air with the enclosed module **mounted to aluminum**. Not mounted, sustained 7A reaches thermal shutdown after about 15-20 minutes. Actual thermal performance depends on placement, nearby heat sources, mounting, and moving airflow inside the robot.
+The 6.0V minimum input covers short battery sags during a match. Marigold-5 is designed for continuous operation at a nominal 12V input; most robots sit around 10-12V during a match.
+
+The current ratings apply to the combined load across the USB-C and auxiliary outputs. Use **5-6A** for normal continuous operation. The **7A continuous rating** was validated at **12V input** in still air with the enclosed module **mounted to aluminum**. Not mounted, sustained 7A reaches thermal shutdown after about 13-21 minutes. Actual thermal performance depends on placement, nearby heat sources, mounting, and moving airflow inside the robot.
 
 The USB-C receptacle hardware can carry the full device output current, while its CC resistors advertise 3A to standards-compliant USB-C sinks. Confirm the connected device and cable are suitable for the intended current. Loads of **8-10A are supported for only a few seconds** under standard passive conditions. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling. Active cooling hardware is not included.
 
@@ -34,7 +36,7 @@ Measured on a production unit with the Marigold-5 locking cable. Output is measu
   <img src="/docs/marigold-5/img/brownout-performance.svg" alt="Graph of output voltage as input voltage falls from 6.5V to 5V at 3A, 5A, and 7A" />
 </picture>
 
-The output stays regulated down to **6.0V at 7A**, 5.8V at 5A, and 5.6V at 3A. Below that, it falls gradually instead of resetting. Input is measured at the power supply.
+The output stays regulated down to **6.0V at 7A**, 5.8V at 5A, and 5.6V at 3A. Below that, it falls gradually instead of resetting. Input is measured at the power supply, so the module's terminals see slightly less, and these thresholds are conservative.
 
 ### 7A continuous load
 
