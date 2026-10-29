@@ -19,9 +19,37 @@ description: Electrical, protection, USB-C, and mechanical specifications for Ma
 | Shutdown current | - | 3 | - | µA |
 | Efficiency at 5A, 12V input | - | ~90% | - | % |
 
-The current ratings apply to the combined load across the USB-C and auxiliary outputs. Use **5-6A** for normal continuous operation. The **7A continuous rating** was validated at **12.3V input**, at standard ambient temperature in still air, with the enclosed module not mounted to aluminum. Actual thermal performance depends on placement, nearby heat sources, mounting, and moving airflow inside the robot.
+The current ratings apply to the combined load across the USB-C and auxiliary outputs. Use **5-6A** for normal continuous operation. The **7A continuous rating** was validated at **12V input** in still air with the enclosed module **mounted to aluminum**. Not mounted, sustained 7A reaches thermal shutdown after about 15-20 minutes. Actual thermal performance depends on placement, nearby heat sources, mounting, and moving airflow inside the robot.
 
 The USB-C receptacle hardware can carry the full device output current, while its CC resistors advertise 3A to standards-compliant USB-C sinks. Confirm the connected device and cable are suitable for the intended current. Loads of **8-10A are supported for only a few seconds** under standard passive conditions. Sustained operation above 7A requires adequate user-supplied active heatsinking and cooling. Active cooling hardware is not included.
+
+## Test results
+
+Measured on a production unit with the Marigold-5 locking cable. Output is measured at the cable end.
+
+### Input sag
+
+<picture class="voltage-chart">
+  <source media="(max-width: 600px)" srcset="/docs/marigold-5/img/brownout-performance-mobile.svg" />
+  <img src="/docs/marigold-5/img/brownout-performance.svg" alt="Graph of output voltage as input voltage falls from 6.5V to 5V at 3A, 5A, and 7A" />
+</picture>
+
+The output stays regulated down to **6.0V at 7A**, 5.8V at 5A, and 5.6V at 3A. Below that, it falls gradually instead of resetting. Input is measured at the power supply.
+
+### 7A continuous load
+
+<picture class="voltage-chart">
+  <source media="(max-width: 600px)" srcset="/docs/marigold-5/img/thermal-soak-7a-mobile.svg" />
+  <img src="/docs/marigold-5/img/thermal-soak-7a.svg" alt="Graph of output voltage over 60 minutes at 7A, mounted to aluminum versus not mounted" />
+</picture>
+
+Mounted to an aluminum plate with VHB tape, Marigold-5 ran **7A for 60 minutes** without shutdown. Not mounted, it reached thermal shutdown after 13-21 minutes and restarted on its own once cooled.
+
+### Other results
+
+- 6V and 18V input, at 0.1A and 7A: output within 15mV of 12V input.
+- Input swings of 12V to 6.2V and 12V to 18V at 7A: output within 20mV.
+- 8.5A load for a few seconds: output still regulated.
 
 ## Protection features
 

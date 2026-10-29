@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-labelledby="title description">
+  <title id="title">Marigold-5 brownout performance</title>
+  <desc id="description">Line graph of output voltage as input voltage falls from 6.5V to 5V at 3, 5, and 7 amps.</desc>
+  <rect width="900" height="520" rx="12" fill="#111111"/>
+  <rect x="1" y="1" width="898" height="518" rx="11" fill="none" stroke="#252525" stroke-width="2"/>
+
+  <g font-family="Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-style="normal">
+    <text x="64" y="54" fill="#f7f7f7" font-size="24" font-weight="700">Output during input sag</text>
+    <text x="64" y="80" fill="#8a8a8a" font-size="14">Output at the cable end. Higher and flatter is better.</text>
+
+    <g stroke="#2b2b2b" stroke-width="1">
+      <line x1="112" y1="112" x2="836" y2="112"/>
+      <line x1="112" y1="207" x2="836" y2="207"/>
+      <line x1="112" y1="302" x2="836" y2="302"/>
+      <line x1="112" y1="397" x2="836" y2="397"/>
+    </g>
+
+    <g fill="#8a8a8a" font-size="13" text-anchor="end">
+      <text x="96" y="117">5.1V</text>
+      <text x="96" y="212">4.9V</text>
+      <text x="96" y="307">4.7V</text>
+      <text x="96" y="402">4.5V</text>
+    </g>
+
+    <g fill="#b0b0b0" font-size="14" text-anchor="middle">
+      <text x="112" y="429">5.0V</text>
+      <text x="353" y="429">5.5V</text>
+      <text x="595" y="429">6.0V</text>
+      <text x="836" y="429">6.5V</text>
+    </g>
+    <text x="474" y="456" fill="#777777" font-size="13" text-anchor="middle">Input voltage</text>
+
+    <line x1="595" y1="112" x2="595" y2="397" stroke="#555555" stroke-width="2" stroke-dasharray="4 5"/>
+    <text x="603" y="373" fill="#8a8a8a" font-size="13">Rated minimum</text>
+    <text x="595" y="235" fill="#e6dcff" font-size="13" font-weight="700" text-anchor="middle">4.807V</text>
+    
+    <polyline points="836,159 739,160 643,159 595,159 546,159 498,160 450,158 402,159 353,176 305,222 257,269 209,315 160,362" fill="none" stroke="#777777" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="836,203 739,203 643,203 595,203 546,203 498,205 450,229 402,275 353,322 305,368" fill="none" stroke="#cdbdf4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="836,251 739,252 643,251 595,251 546,296 498,345 450,393" fill="none" stroke="#a98bea" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#a98bea" stroke="#e6dcff" stroke-width="2">
+      <circle cx="595" cy="251" r="7"/>
+    </g>
+
+    <g font-size="13">
+      <line x1="152" y1="486" x2="184" y2="486" stroke="#777777" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round"/>
+      <text x="194" y="491" fill="#b0b0b0">3A</text>
+      <line x1="367" y1="486" x2="399" y2="486" stroke="#cdbdf4" stroke-width="4" stroke-linecap="round"/>
+      <text x="409" y="491" fill="#b0b0b0">5A</text>
+      <line x1="581" y1="486" x2="613" y2="486" stroke="#a98bea" stroke-width="5" stroke-linecap="round"/>
+      <text x="623" y="491" fill="#f7f7f7" font-weight="700">7A</text>
+    </g>
+  </g>
+</svg>

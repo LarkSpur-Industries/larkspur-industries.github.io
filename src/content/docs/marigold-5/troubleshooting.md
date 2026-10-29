@@ -43,7 +43,7 @@ For when the module's status LED is on but connected devices are non-functional.
 ### Check the load
 
 - Make sure the combined USB-C and auxiliary load is within 5-6A for normal continuous operation.
-- Make sure the load did not exceed 7A continuously without adequate active cooling.
+- Make sure the load did not exceed 7A continuously without mounting the module to metal or adding active cooling.
 - Limit 8-10A load spikes to a few seconds unless adequate user-supplied active heatsinking and cooling are installed.
 - Some devices have a brief inrush-current spike during startup.
 

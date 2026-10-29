@@ -1,110 +1,67 @@
-# Larkspur Industries website
+# Larkspur Industries Website
 
-Two things are built into one `dist/` artifact:
+> **Reasonable Products and Prices at Open Values**
 
-- **The marketing site** — `larkspurindustries.com`, generated from the HTML
-  templates in `site/pages/` by `tools/build.js`.
-- **The product documentation** — everything under `/docs/`, generated from
-  Markdown and MDX by Astro Starlight from `src/content/docs/`.
+Official website for Larkspur Industries, a small hardware design company building hardware for FIRST robotics teams.
 
-## Requirements
+## Live Site
 
-- Node.js 24
-- npm
+🌐 [larkspurindustries.com](https://larkspurindustries.com)
 
-## Layout
+## Products
+
+- **Marigold-5** — A compact DC-DC power module for FRC robots with a regulated 5.1V USB-C output and an auxiliary port. In stock at $24.99. Orders ship at the end of each week.
+- **Locking USB-C Cable** — $7.99 add-on with a Marigold-5 purchase.
+
+## Tech Stack
+
+- Static HTML/CSS/JS for the company pages
+- Astro Starlight for documentation and search
+- [Google Model Viewer](https://modelviewer.dev/) for 3D product previews
+- Hosted on GitHub Pages
+
+## Structure
 
 ```
-site/          the marketing site — everything here is published
-  pages/       HTML templates + shared nav/footer partials
-  styles/      CSS
-  scripts/     client-side JS
-  assets/
-    brand/     logos, favicons, social preview images, background art
-    products/  product photography, PDFs, and 3D models
-  page-meta.js titles, descriptions, OG tags, and schema.org data
-
-src/           Astro / Starlight only
-  content/docs/  documentation pages (Markdown + MDX)
-  components/    Starlight component overrides
-  styles/        documentation theme
-
-masters/       source art that is never published (PNG masters, retired logos)
-tools/         build, verification, clean, and preview scripts
-public/        Astro static passthrough
+├── site/
+│   ├── pages/          # HTML templates and shared navigation/footer
+│   ├── styles/         # Marketing site styles
+│   ├── scripts/        # Browser JavaScript
+│   ├── assets/         # Published images, PDFs, models, and forms
+│   └── page-meta.js    # Product prices, checkout URL, and metadata
+├── src/
+│   ├── content/docs/   # Documentation Markdown and MDX
+│   ├── components/     # Documentation component overrides
+│   └── styles/         # Documentation styles
+├── masters/            # Source artwork, not published
+├── tools/              # Build, verification, and preview scripts
+├── public/             # Documentation static files
+├── astro.config.mjs    # Documentation settings and sidebar
+├── dist/               # Generated website, not tracked
+├── robots.txt
+└── CNAME
 ```
-
-The rule is one line: **`site/` ships, everything else does not.** Nothing
-outside `site/` is ever copied into `dist/`, so a file's location tells you
-whether it is public.
-
-### Source paths vs. published URLs
-
-`site/` is organised by what a file *is*. The published URLs are older than that
-layout and must not change — the STEP model, the PDF drawing, and the product
-images are linked externally and image-indexed. `PUBLISHED_DIRECTORIES` in
-`tools/build.js` maps between the two:
-
-| Source | Published as |
-| --- | --- |
-| `site/styles/` | `/css/` |
-| `site/scripts/` | `/js/` |
-| `site/assets/forms/` | `/forms/` |
-| `site/assets/brand/logos/` | `/content/logos/` |
-| `site/assets/brand/img/` | `/content/img/` |
-| `site/assets/products/marigold-5/` | `/docs/marigold-5/` |
-| `site/assets/products/locking-cable/img/` | `/docs/cables/img/` |
-| `site/assets/products/locking-cable/pdf/` | `/docs/cables/pdf/` |
-
-Change the map, not the asset paths, if a URL ever has to move — and add a
-redirect when it does.
 
 ## Development
 
+Requires Node.js 24 and npm.
+
 ```bash
 npm ci
-npm run dev
+npm run dev            # Documentation at http://localhost:4321/docs/
+npm test               # Build and check output, links, and structured data
+./tools/preview.sh     # Full site at http://127.0.0.1:4173
 ```
 
-The dev server serves the documentation at `http://localhost:4321/docs/` with
-live reload. It does **not** serve the marketing pages; those come from
-`tools/build.js`. Use the preview script below to see the whole site.
+Edit company pages in `site/pages/` and documentation in `src/content/docs/`.
+`npm run build` generates the complete site in `dist/`. Pushes to `main` build,
+verify, and deploy it to GitHub Pages.
 
-## Production build
+## Contact
 
-```bash
-npm run build   # build only
-npm test        # build, then validate output, links, fragments, and JSON-LD
-npm run clean   # remove dist/
-```
+- **Email:** support@larkspurindustries.com
+- **GitHub:** [github.com/Larkspur-Industries](https://github.com/Larkspur-Industries)
 
-`npm test` is what CI runs, so a broken local link or malformed JSON-LD fails
-the deploy instead of shipping.
+## License
 
-To build and serve the complete production site locally:
-
-```bash
-./tools/preview.sh          # http://127.0.0.1:4173
-./tools/preview.sh 8080     # or pick a port
-```
-
-## Adding content
-
-**A documentation page:** add a Markdown or MDX file under `src/content/docs/`,
-then register it in the `sidebar` array in `astro.config.mjs` if it should
-appear in global navigation.
-
-**A marketing page:** add a template to `site/pages/`, add its metadata to
-`pages` in `site/page-meta.js`, and register it in `tools/build.js`. Templates
-use `{{PLACEHOLDER}}` substitution; an unresolved placeholder fails the build.
-
-**A product image:** put the published copy in
-`site/assets/products/<product>/img/` and the full-resolution master in
-`masters/products/<product>/`.
-
-## Deployment
-
-`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every
-push to `main`. The checkout uses `fetch-depth: 0` because Starlight reads each
-documentation page's last-modified date from git history; a shallow clone would
-stamp every page with the same date.
+© 2026 Larkspur Industries. All rights reserved.

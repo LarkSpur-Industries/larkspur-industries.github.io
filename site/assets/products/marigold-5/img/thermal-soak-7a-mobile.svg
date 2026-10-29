@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 560" role="img" aria-labelledby="title description">
+  <title id="title">Marigold-5 7A thermal soak</title>
+  <desc id="description">Line graph of output voltage over 60 minutes at 7 amps, mounted to aluminum versus not mounted.</desc>
+  <rect width="420" height="560" rx="12" fill="#111111"/>
+  <rect x="1" y="1" width="418" height="558" rx="11" fill="none" stroke="#252525" stroke-width="2"/>
+
+  <g font-family="Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-style="normal">
+    <text x="28" y="44" fill="#f7f7f7" font-size="22" font-weight="700">7A continuous load</text>
+    <text x="28" y="70" fill="#8a8a8a" font-size="13">12V input, sealed case, still air.</text>
+
+    <g stroke="#2b2b2b" stroke-width="1">
+      <line x1="62" y1="100" x2="392" y2="100"/>
+      <line x1="62" y1="200" x2="392" y2="200"/>
+      <line x1="62" y1="300" x2="392" y2="300"/>
+      <line x1="62" y1="400" x2="392" y2="400"/>
+    </g>
+
+    <g fill="#8a8a8a" font-size="12" text-anchor="end">
+      <text x="52" y="105">4.82V</text>
+      <text x="52" y="205">4.78V</text>
+      <text x="52" y="305">4.74V</text>
+      <text x="52" y="405">4.70V</text>
+    </g>
+
+    <g fill="#b0b0b0" font-size="14" text-anchor="middle">
+      <text x="62" y="430">0</text>
+      <text x="144" y="430">15</text>
+      <text x="227" y="430">30</text>
+      <text x="310" y="430">45</text>
+      <text x="392" y="430">60</text>
+    </g>
+    <text x="227" y="457" fill="#777777" font-size="13" text-anchor="middle">Minutes</text>
+
+    <line x1="165" y1="310" x2="165" y2="400" stroke="#777777" stroke-width="2" stroke-dasharray="4 5"/>
+    <text x="173" y="363" fill="#b0b0b0" font-size="13">Thermal shutdown</text>
+    <text x="173" y="380" fill="#8a8a8a" font-size="13">at 18.8 min</text>
+    <text x="392" y="280" fill="#e6dcff" font-size="13" font-weight="700" text-anchor="end">60 min</text>
+    
+    <polyline points="65,186 70,220 76,238 81,249 87,261 92,269 98,274 103,281 109,287 114,287 120,291 125,294 131,294 136,295 142,299 147,302 153,302 158,303 164,303 169,305 175,305 180,298 186,298 191,296 197,294 202,296 208,296 213,290 219,293 224,292 230,295 235,290 241,295 246,294 252,299 257,299 263,301 268,297 274,294 279,293 285,292 290,293 296,293 301,293 307,296 312,295 318,296 323,299 329,301 334,306 340,302 345,297 351,301 356,300 362,299 367,292 373,292 378,293 384,294 389,295 395,298" fill="none" stroke="#a98bea" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#a98bea" stroke="#e6dcff" stroke-width="2">
+      <circle cx="395" cy="298" r="7"/>
+    </g>
+    <polyline points="65,182 70,206 76,227 81,244 87,257 92,266 98,273 103,281 109,286 114,290 120,289 125,295 131,301 136,307 142,307 147,309 153,312 158,312 164,310 165,310" fill="none" stroke="#777777" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#777777">
+      <circle cx="165" cy="310" r="5"/>
+    </g>
+
+    <g font-size="13">
+      <line x1="66" y1="493" x2="98" y2="493" stroke="#a98bea" stroke-width="5" stroke-linecap="round"/>
+      <text x="108" y="498" fill="#f7f7f7" font-weight="700">Mounted to aluminum</text>
+      <line x1="66" y1="523" x2="98" y2="523" stroke="#777777" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round"/>
+      <text x="108" y="528" fill="#b0b0b0">Not mounted</text>
+    </g>
+  </g>
+</svg>
